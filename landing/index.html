@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Lesgo | Private Tutors & Lessons</title>
+  <!-- Google Fonts + simple reset for smoothness -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #eef5ff 0%, #d9e9fa 100%);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* main card container */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 40, 80, 0.35), 0 2px 8px rgba(0, 0, 0, 0.02);
+      width: 100%;
+      max-width: 520px;
+      padding: 2rem 2rem 2.4rem;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    /* brand section */
+    .brand {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .brand h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0b3b5f, #1e6fdf, #2c7be5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 5px rgba(0, 80, 150, 0.08);
+      word-break: keep-all;
+    }
+
+    .brand p {
+      color: #2c5282;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      border-top: 1px solid #cbdff2;
+      display: inline-block;
+      padding-top: 0.4rem;
+      opacity: 0.85;
+    }
+
+    /* toggle (login / signup) */
+    .mode-switch {
+      display: flex;
+      gap: 0.75rem;
+      background: #e9f0fa;
+      padding: 0.4rem;
+      border-radius: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .mode-btn {
+      flex: 1;
+      text-align: center;
+      padding: 0.7rem 0;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 2.5rem;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      transition: all 0.2s ease;
+      color: #1e4a76;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .mode-btn.active {
+      background: white;
+      color: #1e6fdf;
+      box-shadow: 0 6px 12px -8px rgba(0, 66, 128, 0.2);
+      border: 0.5px solid rgba(30, 111, 223, 0.3);
+    }
+
+    /* role selector (admin/user pills) */
+    .role-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .role-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #1e5a9e;
+      margin-bottom: 0.65rem;
+      display: block;
+    }
+
+    .role-pills {
+      display: flex;
+      gap: 1rem;
+      background: #f1f6fe;
+      padding: 0.3rem;
+      border-radius: 2.5rem;
+    }
+
+    .role-option {
+      flex: 1;
+      text-align: center;
+      padding: 0.55rem 0;
+      font-weight: 500;
+      border-radius: 2rem;
+      cursor: pointer;
+      background: transparent;
+      transition: all 0.2s;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #1e4f7a;
+    }
+
+    .role-option.active-role {
+      background: #1e6fdf;
+      color: white;
+      box-shadow: 0 2px 8px rgba(30, 111, 223, 0.3);
+    }
+
+    /* form styling */
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #1a4c7a;
+      letter-spacing: 0.3px;
+    }
+
+    .input-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.6rem;
+      border: 1.5px solid #cde0f0;
+      border-radius: 1.2rem;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      background: white;
+      transition: 0.2s;
+      outline: none;
+      color: #0a2a44;
+    }
+
+    .input-icon input:focus {
+      border-color: #2c7be5;
+      box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.2);
+    }
+
+    .input-icon i {
+      position: absolute;
+      left: 1rem;
+      font-size: 1rem;
+      color: #6c8db0;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* simple pseudo icons via unicode / text */
+    .input-icon .field-icon {
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
+    .submit-btn {
+      background: #1e6fdf;
+      border: none;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin-top: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 14px rgba(30, 111, 223, 0.3);
+    }
+
+    .submit-btn:hover {
+      background: #0f5bc2;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(30, 111, 223, 0.35);
+    }
+
+    .extra-note {
+      text-align: center;
+      font-size: 0.75rem;
+      margin-top: 1.4rem;
+      color: #3a6b92;
+      border-top: 1px solid #dae9fa;
+      padding-top: 1rem;
+    }
+
+    .toggle-mode-link {
+      background: none;
+      border: none;
+      color: #1e6fdf;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+
+    /* dynamic fields */
+    .hidden-field {
+      display: none;
+    }
+
+    .message-area {
+      margin-top: 1rem;
+      padding: 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+      text-align: center;
+      font-weight: 500;
+      background: #eef2fc;
+      color: #155a9a;
+    }
+
+    .error-message {
+      background: #ffe8e6;
+      color: #c23d2e;
+    }
+
+    .success-message {
+      background: #e3f7ec;
+      color: #1f7840;
+    }
+
+    button {
+      background: none;
+      border: none;
+    }
+
+    hr {
+      margin: 0.5rem 0;
+      border-color: #cde0f0;
+    }
+  </style>
+</head>
+<body>
+<div class="glass-panel" id="appContainer">
+  <div class="brand">
+    <h1>lesgo</h1>
+    <p>connect · learn · grow with expert tutors</p>
+  </div>
+
+  <!-- LOGIN / SIGNUP toggle -->
+  <div class="mode-switch">
+    <button class="mode-btn" id="loginModeBtn" data-mode="login">🔐 Log in</button>
+    <button class="mode-btn" id="signupModeBtn" data-mode="signup">📝 Sign up</button>
+  </div>
+
+  <!-- Role pills (admin / user) -->
+  <div class="role-group">
+    <span class="role-label">I am a...</span>
+    <div class="role-pills">
+      <button class="role-option" data-role="admin">👑 Admin</button>
+      <button class="role-option active-role" data-role="user">🧑‍🎓 User (Student/Tutor)</button>
+    </div>
+  </div>
+
+  <!-- DYNAMIC FORM (will be updated via JS) -->
+  <form id="mainForm" action="javascript:void(0);">
+    <div id="formDynamicFields">
+      <!-- fields injected by JS -->
+    </div>
+    <button type="submit" class="submit-btn" id="submitActionBtn">Continue</button>
+    <div id="formFeedback" class="message-area"></div>
+  </form>
+  <div class="extra-note">
+    ⚡ Demo credentials: any non-empty (e.g. demo@lesgo.com / pass123)
+  </div>
+</div>
+
+<script>
+  // ---------- DOM elements ----------
+  const loginBtn = document.getElementById('loginModeBtn');
+  const signupBtn = document.getElementById('signupModeBtn');
+  const roleAdminBtn = document.querySelector('[data-role="admin"]');
+  const roleUserBtn = document.querySelector('[data-role="user"]');
+  const formFieldsContainer = document.getElementById('formDynamicFields');
+  const submitBtn = document.getElementById('submitActionBtn');
+  const feedbackDiv = document.getElementById('formFeedback');
+
+  // State management
+  let currentMode = 'login';     // 'login' or 'signup'
+  let currentRole = 'user';      // 'admin' or 'user'
+
+  // Helper: clear feedback
+  function setFeedback(message, isError = false) {
+    feedbackDiv.textContent = message;
+    if (message) {
+      feedbackDiv.classList.remove('error-message', 'success-message');
+      if (isError) {
+        feedbackDiv.classList.add('error-message');
+      } else {
+        feedbackDiv.classList.add('success-message');
+      }
+    } else {
+      feedbackDiv.classList.remove('error-message', 'success-message');
+    }
+    if (!message) feedbackDiv.textContent = '';
+  }
+
+  // Update active toggle UI (login/signup)
+  function updateModeToggleUI() {
+    if (currentMode === 'login') {
+      loginBtn.classList.add('active');
+      signupBtn.classList.remove('active');
+      submitBtn.textContent = '🔑 Log in';
+    } else {
+      signupBtn.classList.add('active');
+      loginBtn.classList.remove('active');
+      submitBtn.textContent = '✨ Sign up';
+    }
+  }
+
+  // Update role pills UI
+  function updateRoleUI() {
+    if (currentRole === 'admin') {
+      roleAdminBtn.classList.add('active-role');
+      roleUserBtn.classList.remove('active-role');
+    } else {
+      roleUserBtn.classList.add('active-role');
+      roleAdminBtn.classList.remove('active-role');
+    }
+  }
+
+  // generate dynamic fields based on currentMode + currentRole
+  function renderFormFields() {
+    // base fields for any combination: username, gmail, password
+    // birthday only appears for signup (both admin & user signup require birthday)
+    // For login: username, gmail, password (admin/user both same fields)
+    // For signup: username, gmail, password, birthday
+    
+    let fieldsHtml = '';
+    
+    // Username field (common)
+    fieldsHtml += `
+      <div class="form-group">
+        <label>👤 Username</label>
+        <div class="input-icon">
+          <span class="field-icon" style="left: 1rem; position: absolute;">@</span>
+          <input type="text" id="username" name="username" placeholder="e.g., alex_tutor" autocomplete="username">
+        </div>
+      </div>
+    `;
+    
+    // Gmail field
+    fieldsHtml += `
+      <div class="form-group">
+        <label>📧 Gmail</label>
+        <div class="input-icon">
+          <span class="field-icon" style="left: 1rem; position: absolute;">✉️</span>
+          <input type="email" id="gmail" name="gmail" placeholder="name@gmail.com" autocomplete="email">
+        </div>
+      </div>
+    `;
+    
+    // Password field
+    fieldsHtml += `
+      <div class="form-group">
+        <label>🔒 Password</label>
+        <div class="input-icon">
+          <span class="field-icon" style="left: 1rem; position: absolute;">🔑</span>
+          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+      </div>
+    `;
+    
+    // Birthday field only for signup mode
+    if (currentMode === 'signup') {
+      fieldsHtml += `
+        <div class="form-group">
+          <label>🎂 Birthday</label>
+          <div class="input-icon">
+            <span class="field-icon" style="left: 1rem; position: absolute;">📅</span>
+            <input type="date" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
+          </div>
+        </div>
+      `;
+    }
+    
+    // Optional: small hint for role
+    const roleLabelText = currentRole === 'admin' ? 'admin account' : 'user account';
+    const roleHint = `<div style="font-size:0.7rem; text-align:center; margin-top:0.3rem; color:#4783b0;">⦿ ${currentMode === 'login' ? 'Logging in as' : 'Signing up as'} <strong>${currentRole.toUpperCase()}</strong></div>`;
+    
+    formFieldsContainer.innerHTML = fieldsHtml + roleHint;
+  }
+  
+  // validate common fields for both modes (non-empty, email pattern)
+  function validateCommonFields(username, gmail, password) {
+    if (!username || username.trim() === '') {
+      setFeedback('❌ Username is required.', true);
+      return false;
+    }
+    if (!gmail || gmail.trim() === '') {
+      setFeedback('❌ Gmail address is required.', true);
+      return false;
+    }
+    // basic email pattern (gmail-like but any domain allowed, just simple regex)
+    const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+    if (!emailPattern.test(gmail)) {
+      setFeedback('❌ Please enter a valid email address (e.g., name@gmail.com).', true);
+      return false;
+    }
+    if (!password || password.trim() === '') {
+      setFeedback('❌ Password cannot be empty.', true);
+      return false;
+    }
+    if (password.length < 4) {
+      setFeedback('⚠️ Password should be at least 4 characters (demo).', true);
+      return false;
+    }
+    return true;
+  }
+  
+  // Handle form submission based on mode & role
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    setFeedback(''); // clear previous
+    
+    // get current input values
+    const usernameElem = document.getElementById('username');
+    const gmailElem = document.getElementById('gmail');
+    const passwordElem = document.getElementById('password');
+    
+    if (!usernameElem || !gmailElem || !passwordElem) {
+      setFeedback('Form error, please refresh.', true);
+      return;
+    }
+    
+    const username = usernameElem.value.trim();
+    const gmail = gmailElem.value.trim();
+    const password = passwordElem.value;
+    
+    // common validation
+    if (!validateCommonFields(username, gmail, password)) return;
+    
+    if (currentMode === 'login') {
+      // LOGIN simulation (admin / user)
+      // For demo, we just accept any non-empty credentials; show successful login with role info.
+      // Since no backend, we mimic successful login with a message and reset.
+      let roleMsg = currentRole === 'admin' ? 'Administrator' : 'User (Student/Tutor)';
+      setFeedback(`✅ Welcome back, ${username}! Logged in as ${roleMsg} (demo mode).`, false);
+      // Optional: clear sensitive fields for better UX? no need, but we show success.
+      // You could also redirect, but for frontend demo we keep.
+      // additional: console log success.
+      console.log(`[LOGIN] role=${currentRole}, user=${username}, email=${gmail}`);
+    } 
+    else {  // SIGNUP mode
+      // birthday validation for signup
+      const birthdayElem = document.getElementById('birthday');
+      if (!birthdayElem) {
+        setFeedback('Missing birthday field, please refresh.', true);
+        return;
+      }
+      const birthday = birthdayElem.value;
+      if (!birthday || birthday.trim() === '') {
+        setFeedback('🎂 Please enter your birthday (required for sign up).', true);
+        return;
+      }
+      // basic date check: birthday not in future too extreme? just ensure it's a valid date string
+      const birthDateObj = new Date(birthday);
+      if (isNaN(birthDateObj.getTime())) {
+        setFeedback('Please provide a valid birthday date.', true);
+        return;
+      }
+      const today = new Date();
+      if (birthDateObj > today) {
+        setFeedback('Birthday cannot be in the future.', true);
+        return;
+      }
+      
+      // signup success message (admin/user)
+      let roleMsg = currentRole === 'admin' ? 'Admin account' : 'User account';
+      setFeedback(`🎉 Signup successful! Welcome ${username} (${roleMsg}). Birthday: ${birthday}. You can now log in.`, false);
+      console.log(`[SIGNUP] role=${currentRole}, username=${username}, gmail=${gmail}, birthday=${birthday}`);
+      // optional: clear password for better demo UX, but keep as is.
+      // we could also reset fields but not mandatory.
+      // After signup success, we do NOT automatically switch mode by design (user can manually click login)
+      // However we can gently remind.
+      setTimeout(() => {
+        if(confirm("Signup demo successful! Would you like to switch to login mode?")){
+          currentMode = 'login';
+          updateModeToggleUI();
+          renderFormFields();
+          setFeedback('Switched to login. Use your new credentials!', false);
+        }
+      }, 100);
+    }
+  }
+  
+  // attach event to form
+  function attachFormListener() {
+    const form = document.getElementById('mainForm');
+    // remove previous listener to avoid duplicate
+    form.removeEventListener('submit', handleFormSubmit);
+    form.addEventListener('submit', handleFormSubmit);
+  }
+  
+  // Combine full UI update: mode + role -> re-render fields, toggle active styles, attach event
+  function fullRefresh() {
+    updateModeToggleUI();
+    updateRoleUI();
+    renderFormFields();
+    attachFormListener();
+  }
+  
+  // ---- EVENT HANDLERS for toggles ----
+  loginBtn.addEventListener('click', () => {
+    if (currentMode === 'login') return;
+    currentMode = 'login';
+    setFeedback('');
+    fullRefresh();
+  });
+  
+  signupBtn.addEventListener('click', () => {
+    if (currentMode === 'signup') return;
+    currentMode = 'signup';
+    setFeedback('');
+    fullRefresh();
+  });
+  
+  roleAdminBtn.addEventListener('click', () => {
+    if (currentRole === 'admin') return;
+    currentRole = 'admin';
+    setFeedback('');
+    fullRefresh();
+  });
+  
+  roleUserBtn.addEventListener('click', () => {
+    if (currentRole === 'user') return;
+    currentRole = 'user';
+    setFeedback('');
+    fullRefresh();
+  });
+  
+  // initial render: default mode = login, role = user
+  function init() {
+    currentMode = 'login';
+    currentRole = 'user';
+    fullRefresh();
+  }
+  
+  init();
+</script>
+</body>
+</html>
