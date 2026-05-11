@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>LesGo | Private Tutoring, Unlimited Growth</title>
-  <!-- Google Fonts & simple reset -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <title>LesGo · 2000s fresh tutoring</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -15,55 +14,68 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f0fe 100%);
-      color: #0a2a44;
-      overflow-x: hidden;
+      background: linear-gradient(135deg, #b5e4f0 0%, #8fd0e0 40%, #6fc2d4 100%);
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', 'Arial', sans-serif;
+      color: #035c5e;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      position: relative;
     }
 
-    /* custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #cbdff2;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e6fdf;
-      border-radius: 10px;
+    /* frutiger aero bubbles / glassmorphism overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 40%, rgba(255,255,240,0.2) 0%, rgba(175,225,235,0.1) 100%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* general container */
     .container {
-      max-width: 1280px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
     }
 
-    /* navbar */
+    /* glossy card effect */
+    .glass-panel {
+      background: rgba(240, 255, 250, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 8px 20px rgba(0, 100, 100, 0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    /* navbar y2k style */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
       flex-wrap: wrap;
-      background: rgba(255, 255, 255, 0.92);
+      gap: 1.2rem;
+      background: rgba(235, 255, 250, 0.85);
       backdrop-filter: blur(12px);
-      border-radius: 2rem;
-      margin-top: 1.5rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(30, 111, 223, 0.2);
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255,255,230,0.9);
+      box-shadow: 0 5px 15px rgba(0,80,80,0.1);
     }
 
     .logo h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      background: linear-gradient(125deg, #0b3b5f, #1e6fdf, #3b82f6);
+      background: linear-gradient(125deg, #038f8f, #00b4b0, #57d6c9);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
       letter-spacing: -0.5px;
+      text-shadow: 2px 2px 8px rgba(0,150,150,0.2);
     }
 
     .nav-buttons {
@@ -72,425 +84,505 @@
     }
 
     .btn-outline {
-      background: transparent;
-      border: 1.5px solid #1e6fdf;
+      background: rgba(255,255,250,0.5);
+      border: 1.5px solid #2fbfb0;
       padding: 0.6rem 1.5rem;
-      border-radius: 2rem;
+      border-radius: 40px;
       font-weight: 600;
-      color: #1e6fdf;
+      color: #047c7a;
       cursor: pointer;
       transition: 0.2s;
-      font-family: 'Inter', sans-serif;
+      font-family: inherit;
+      backdrop-filter: blur(4px);
     }
 
     .btn-outline:hover {
-      background: #eef4ff;
+      background: #e2fff5;
       transform: translateY(-2px);
+      border-color: #0fa396;
     }
 
     .btn-primary {
-      background: #1e6fdf;
+      background: linear-gradient(105deg, #25b6a8, #139c8f);
       border: none;
       padding: 0.6rem 1.8rem;
-      border-radius: 2rem;
-      font-weight: 600;
+      border-radius: 40px;
+      font-weight: 700;
       color: white;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 4px 8px rgba(30, 111, 223, 0.3);
-      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 10px rgba(0,150,140,0.3);
+      font-family: inherit;
     }
 
     .btn-primary:hover {
-      background: #0f5bc2;
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(30, 111, 223, 0.35);
+      background: linear-gradient(105deg, #1faa9b, #0d8b7e);
+      box-shadow: 0 8px 18px rgba(0,140,130,0.4);
     }
 
-    /* hero section */
+    /* hero with y2k illustrations */
     .hero {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
       gap: 2rem;
-      margin: 4rem 0 3rem;
+      background: rgba(220, 255, 245, 0.65);
+      backdrop-filter: blur(8px);
+      border-radius: 3rem;
+      padding: 2rem 2.2rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255,255,240,0.8);
+      box-shadow: 0 12px 28px rgba(0, 90, 90, 0.12);
     }
 
     .hero-content {
-      flex: 1;
-      min-width: 280px;
+      flex: 1.2;
     }
 
-    .hero-content .badge {
-      background: rgba(30, 111, 223, 0.12);
-      color: #1e6fdf;
-      padding: 0.3rem 1rem;
-      border-radius: 2rem;
-      font-weight: 600;
-      font-size: 0.8rem;
+    .badge {
+      background: rgba(35, 180, 166, 0.2);
+      backdrop-filter: blur(4px);
+      color: #0a7b72;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
       display: inline-block;
       margin-bottom: 1.2rem;
+      letter-spacing: 0.5px;
+      border: 0.5px solid #b9f3ec;
     }
 
     .hero-content h1 {
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       font-weight: 800;
       line-height: 1.2;
-      background: linear-gradient(to right, #0f2b46, #1e6fdf);
+      color: #046c64;
+      text-shadow: 3px 3px 0 rgba(180, 240, 230, 0.6);
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, #027d7a, #0fbcb0);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 1.2rem;
     }
 
     .hero-content p {
-      font-size: 1.1rem;
-      color: #2c5282;
-      margin-bottom: 2rem;
-      line-height: 1.5;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      font-size: 1rem;
+      color: #116b66;
+      margin: 1rem 0 1.8rem;
+      line-height: 1.45;
+      font-weight: 500;
     }
 
     .hero-image {
-      flex: 1;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none"><path d="M50 200 L150 100 L250 150 L350 80 L320 220 L200 260 L80 230 Z" fill="%233b82f6" fill-opacity="0.15" stroke="%231e6fdf" stroke-width="2"/><circle cx="180" cy="150" r="30" fill="%23ffffff" stroke="%231e6fdf" stroke-width="2"/><text x="170" y="160" font-size="20" fill="%231e6fdf" font-weight="bold">📚</text><circle cx="280" cy="110" r="22" fill="%23ffffff" stroke="%233b82f6" stroke-width="2"/><text x="272" y="120" font-size="16">✏️</text><path d="M100 210 L130 180 L170 200" stroke="%231e6fdf" stroke-width="2" fill="none"/><rect x="260" y="190" width="40" height="40" fill="%23d9e9fa" stroke="%231e6fdf" stroke-width="2" rx="8"/><text x="268" y="215" font-size="20">🧑‍🏫</text></svg>') no-repeat center;
-      background-size: contain;
-      min-height: 280px;
+      flex: 0.9;
+      background: radial-gradient(ellipse at 30% 40%, #bef1ec, #9be0da);
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255,255,240,0.7);
+      box-shadow: inset 0 0 20px rgba(255,255,210,0.6), 0 10px 20px rgba(0,0,0,0.05);
     }
 
-    /* features section */
-    .section-title {
+    .hero-image-content {
       text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 4rem 0 2rem;
-      color: #0f2b46;
+    }
+
+    .hero-image-content i {
+      font-size: 3.8rem;
+      color: #fffbe3;
+      text-shadow: 0 2px 5px #14aa9b;
+      margin: 0 0.3rem;
+    }
+
+    /* features section ( y2k bubbles  ) */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      margin: 2rem 0 1.8rem;
+      background: linear-gradient(110deg, #035c5e, #21b2a3);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+      width: auto;
+      padding: 0 1rem;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .feature-card {
-      background: white;
-      padding: 1.8rem;
+      background: rgba(244, 255, 250, 0.8);
+      backdrop-filter: blur(6px);
+      padding: 1.8rem 1.2rem;
       border-radius: 2rem;
       text-align: center;
-      transition: 0.25s ease;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(30, 111, 223, 0.2);
+      transition: all 0.2s ease;
+      border: 1px solid #c5f3ec;
+      box-shadow: 0 8px 18px rgba(0, 90, 85, 0.08);
     }
 
     .feature-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 25px 35px -12px rgba(30, 111, 223, 0.2);
-      border-color: #1e6fdf40;
+      transform: translateY(-6px);
+      background: rgba(255, 255, 250, 0.95);
+      border-color: #8be6db;
     }
 
     .feature-icon {
-      font-size: 2.5rem;
-      background: #eef4ff;
+      background: #c4f3ec;
       width: 70px;
       height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 30px;
-      margin: 0 auto 1.2rem;
-      color: #1e6fdf;
+      border-radius: 35px;
+      margin: 0 auto 1rem;
+      font-size: 2rem;
+      color: #0f8f84;
+      box-shadow: inset 0 -1px 0 #fff8e0, 0 4px 12px rgba(0,0,0,0.02);
     }
 
-    .feature-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-card p {
-      color: #3c6e9c;
-    }
-
-    /* how it works */
+    /* steps like 2000s web */
     .steps {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      margin: 2rem 0 4rem;
+      margin: 2rem 0 2.5rem;
     }
 
     .step {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(235, 255, 248, 0.8);
       backdrop-filter: blur(4px);
-      padding: 1.5rem;
+      width: 210px;
+      padding: 1.3rem;
       border-radius: 2rem;
-      width: 240px;
       text-align: center;
+      border: 1px solid #b0f0e6;
+      transition: 0.2s;
     }
 
     .step-number {
-      background: #1e6fdf;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
+      background: linear-gradient(145deg, #2bc3b2, #179e90);
+      width: 44px;
+      height: 44px;
+      border-radius: 30px;
       display: flex;
+      margin: 0 auto 0.8rem;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1rem;
-      color: white;
       font-weight: 800;
-      font-size: 1.4rem;
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
 
-    /* testimonials */
-    .testimonials {
-      background: linear-gradient(110deg, #dbeafe, #eff6ff);
-      border-radius: 3rem;
-      padding: 2rem 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .testimonial-grid {
+    /* Daily fresh zone ( inspired by nwjn / y2k notebook ) */
+    .resources-zone {
+      background: rgba(210, 248, 240, 0.7);
+      backdrop-filter: blur(6px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin: 2.5rem 0;
       display: flex;
       flex-wrap: wrap;
-      gap: 1.8rem;
-      justify-content: center;
+      gap: 2rem;
+      border: 1px solid #ccf7ef;
     }
 
-    .testi-card {
-      background: white;
+    .routine-card {
+      flex: 1;
+      background: rgba(255, 255, 250, 0.8);
       border-radius: 1.5rem;
-      padding: 1.2rem 1.5rem;
-      max-width: 280px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+      padding: 1.2rem;
     }
 
-    .testi-card i {
-      color: #fbbf24;
-      margin-bottom: 0.5rem;
+    .routine-card h3 {
+      font-size: 1.1rem;
+      border-left: 4px solid #16baab;
+      padding-left: 0.7rem;
+      margin-bottom: 1rem;
+      color: #04645e;
     }
 
-    /* cta banner */
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.7rem;
+    }
+
+    .mini-table td {
+      padding: 0.3rem;
+      border-bottom: 1px solid #bfefe6;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: #c6f0e8;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #026f68;
+    }
+
+    /* CTA - 2000s glossy banner */
     .cta-banner {
-      background: #0b3b5f;
+      background: linear-gradient(115deg, #b3ede4, #88ddcf);
       border-radius: 2.5rem;
-      padding: 2.5rem;
+      padding: 2rem;
       text-align: center;
-      margin: 2rem 0 4rem;
-      color: white;
+      margin: 2rem 0 2rem;
+      border: 1px solid #ebfff5;
+      box-shadow: 0 10px 20px rgba(0,100,90,0.15);
     }
 
     .cta-banner h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-weight: 800;
+      color: #025c58;
     }
 
     .cta-banner .btn-primary {
-      background: white;
-      color: #0b3b5f;
+      background: #067b70;
       margin-top: 1rem;
-      box-shadow: none;
-    }
-    .cta-banner .btn-primary:hover {
-      background: #eef2ff;
     }
 
-    /* footer */
     footer {
       text-align: center;
-      padding: 2rem;
-      border-top: 1px solid #cbdff2;
-      color: #2c5282;
+      padding: 2rem 0 0.5rem;
+      font-size: 0.75rem;
+      color: #166f67;
+      border-top: 1px solid #9fe2d8;
     }
 
-    /* modal styles (login/signup popup) */
+    /* MODAL fresh & glossy */
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(6px);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 100, 90, 0.3);
+      backdrop-filter: blur(8px);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
+
     .modal-card {
-      background: white;
-      max-width: 460px;
+      background: #f2fffcf0;
+      backdrop-filter: blur(16px);
+      max-width: 440px;
       width: 90%;
       border-radius: 2rem;
       padding: 2rem;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-      animation: fadeUp 0.25s ease;
+      border: 1px solid #c1f0e6;
+      box-shadow: 0 20px 35px rgba(0,90,80,0.2);
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
+
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
-    .modal-header h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #0f2b46;
-    }
+
     .close-modal {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       cursor: pointer;
       background: none;
       border: none;
+      color: #2f9b8f;
     }
+
     .input-group {
       margin-bottom: 1rem;
     }
+
     .input-group input, .input-group select {
       width: 100%;
-      padding: 0.8rem 1rem;
-      border-radius: 1.2rem;
-      border: 1px solid #cbdff2;
-      font-family: 'Inter', sans-serif;
+      padding: 0.7rem 1rem;
+      border-radius: 1.5rem;
+      border: 1px solid #afddd4;
+      background: rgba(255,255,250,0.9);
+      font-family: inherit;
     }
-    .input-group input:focus {
-      outline: none;
-      border-color: #1e6fdf;
+
+    .error-txt {
+      color: #cb6e57;
+      font-size: 0.7rem;
     }
-    .modal-footer {
-      text-align: center;
-      margin-top: 1.2rem;
-    }
+
     .toggle-auth {
-      color: #1e6fdf;
+      color: #1f9b8e;
       cursor: pointer;
       font-weight: 600;
     }
-    .error-txt {
-      color: #dc2626;
-      font-size: 0.75rem;
+
+    /* little y2k decorations */
+    .bubble-deco {
+      position: absolute;
+      background: radial-gradient(circle, rgba(210,255,240,0.4) 0%, rgba(140,230,210,0.2) 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
     }
-    @media (max-width: 768px) {
-      .hero-content h1 { font-size: 2.3rem; }
-      .navbar { flex-direction: column; gap: 1rem; }
-      .container { padding: 0 1.2rem; }
+
+    @media (max-width: 760px) {
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <!-- navigation -->
+  <!-- nav bar y2k fresh -->
   <div class="navbar">
-    <div class="logo"><h1>LesGo</h1></div>
+    <div class="logo"><h1>🌊 LesGo</h1></div>
     <div class="nav-buttons">
-      <button class="btn-outline" id="navLoginBtn">Log in</button>
-      <button class="btn-primary" id="navSignupBtn">Sign up</button>
+      <button class="btn-outline" id="navLoginBtn">🎧 log in</button>
+      <button class="btn-primary" id="navSignupBtn">✨ sign up</button>
     </div>
   </div>
 
-  <!-- hero -->
+  <!-- hero with 2000's blue/green watery vibes -->
   <div class="hero">
     <div class="hero-content">
-      <span class="badge">✨ 1-on-1 private tutoring</span>
-      <h1>Unlock your potential with <span style="color:#1e6fdf;">LesGo</span></h1>
-      <p>Connect with expert private tutors, master any subject, and achieve academic excellence — all in one smart platform.</p>
+      <span class="badge">🍃 1:1 · private tutoring · y2k fresh</span>
+      <h1>unlock your <span>best</span> <br>with <span>LesGo</span> wave</h1>
+      <p>⚡ match with mentors who get your vibe. modern, cozy & effective — learn like it's the 2000s but smarter.</p>
       <div class="hero-buttons">
-        <button class="btn-primary" id="heroSignupBtn">Start learning today →</button>
-        <button class="btn-outline" id="heroLoginBtn">I’m a tutor</button>
+        <button class="btn-primary" id="heroSignupBtn">🌊 start the journey</button>
+        <button class="btn-outline" id="heroLoginBtn">🎀 i'm a tutor</button>
+      </div>
+      <div style="margin-top: 1rem;"><span style="background:#c3f0e6; padding:0.2rem 0.8rem; border-radius:40px; font-size:0.7rem;">✨ 800+ active learners</span></div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-image-content">
+        <i class="fas fa-compact-disc"></i>
+        <i class="fas fa-headphones"></i>
+        <i class="fas fa-cloud-sun"></i>
+        <div style="margin-top: 12px; font-size: 0.8rem; font-weight: 600;">newjeans energy • frutiger aero</div>
       </div>
     </div>
-    <div class="hero-image"></div>
   </div>
 
-  <!-- features -->
-  <h2 class="section-title">Why students love <span style="color:#1e6fdf;">LesGo</span></h2>
+  <!-- features section / clean cards -->
+  <div style="text-align: center;">
+    <span class="section-title">🌼 how we glow up your learning</span>
+  </div>
   <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-chalkboard-user"></i></div><h3>Expert Tutors</h3><p>Verified professionals in math, science, languages & more.</p></div>
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar-alt"></i></div><h3>Flexible scheduling</h3><p>Book lessons 24/7, pay per session or subscribe.</p></div>
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Personalized plans</h3><p>Custom learning path & progress tracking.</p></div>
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-video"></i></div><h3>Live interactive sessions</h3><p>Zoom integration + digital whiteboard.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-chalkboard-user"></i></div><h3>fresh tutors</h3><p>vetted experts, artsy & stem — all backgrounds.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar-alt"></i></div><h3>flex scheduling</h3><p>pick hours that fit your daily wave.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-compass"></i></div><h3>custom plans</h3><p>personal roadmap + study kit.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-music"></i></div><h3>aesthetic sessions</h3><p>lo-fi beats & interactive tools.</p></div>
   </div>
 
-  <!-- how it works -->
-  <h2 class="section-title">How LesGo works</h2>
-  <div class="steps">
-    <div class="step"><div class="step-number">1</div><h3>Sign up free</h3><p>Create your account as student or tutor.</p></div>
-    <div class="step"><div class="step-number">2</div><h3>Find your match</h3><p>Browse tutors by subject, rating & price.</p></div>
-    <div class="step"><div class="step-number">3</div><h3>Book & learn</h3><p>Schedule sessions and achieve goals.</p></div>
-  </div>
-
-  <!-- testimonials section -->
-  <div class="testimonials">
-    <h2 style="text-align:center; margin-bottom:1.5rem;">⭐ Trusted by 1000+ learners</h2>
-    <div class="testimonial-grid">
-      <div class="testi-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Found my math tutor in 2 days. Grades improved dramatically!"</p><b>- Sophia L.</b></div>
-      <div class="testi-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><p>"LesGo made private tutoring affordable and super easy. Love the dashboard."</p><b>- James K.</b></div>
-      <div class="testi-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"As a tutor, I’ve gained amazing students. Best platform for side income."</p><b>- Ms. Chen</b></div>
+  <!-- daily routine / "nwjn" style section (inspired by ur file) -->
+  <div class="resources-zone">
+    <div class="routine-card">
+      <h3><i class="fas fa-heart"></i> weekly focus</h3>
+      <table class="mini-table">
+        <tr><th></th><th>mon</th><th>wed</th><th>fri</th></tr>
+        <tr><td>📘 tutoring</td><td>math</td><td>lang</td><td>coding</td></tr>
+        <tr><td>🎮 group study</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+        <tr><td>🎧 feedback</td><td>✅</td><td>✅</td><td>✅</td></tr>
+      </table>
+      <div class="tag-list"><span class="tag">#editUI</span><span class="tag">#filming</span><span class="tag">#prep</span></div>
+    </div>
+    <div class="routine-card">
+      <h3><i class="fas fa-folder"></i> apps / folders</h3>
+      <p style="font-size:0.75rem;">📁 notion · zoom · rhythm · canva</p>
+      <p style="margin-top: 0.5rem; font-size:0.75rem;">⭐ "do well!" — anonym</p>
+      <div class="tag-list"><span class="tag">team news</span><span class="tag">dailywork</span><span class="tag">copy</span></div>
+    </div>
+    <div class="routine-card">
+      <h3><i class="fas fa-camera-retro"></i> inspo picks</h3>
+      <p style="font-size:0.75rem;">🎵 newjeans · y2k study playlists · pastel notes</p>
+      <div style="background:#c6f0e6; border-radius: 28px; padding: 0.3rem; margin-top:0.5rem; text-align:center; font-size:0.7rem;">favorite: frutiger aero archive</div>
     </div>
   </div>
 
-  <!-- call to action -->
+  <!-- how lesgo works: y2k steps -->
+  <div style="text-align: center;">
+    <span class="section-title">⚡ 3 .. 2 .. 1 .. lesgo</span>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><h3>pick your subject</h3><p>math, music, design, languages</p></div>
+    <div class="step"><div class="step-number">2</div><h3>meet your tutor</h3><p>free 20min vibe check</p></div>
+    <div class="step"><div class="step-number">3</div><h3>learn & level up</h3><p>goals + weekly milestones</p></div>
+  </div>
+
+  <!-- card credit / luviebin inspired note -->
+  <div style="background: rgba(215, 250, 240, 0.75); backdrop-filter: blur(6px); border-radius: 2rem; padding: 1.4rem; margin: 2rem 0; border-left: 8px solid #39bfae;">
+    <div style="display: flex; gap: 0.8rem; align-items: flex-start; flex-wrap: wrap;">
+      <div><i class="fas fa-dove" style="font-size: 2rem; color: #11988a;"></i></div>
+      <div>
+        <p style="font-weight: 700;">📀 card credit: luviebin / lin</p>
+        <p style="font-size: 0.8rem;">inspired by the card community & y2k web revival. lesgo shares free study templates + tutoring copies whenever allowed. not commissions — just good energy. 🧃</p>
+        <p style="font-size: 0.7rem; margin-top: 0.20rem;">🎧 note: i'm a uni student, so replies may be slow. but i drop 2-3 tutor spotlights / week. check youtube link in bio!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- cta -->
   <div class="cta-banner">
-    <h2>Ready to transform your learning journey?</h2>
-    <p>Join LesGo today and get matched with your ideal private tutor.</p>
-    <button class="btn-primary" id="ctaSignupBtn">Get started →</button>
+    <h2>ready to ride the new wave?</h2>
+    <p>join lesgo · fresh private tutoring starts here</p>
+    <button class="btn-primary" id="ctaSignupBtn">✨ create account →</button>
   </div>
 
   <footer>
-    <p>© 2025 LesGo — Empowering students through private tutoring. All rights reserved.</p>
+    <p>© 2025 LesGo — 2000s energy, modern education. frutiger aero dream. 🍥</p>
   </footer>
 </div>
 
-<!-- LOGIN/SIGNUP MODAL (unified) -->
+<!-- MODAL -->
 <div id="authModal" class="modal">
   <div class="modal-card">
     <div class="modal-header">
-      <h2 id="modalTitle">Log in</h2>
+      <h2 id="modalTitle" style="color:#04645e;">log in 🌊</h2>
       <button class="close-modal" id="closeModalBtn">&times;</button>
     </div>
     <form id="authForm">
-      <div class="input-group">
-        <input type="text" id="authUsername" placeholder="Username" required>
-      </div>
-      <div class="input-group">
-        <input type="email" id="authEmail" placeholder="Gmail address" required>
-      </div>
-      <div class="input-group">
-        <input type="password" id="authPassword" placeholder="Password" required>
-      </div>
-      <div class="input-group" id="birthdayGroup" style="display: none;">
-        <input type="date" id="authBirthday" placeholder="Birthday">
-      </div>
+      <div class="input-group"><input type="text" id="authUsername" placeholder="username" required></div>
+      <div class="input-group"><input type="email" id="authEmail" placeholder="gmail address" required></div>
+      <div class="input-group"><input type="password" id="authPassword" placeholder="password" required></div>
+      <div class="input-group" id="birthdayGroup" style="display: none;"><input type="date" id="authBirthday" placeholder="birthday"></div>
       <div class="input-group">
         <select id="authRole">
-          <option value="user">👩‍🎓 Student / User</option>
-          <option value="admin">👑 Admin (Tutor/Manager)</option>
+          <option value="user">👩‍🎓 student / user</option>
+          <option value="admin">👾 tutor / admin</option>
         </select>
       </div>
-      <div id="formError" class="error-txt" style="margin-bottom:10px;"></div>
-      <button type="submit" class="btn-primary" style="width:100%;">Continue</button>
+      <div id="formError" class="error-txt"></div>
+      <button type="submit" class="btn-primary" style="width:100%; background:#119e90;">continue →</button>
     </form>
-    <div class="modal-footer">
-      <span id="toggleAuthText">Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span></span>
-    </div>
+    <div class="modal-footer"><span id="toggleAuthText">don't have an account? <span class="toggle-auth" id="toggleAuthMode">sign up ☆</span></span></div>
   </div>
 </div>
 
 <script>
-  // ---------- Separate JS for landing page interactions ----------
-  // Modal elements
+  // fresh js with y2k modal logic
   const modal = document.getElementById('authModal');
   const modalTitle = document.getElementById('modalTitle');
   const authForm = document.getElementById('authForm');
@@ -500,13 +592,12 @@
   const authBirthday = document.getElementById('authBirthday');
   const birthdayGroup = document.getElementById('birthdayGroup');
   const authRoleSelect = document.getElementById('authRole');
-  const toggleAuthModeSpan = document.getElementById('toggleAuthMode');
   const toggleTextSpan = document.getElementById('toggleAuthText');
   const formErrorDiv = document.getElementById('formError');
+  const closeModalBtn = document.getElementById('closeModalBtn');
 
-  let currentAuthMode = 'login'; // 'login' or 'signup'
+  let currentAuthMode = 'login';
 
-  // Helper: open modal
   function openModal(mode = 'login') {
     currentAuthMode = mode;
     updateModalUI();
@@ -519,104 +610,86 @@
     authRoleSelect.value = 'user';
   }
 
-  function closeModal() {
+  function closeModalFunc() {
     modal.style.display = 'none';
   }
 
   function updateModalUI() {
     if (currentAuthMode === 'login') {
-      modalTitle.innerText = 'Log in to LesGo';
+      modalTitle.innerHTML = 'log in 🌊 lesgo';
       birthdayGroup.style.display = 'none';
       authBirthday.removeAttribute('required');
-      toggleTextSpan.innerHTML = `Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span>`;
+      toggleTextSpan.innerHTML = `don't have an account? <span class="toggle-auth" id="toggleAuthMode">sign up ☆</span>`;
     } else {
-      modalTitle.innerText = 'Create your LesGo account';
+      modalTitle.innerHTML = 'sign up 🎧 fresh account';
       birthdayGroup.style.display = 'block';
       authBirthday.setAttribute('required', 'required');
-      toggleTextSpan.innerHTML = `Already have an account? <span class="toggle-auth" id="toggleAuthMode">Log in</span>`;
+      toggleTextSpan.innerHTML = `already have an account? <span class="toggle-auth" id="toggleAuthMode">log in ✨</span>`;
     }
-    // reattach event listener to new toggle element
     const newToggle = document.getElementById('toggleAuthMode');
-    if (newToggle) {
-      newToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (currentAuthMode === 'login') {
-          currentAuthMode = 'signup';
-        } else {
-          currentAuthMode = 'login';
-        }
-        updateModalUI();
-        formErrorDiv.innerText = '';
-      });
-    }
+    if (newToggle) newToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
+      updateModalUI();
+      formErrorDiv.innerText = '';
+    });
   }
 
-  // simple demo validation & success message (no backend, but feedback)
-  function handleAuthSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const username = authUsername.value.trim();
     const email = authEmail.value.trim();
     const password = authPassword.value;
-    const role = authRoleSelect.value;  // 'user' or 'admin'
-    let birthday = null;
-    if (currentAuthMode === 'signup') {
-      birthday = authBirthday.value;
-      if (!birthday) {
-        formErrorDiv.innerText = 'Please enter your birthday.';
-        return;
-      }
-    }
+    const role = authRoleSelect.value;
 
     if (!username || !email || !password) {
-      formErrorDiv.innerText = 'All fields are required.';
+      formErrorDiv.innerText = '❌ all fields required 🎧';
       return;
     }
-    if (password.length < 4) {
-      formErrorDiv.innerText = 'Password must be at least 4 characters.';
+    if (password.length < 3) {
+      formErrorDiv.innerText = 'password must be 3+ chars~';
       return;
     }
     const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      formErrorDiv.innerText = 'Please provide a valid Gmail or email address.';
+      formErrorDiv.innerText = 'enter a valid gmail/email.';
       return;
     }
-
-    // simulate success message based on mode
-    if (currentAuthMode === 'login') {
-      // Login simulation (admin/user)
-      alert(`✅ Welcome back, ${username}!\nLogged in as ${role === 'admin' ? 'Admin/Tutor' : 'Student'}.\n( Demo mode - dashboard ready )`);
-      closeModal();
-      // you could optionally reset UI or show logged state, but for landing we just alert.
+    if (currentAuthMode === 'signup') {
+      const birthday = authBirthday.value;
+      if (!birthday) {
+        formErrorDiv.innerText = 'birthday required 🧃';
+        return;
+      }
+      if (new Date(birthday) > new Date()) {
+        formErrorDiv.innerText = 'birthday cannot be future 🌊';
+        return;
+      }
+      alert(`✨ y2k signup success, ${username}! ✨\nrole: ${role === 'admin' ? 'tutor/admin' : 'student'}\nbday: ${birthday}\nwelcome to lesgo wave.`);
+      closeModalFunc();
     } else {
-      // Signup simulation
-      alert(`🎉 Signup successful, ${username}!\nRole: ${role === 'admin' ? 'Admin/Tutor' : 'Student'}\nBirthday: ${birthday}\nYou can now log in.`);
-      closeModal();
-      // After signup, switch modal to login mode if user wants, but we just close.
-      // Optionally, you can reopen login? not needed.
+      alert(`🍥 welcome back, ${username}!\nlogged in as ${role === 'admin' ? 'tutor/admin' : 'student'}.\nlet's study with good vibes.`);
+      closeModalFunc();
     }
     formErrorDiv.innerText = '';
   }
 
-  // attach form submit
-  authForm.addEventListener('submit', handleAuthSubmit);
-
-  // open modal triggers from multiple buttons
-  function openLoginModal() { openModal('login'); }
-  function openSignupModal() { openModal('signup'); }
-
-  // get all login/signup buttons across the landing page
-  document.getElementById('navLoginBtn')?.addEventListener('click', openLoginModal);
-  document.getElementById('navSignupBtn')?.addEventListener('click', openSignupModal);
-  document.getElementById('heroSignupBtn')?.addEventListener('click', openSignupModal);
-  document.getElementById('heroLoginBtn')?.addEventListener('click', openLoginModal);
-  document.getElementById('ctaSignupBtn')?.addEventListener('click', openSignupModal);
-  
-  // close modal event
-  document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
-  window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-  // optional: any extra animations or logged-in state placeholder
-  console.log('LesGo landing page ready — vibrant tutoring platform');
+  document.getElementById('navLoginBtn')?.addEventListener('click', () => openModal('login'));
+  document.getElementById('navSignupBtn')?.addEventListener('click', () => openModal('signup'));
+  document.getElementById('heroSignupBtn')?.addEventListener('click', () => openModal('signup'));
+  document.getElementById('heroLoginBtn')?.addEventListener('click', () => openModal('login'));
+  document.getElementById('ctaSignupBtn')?.addEventListener('click', () => openModal('signup'));
+  closeModalBtn?.addEventListener('click', closeModalFunc);
+  window.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
+  authForm.addEventListener('submit', handleSubmit);
+  if(document.getElementById('toggleAuthMode')) {
+    document.getElementById('toggleAuthMode').addEventListener('click', (e) => {
+      e.preventDefault();
+      currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
+      updateModalUI();
+      formErrorDiv.innerText = '';
+    });
+  }
 </script>
 </body>
 </html>
