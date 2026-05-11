@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar - LesGo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="logo-center">🎓 LesGo</div>
+            <h2>Daftar Akun Baru</h2>
+            
+            <form id="registerForm">
+                <input type="text" id="fullname" placeholder="Nama Lengkap" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="confirmPassword" placeholder="Konfirmasi Password" required>
+                
+                <button type="submit" class="btn-login-submit">📝 Daftar</button>
+            </form>
+            
+            <p class="register-link">Sudah punya akun? <a href="login.html">Login di sini</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirm) {
+                alert("Password tidak cocok!");
+                return;
+            }
+            
+            // Simpan user baru
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            users.push({
+                name: document.getElementById('fullname').value,
+                email: document.getElementById('email').value,
+                password: password
+            });
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert("Pendaftaran berhasil! Silakan login.");
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaksi - LesGo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🎓 LesGo</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="transaction.html">Transaksi</a>
+            <a href="profile.html">Profil</a>
+            <a href="login.html" onclick="localStorage.clear()">Logout</a>
+        </div>
+    </nav>
+
+    <div class="transaction-container">
+        <h1>💰 Booking Les Privat</h1>
+        
+        <div class="transaction-form">
+            <label>Pilih Guru:</label>
+            <select id="teacher">
+                <option value="40000">Ustadz Ahmad - Tahfidz (Rp40.000)</option>
+                <option value="40000">Ustadz Budi - Tahsin (Rp40.000)</option>
+                <option value="50000">Bu Rina - Matematika (Rp50.000)</option>
+                <option value="50000">Pak Dedi - Inggris (Rp50.000)</option>
+            </select>
+
+            <label>Jam Padat? (Tambahan Rp2.000)</label>
+            <select id="peakHour">
+                <option value="0">Tidak (Jam Biasa)</option>
+                <option value="2000">Ya (Jam Padat - Rp2.000)</option>
+            </select>
+
+            <label>Metode Pengiriman:</label>
+            <select id="delivery">
+                <option value="10000">Guru Datang ke Rumah (+Rp10.000)</option>
+                <option value="0">Online via Zoom (Gratis)</option>
+            </select>
+
+            <div class="price-breakdown" id="priceBreakdown"></div>
+            
+            <button class="btn-primary" id="checkoutBtn">✅ Bayar Sekarang</button>
+        </div>
+    </div>
+
+    <script>
+        const memberUstadz = ["ustadz.ahmad@lesgo.com", "ustadz.budi@lesgo.com", "ustadz.cecep@lesgo.com", "ustadz.dian@lesgo.com", "ustadz.eka@lesgo.com"];
+        const isMember = memberUstadz.includes(localStorage.getItem('userEmail'));
+        
+        function calculateTotal() {
+            const teacherPrice = parseInt(document.getElementById('teacher').value);
+            const peakHour = parseInt(document.getElementById('peakHour').value);
+            const delivery = parseInt(document.getElementById('delivery').value);
+            
+            let subtotal = teacherPrice + peakHour + delivery;
+            let discount = 0;
+            
+            if (isMember) {
+                discount = teacherPrice * 0.2;
+                subtotal = teacherPrice + peakHour + delivery - discount;
+            }
+            
+            document.getElementById('priceBreakdown').innerHTML = `
+                <h3>Rincian Biaya:</h3>
+                <p>Harga Les: Rp${teacherPrice.toLocaleString()}</p>
+                ${peakHour > 0 ? `<p>Biaya Jam Padat: +Rp${peakHour.toLocaleString()}</p>` : ''}
+                ${delivery > 0 ? `<p>Biaya Delivery: +Rp${delivery.toLocaleString()}</p>` : ''}
+                ${isMember ? `<p style="color:green;">Diskon Member 20%: -Rp${Math.floor(discount).toLocaleString()}</p>` : ''}
+                <hr>
+                <p><strong>TOTAL: Rp${Math.floor(subtotal).toLocaleString()}</strong></p>
+            `;
+        }
+        
+        document.getElementById('teacher').addEventListener('change', calculateTotal);
+        document.getElementById('peakHour').addEventListener('change', calculateTotal);
+        document.getElementById('delivery').addEventListener('change', calculateTotal);
+        
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            alert("✅ Transaksi berhasil! Guru akan segera dijadwalkan.");
+            window.location.href = 'dashboard.html';
+        });
+        
+        calculateTotal();
+    </script>
+</body>
+</html>

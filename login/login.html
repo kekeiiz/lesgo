@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - LesGo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="logo-center">🎓 LesGo</div>
+            <h2>Login ke Akun Anda</h2>
+            
+            <!-- Pilihan Role -->
+            <div class="role-selector">
+                <button class="role-btn active" data-role="user">👤 User (Siswa)</button>
+                <button class="role-btn" data-role="admin">🛠️ Admin</button>
+            </div>
+
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                
+                <!-- Contoh Akun -->
+                <div class="demo-accounts">
+                    <p><strong>Contoh Akun:</strong></p>
+                    <div class="demo-user">👤 User: user@lesgo.com / 123456</div>
+                    <div class="demo-admin">🛠️ Admin: admin@lesgo.com / 123456</div>
+                    <div class="demo-member">⭐ Member (Ustadz): ustadz.ahmad@lesgo.com / 123456</div>
+                </div>
+
+                <button type="submit" class="btn-login-submit">🔐 Login</button>
+            </form>
+            
+            <p class="register-link">Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+        </div>
+    </div>
+
+    <script>
+        // LOGIC LOGIN: User vs Admin vs Member (5 Ustadz)
+        const memberUstadz = [
+            "ustadz.ahmad@lesgo.com",
+            "ustadz.budi@lesgo.com", 
+            "ustadz.cecep@lesgo.com",
+            "ustadz.dian@lesgo.com",
+            "ustadz.eka@lesgo.com"
+        ];
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.querySelector('.role-btn.active').dataset.role;
+            
+            // Validasi sederhana
+            if (password !== "123456") {
+                alert("Password salah! Gunakan: 123456");
+                return;
+            }
+            
+            // Cek apakah user adalah member (5 ustadz)
+            const isMember = memberUstadz.includes(email);
+            
+            // Simpan data ke localStorage
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userRole', role);
+            localStorage.setItem('isMember', isMember);
+            
+            // Redirect berdasarkan role
+            if (role === 'admin') {
+                window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        });
+        
+        // Switch role button
+        document.querySelectorAll('.role-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
