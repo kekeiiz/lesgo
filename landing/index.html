@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Lesgo | Private Tutors & Lessons</title>
-  <!-- Google Fonts + simple reset for smoothness -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LesGo | Private Tutoring, Unlimited Growth</title>
+  <!-- Google Fonts & simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -14,570 +15,608 @@
     }
 
     body {
-      background: linear-gradient(145deg, #eef5ff 0%, #d9e9fa 100%);
       font-family: 'Inter', sans-serif;
-      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f0fe 100%);
+      color: #0a2a44;
+      overflow-x: hidden;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #cbdff2;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e6fdf;
+      border-radius: 10px;
+    }
+
+    /* general container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* navbar */
+    .navbar {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    /* main card container */
-    .glass-panel {
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
       background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(2px);
-      border-radius: 2.5rem;
-      box-shadow: 0 25px 45px -12px rgba(0, 40, 80, 0.35), 0 2px 8px rgba(0, 0, 0, 0.02);
-      width: 100%;
-      max-width: 520px;
-      padding: 2rem 2rem 2.4rem;
-      transition: all 0.2s ease;
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(30, 111, 223, 0.2);
     }
 
-    /* brand section */
-    .brand {
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
-
-    .brand h1 {
-      font-size: 3rem;
+    .logo h1 {
+      font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #0b3b5f, #1e6fdf, #2c7be5);
+      background: linear-gradient(125deg, #0b3b5f, #1e6fdf, #3b82f6);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      text-shadow: 0 2px 5px rgba(0, 80, 150, 0.08);
-      word-break: keep-all;
+      letter-spacing: -0.5px;
     }
 
-    .brand p {
-      color: #2c5282;
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
-      border-top: 1px solid #cbdff2;
-      display: inline-block;
-      padding-top: 0.4rem;
-      opacity: 0.85;
-    }
-
-    /* toggle (login / signup) */
-    .mode-switch {
-      display: flex;
-      gap: 0.75rem;
-      background: #e9f0fa;
-      padding: 0.4rem;
-      border-radius: 3rem;
-      margin-bottom: 2rem;
-    }
-
-    .mode-btn {
-      flex: 1;
-      text-align: center;
-      padding: 0.7rem 0;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 2.5rem;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      transition: all 0.2s ease;
-      color: #1e4a76;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .mode-btn.active {
-      background: white;
-      color: #1e6fdf;
-      box-shadow: 0 6px 12px -8px rgba(0, 66, 128, 0.2);
-      border: 0.5px solid rgba(30, 111, 223, 0.3);
-    }
-
-    /* role selector (admin/user pills) */
-    .role-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .role-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #1e5a9e;
-      margin-bottom: 0.65rem;
-      display: block;
-    }
-
-    .role-pills {
+    .nav-buttons {
       display: flex;
       gap: 1rem;
-      background: #f1f6fe;
-      padding: 0.3rem;
-      border-radius: 2.5rem;
     }
 
-    .role-option {
-      flex: 1;
-      text-align: center;
-      padding: 0.55rem 0;
-      font-weight: 500;
-      border-radius: 2rem;
-      cursor: pointer;
+    .btn-outline {
       background: transparent;
-      transition: all 0.2s;
-      border: none;
+      border: 1.5px solid #1e6fdf;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      color: #1e6fdf;
+      cursor: pointer;
+      transition: 0.2s;
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      color: #1e4f7a;
     }
 
-    .role-option.active-role {
+    .btn-outline:hover {
+      background: #eef4ff;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
       background: #1e6fdf;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 2rem;
+      font-weight: 600;
       color: white;
-      box-shadow: 0 2px 8px rgba(30, 111, 223, 0.3);
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(30, 111, 223, 0.3);
+      font-family: 'Inter', sans-serif;
     }
 
-    /* form styling */
-    .form-group {
+    .btn-primary:hover {
+      background: #0f5bc2;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(30, 111, 223, 0.35);
+    }
+
+    /* hero section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin: 4rem 0 3rem;
+    }
+
+    .hero-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-content .badge {
+      background: rgba(30, 111, 223, 0.12);
+      color: #1e6fdf;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      display: inline-block;
       margin-bottom: 1.2rem;
     }
 
-    label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-      color: #1a4c7a;
-      letter-spacing: 0.3px;
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(to right, #0f2b46, #1e6fdf);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1.2rem;
     }
 
-    .input-icon {
-      position: relative;
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #2c5282;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      flex: 1;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none"><path d="M50 200 L150 100 L250 150 L350 80 L320 220 L200 260 L80 230 Z" fill="%233b82f6" fill-opacity="0.15" stroke="%231e6fdf" stroke-width="2"/><circle cx="180" cy="150" r="30" fill="%23ffffff" stroke="%231e6fdf" stroke-width="2"/><text x="170" y="160" font-size="20" fill="%231e6fdf" font-weight="bold">📚</text><circle cx="280" cy="110" r="22" fill="%23ffffff" stroke="%233b82f6" stroke-width="2"/><text x="272" y="120" font-size="16">✏️</text><path d="M100 210 L130 180 L170 200" stroke="%231e6fdf" stroke-width="2" fill="none"/><rect x="260" y="190" width="40" height="40" fill="%23d9e9fa" stroke="%231e6fdf" stroke-width="2" rx="8"/><text x="268" y="215" font-size="20">🧑‍🏫</text></svg>') no-repeat center;
+      background-size: contain;
+      min-height: 280px;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* features section */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 4rem 0 2rem;
+      color: #0f2b46;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 2rem;
+      text-align: center;
+      transition: 0.25s ease;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(30, 111, 223, 0.2);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 25px 35px -12px rgba(30, 111, 223, 0.2);
+      border-color: #1e6fdf40;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      background: #eef4ff;
+      width: 70px;
+      height: 70px;
       display: flex;
       align-items: center;
-    }
-
-    .input-icon input {
-      width: 100%;
-      padding: 0.85rem 1rem 0.85rem 2.6rem;
-      border: 1.5px solid #cde0f0;
-      border-radius: 1.2rem;
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
-      background: white;
-      transition: 0.2s;
-      outline: none;
-      color: #0a2a44;
-    }
-
-    .input-icon input:focus {
-      border-color: #2c7be5;
-      box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.2);
-    }
-
-    .input-icon i {
-      position: absolute;
-      left: 1rem;
-      font-size: 1rem;
-      color: #6c8db0;
-      font-style: normal;
-      font-weight: 500;
-    }
-
-    /* simple pseudo icons via unicode / text */
-    .input-icon .field-icon {
-      font-weight: 500;
-      opacity: 0.7;
-    }
-
-    .submit-btn {
-      background: #1e6fdf;
-      border: none;
-      width: 100%;
-      padding: 0.9rem;
-      border-radius: 2rem;
-      font-weight: 700;
-      font-size: 1rem;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      margin-top: 0.6rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 6px 14px rgba(30, 111, 223, 0.3);
-    }
-
-    .submit-btn:hover {
-      background: #0f5bc2;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(30, 111, 223, 0.35);
-    }
-
-    .extra-note {
-      text-align: center;
-      font-size: 0.75rem;
-      margin-top: 1.4rem;
-      color: #3a6b92;
-      border-top: 1px solid #dae9fa;
-      padding-top: 1rem;
-    }
-
-    .toggle-mode-link {
-      background: none;
-      border: none;
+      justify-content: center;
+      border-radius: 30px;
+      margin: 0 auto 1.2rem;
       color: #1e6fdf;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.75rem;
     }
 
-    /* dynamic fields */
-    .hidden-field {
-      display: none;
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
     }
 
-    .message-area {
-      margin-top: 1rem;
-      padding: 0.6rem;
-      border-radius: 1rem;
-      font-size: 0.8rem;
+    .feature-card p {
+      color: #3c6e9c;
+    }
+
+    /* how it works */
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0 4rem;
+    }
+
+    .step {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      padding: 1.5rem;
+      border-radius: 2rem;
+      width: 240px;
       text-align: center;
-      font-weight: 500;
-      background: #eef2fc;
-      color: #155a9a;
     }
 
-    .error-message {
-      background: #ffe8e6;
-      color: #c23d2e;
+    .step-number {
+      background: #1e6fdf;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-weight: 800;
+      font-size: 1.4rem;
     }
 
-    .success-message {
-      background: #e3f7ec;
-      color: #1f7840;
+    /* testimonials */
+    .testimonials {
+      background: linear-gradient(110deg, #dbeafe, #eff6ff);
+      border-radius: 3rem;
+      padding: 2rem 1.5rem;
+      margin: 3rem 0;
     }
 
-    button {
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+    }
+
+    .testi-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      max-width: 280px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    }
+
+    .testi-card i {
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+    }
+
+    /* cta banner */
+    .cta-banner {
+      background: #0b3b5f;
+      border-radius: 2.5rem;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 2rem 0 4rem;
+      color: white;
+    }
+
+    .cta-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-banner .btn-primary {
+      background: white;
+      color: #0b3b5f;
+      margin-top: 1rem;
+      box-shadow: none;
+    }
+    .cta-banner .btn-primary:hover {
+      background: #eef2ff;
+    }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #cbdff2;
+      color: #2c5282;
+    }
+
+    /* modal styles (login/signup popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-card {
+      background: white;
+      max-width: 460px;
+      width: 90%;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      animation: fadeUp 0.25s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .modal-header h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f2b46;
+    }
+    .close-modal {
+      font-size: 1.8rem;
+      cursor: pointer;
       background: none;
       border: none;
     }
-
-    hr {
-      margin: 0.5rem 0;
-      border-color: #cde0f0;
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 1.2rem;
+      border: 1px solid #cbdff2;
+      font-family: 'Inter', sans-serif;
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: #1e6fdf;
+    }
+    .modal-footer {
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+    .toggle-auth {
+      color: #1e6fdf;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .error-txt {
+      color: #dc2626;
+      font-size: 0.75rem;
+    }
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2.3rem; }
+      .navbar { flex-direction: column; gap: 1rem; }
+      .container { padding: 0 1.2rem; }
     }
   </style>
 </head>
 <body>
-<div class="glass-panel" id="appContainer">
-  <div class="brand">
-    <h1>lesgo</h1>
-    <p>connect · learn · grow with expert tutors</p>
-  </div>
-
-  <!-- LOGIN / SIGNUP toggle -->
-  <div class="mode-switch">
-    <button class="mode-btn" id="loginModeBtn" data-mode="login">🔐 Log in</button>
-    <button class="mode-btn" id="signupModeBtn" data-mode="signup">📝 Sign up</button>
-  </div>
-
-  <!-- Role pills (admin / user) -->
-  <div class="role-group">
-    <span class="role-label">I am a...</span>
-    <div class="role-pills">
-      <button class="role-option" data-role="admin">👑 Admin</button>
-      <button class="role-option active-role" data-role="user">🧑‍🎓 User (Student/Tutor)</button>
+<div class="container">
+  <!-- navigation -->
+  <div class="navbar">
+    <div class="logo"><h1>LesGo</h1></div>
+    <div class="nav-buttons">
+      <button class="btn-outline" id="navLoginBtn">Log in</button>
+      <button class="btn-primary" id="navSignupBtn">Sign up</button>
     </div>
   </div>
 
-  <!-- DYNAMIC FORM (will be updated via JS) -->
-  <form id="mainForm" action="javascript:void(0);">
-    <div id="formDynamicFields">
-      <!-- fields injected by JS -->
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <span class="badge">✨ 1-on-1 private tutoring</span>
+      <h1>Unlock your potential with <span style="color:#1e6fdf;">LesGo</span></h1>
+      <p>Connect with expert private tutors, master any subject, and achieve academic excellence — all in one smart platform.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" id="heroSignupBtn">Start learning today →</button>
+        <button class="btn-outline" id="heroLoginBtn">I’m a tutor</button>
+      </div>
     </div>
-    <button type="submit" class="submit-btn" id="submitActionBtn">Continue</button>
-    <div id="formFeedback" class="message-area"></div>
-  </form>
-  <div class="extra-note">
-    ⚡ Demo credentials: any non-empty (e.g. demo@lesgo.com / pass123)
+    <div class="hero-image"></div>
+  </div>
+
+  <!-- features -->
+  <h2 class="section-title">Why students love <span style="color:#1e6fdf;">LesGo</span></h2>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-chalkboard-user"></i></div><h3>Expert Tutors</h3><p>Verified professionals in math, science, languages & more.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar-alt"></i></div><h3>Flexible scheduling</h3><p>Book lessons 24/7, pay per session or subscribe.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Personalized plans</h3><p>Custom learning path & progress tracking.</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fas fa-video"></i></div><h3>Live interactive sessions</h3><p>Zoom integration + digital whiteboard.</p></div>
+  </div>
+
+  <!-- how it works -->
+  <h2 class="section-title">How LesGo works</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><h3>Sign up free</h3><p>Create your account as student or tutor.</p></div>
+    <div class="step"><div class="step-number">2</div><h3>Find your match</h3><p>Browse tutors by subject, rating & price.</p></div>
+    <div class="step"><div class="step-number">3</div><h3>Book & learn</h3><p>Schedule sessions and achieve goals.</p></div>
+  </div>
+
+  <!-- testimonials section -->
+  <div class="testimonials">
+    <h2 style="text-align:center; margin-bottom:1.5rem;">⭐ Trusted by 1000+ learners</h2>
+    <div class="testimonial-grid">
+      <div class="testi-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Found my math tutor in 2 days. Grades improved dramatically!"</p><b>- Sophia L.</b></div>
+      <div class="testi-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><p>"LesGo made private tutoring affordable and super easy. Love the dashboard."</p><b>- James K.</b></div>
+      <div class="testi-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"As a tutor, I’ve gained amazing students. Best platform for side income."</p><b>- Ms. Chen</b></div>
+    </div>
+  </div>
+
+  <!-- call to action -->
+  <div class="cta-banner">
+    <h2>Ready to transform your learning journey?</h2>
+    <p>Join LesGo today and get matched with your ideal private tutor.</p>
+    <button class="btn-primary" id="ctaSignupBtn">Get started →</button>
+  </div>
+
+  <footer>
+    <p>© 2025 LesGo — Empowering students through private tutoring. All rights reserved.</p>
+  </footer>
+</div>
+
+<!-- LOGIN/SIGNUP MODAL (unified) -->
+<div id="authModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 id="modalTitle">Log in</h2>
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+    </div>
+    <form id="authForm">
+      <div class="input-group">
+        <input type="text" id="authUsername" placeholder="Username" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="authEmail" placeholder="Gmail address" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="authPassword" placeholder="Password" required>
+      </div>
+      <div class="input-group" id="birthdayGroup" style="display: none;">
+        <input type="date" id="authBirthday" placeholder="Birthday">
+      </div>
+      <div class="input-group">
+        <select id="authRole">
+          <option value="user">👩‍🎓 Student / User</option>
+          <option value="admin">👑 Admin (Tutor/Manager)</option>
+        </select>
+      </div>
+      <div id="formError" class="error-txt" style="margin-bottom:10px;"></div>
+      <button type="submit" class="btn-primary" style="width:100%;">Continue</button>
+    </form>
+    <div class="modal-footer">
+      <span id="toggleAuthText">Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span></span>
+    </div>
   </div>
 </div>
 
 <script>
-  // ---------- DOM elements ----------
-  const loginBtn = document.getElementById('loginModeBtn');
-  const signupBtn = document.getElementById('signupModeBtn');
-  const roleAdminBtn = document.querySelector('[data-role="admin"]');
-  const roleUserBtn = document.querySelector('[data-role="user"]');
-  const formFieldsContainer = document.getElementById('formDynamicFields');
-  const submitBtn = document.getElementById('submitActionBtn');
-  const feedbackDiv = document.getElementById('formFeedback');
+  // ---------- Separate JS for landing page interactions ----------
+  // Modal elements
+  const modal = document.getElementById('authModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const authForm = document.getElementById('authForm');
+  const authUsername = document.getElementById('authUsername');
+  const authEmail = document.getElementById('authEmail');
+  const authPassword = document.getElementById('authPassword');
+  const authBirthday = document.getElementById('authBirthday');
+  const birthdayGroup = document.getElementById('birthdayGroup');
+  const authRoleSelect = document.getElementById('authRole');
+  const toggleAuthModeSpan = document.getElementById('toggleAuthMode');
+  const toggleTextSpan = document.getElementById('toggleAuthText');
+  const formErrorDiv = document.getElementById('formError');
 
-  // State management
-  let currentMode = 'login';     // 'login' or 'signup'
-  let currentRole = 'user';      // 'admin' or 'user'
+  let currentAuthMode = 'login'; // 'login' or 'signup'
 
-  // Helper: clear feedback
-  function setFeedback(message, isError = false) {
-    feedbackDiv.textContent = message;
-    if (message) {
-      feedbackDiv.classList.remove('error-message', 'success-message');
-      if (isError) {
-        feedbackDiv.classList.add('error-message');
-      } else {
-        feedbackDiv.classList.add('success-message');
+  // Helper: open modal
+  function openModal(mode = 'login') {
+    currentAuthMode = mode;
+    updateModalUI();
+    modal.style.display = 'flex';
+    formErrorDiv.innerText = '';
+    authUsername.value = '';
+    authEmail.value = '';
+    authPassword.value = '';
+    authBirthday.value = '';
+    authRoleSelect.value = 'user';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  function updateModalUI() {
+    if (currentAuthMode === 'login') {
+      modalTitle.innerText = 'Log in to LesGo';
+      birthdayGroup.style.display = 'none';
+      authBirthday.removeAttribute('required');
+      toggleTextSpan.innerHTML = `Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span>`;
+    } else {
+      modalTitle.innerText = 'Create your LesGo account';
+      birthdayGroup.style.display = 'block';
+      authBirthday.setAttribute('required', 'required');
+      toggleTextSpan.innerHTML = `Already have an account? <span class="toggle-auth" id="toggleAuthMode">Log in</span>`;
+    }
+    // reattach event listener to new toggle element
+    const newToggle = document.getElementById('toggleAuthMode');
+    if (newToggle) {
+      newToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentAuthMode === 'login') {
+          currentAuthMode = 'signup';
+        } else {
+          currentAuthMode = 'login';
+        }
+        updateModalUI();
+        formErrorDiv.innerText = '';
+      });
+    }
+  }
+
+  // simple demo validation & success message (no backend, but feedback)
+  function handleAuthSubmit(e) {
+    e.preventDefault();
+    const username = authUsername.value.trim();
+    const email = authEmail.value.trim();
+    const password = authPassword.value;
+    const role = authRoleSelect.value;  // 'user' or 'admin'
+    let birthday = null;
+    if (currentAuthMode === 'signup') {
+      birthday = authBirthday.value;
+      if (!birthday) {
+        formErrorDiv.innerText = 'Please enter your birthday.';
+        return;
       }
-    } else {
-      feedbackDiv.classList.remove('error-message', 'success-message');
     }
-    if (!message) feedbackDiv.textContent = '';
-  }
 
-  // Update active toggle UI (login/signup)
-  function updateModeToggleUI() {
-    if (currentMode === 'login') {
-      loginBtn.classList.add('active');
-      signupBtn.classList.remove('active');
-      submitBtn.textContent = '🔑 Log in';
-    } else {
-      signupBtn.classList.add('active');
-      loginBtn.classList.remove('active');
-      submitBtn.textContent = '✨ Sign up';
-    }
-  }
-
-  // Update role pills UI
-  function updateRoleUI() {
-    if (currentRole === 'admin') {
-      roleAdminBtn.classList.add('active-role');
-      roleUserBtn.classList.remove('active-role');
-    } else {
-      roleUserBtn.classList.add('active-role');
-      roleAdminBtn.classList.remove('active-role');
-    }
-  }
-
-  // generate dynamic fields based on currentMode + currentRole
-  function renderFormFields() {
-    // base fields for any combination: username, gmail, password
-    // birthday only appears for signup (both admin & user signup require birthday)
-    // For login: username, gmail, password (admin/user both same fields)
-    // For signup: username, gmail, password, birthday
-    
-    let fieldsHtml = '';
-    
-    // Username field (common)
-    fieldsHtml += `
-      <div class="form-group">
-        <label>👤 Username</label>
-        <div class="input-icon">
-          <span class="field-icon" style="left: 1rem; position: absolute;">@</span>
-          <input type="text" id="username" name="username" placeholder="e.g., alex_tutor" autocomplete="username">
-        </div>
-      </div>
-    `;
-    
-    // Gmail field
-    fieldsHtml += `
-      <div class="form-group">
-        <label>📧 Gmail</label>
-        <div class="input-icon">
-          <span class="field-icon" style="left: 1rem; position: absolute;">✉️</span>
-          <input type="email" id="gmail" name="gmail" placeholder="name@gmail.com" autocomplete="email">
-        </div>
-      </div>
-    `;
-    
-    // Password field
-    fieldsHtml += `
-      <div class="form-group">
-        <label>🔒 Password</label>
-        <div class="input-icon">
-          <span class="field-icon" style="left: 1rem; position: absolute;">🔑</span>
-          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password">
-        </div>
-      </div>
-    `;
-    
-    // Birthday field only for signup mode
-    if (currentMode === 'signup') {
-      fieldsHtml += `
-        <div class="form-group">
-          <label>🎂 Birthday</label>
-          <div class="input-icon">
-            <span class="field-icon" style="left: 1rem; position: absolute;">📅</span>
-            <input type="date" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
-          </div>
-        </div>
-      `;
-    }
-    
-    // Optional: small hint for role
-    const roleLabelText = currentRole === 'admin' ? 'admin account' : 'user account';
-    const roleHint = `<div style="font-size:0.7rem; text-align:center; margin-top:0.3rem; color:#4783b0;">⦿ ${currentMode === 'login' ? 'Logging in as' : 'Signing up as'} <strong>${currentRole.toUpperCase()}</strong></div>`;
-    
-    formFieldsContainer.innerHTML = fieldsHtml + roleHint;
-  }
-  
-  // validate common fields for both modes (non-empty, email pattern)
-  function validateCommonFields(username, gmail, password) {
-    if (!username || username.trim() === '') {
-      setFeedback('❌ Username is required.', true);
-      return false;
-    }
-    if (!gmail || gmail.trim() === '') {
-      setFeedback('❌ Gmail address is required.', true);
-      return false;
-    }
-    // basic email pattern (gmail-like but any domain allowed, just simple regex)
-    const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
-    if (!emailPattern.test(gmail)) {
-      setFeedback('❌ Please enter a valid email address (e.g., name@gmail.com).', true);
-      return false;
-    }
-    if (!password || password.trim() === '') {
-      setFeedback('❌ Password cannot be empty.', true);
-      return false;
-    }
-    if (password.length < 4) {
-      setFeedback('⚠️ Password should be at least 4 characters (demo).', true);
-      return false;
-    }
-    return true;
-  }
-  
-  // Handle form submission based on mode & role
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    setFeedback(''); // clear previous
-    
-    // get current input values
-    const usernameElem = document.getElementById('username');
-    const gmailElem = document.getElementById('gmail');
-    const passwordElem = document.getElementById('password');
-    
-    if (!usernameElem || !gmailElem || !passwordElem) {
-      setFeedback('Form error, please refresh.', true);
+    if (!username || !email || !password) {
+      formErrorDiv.innerText = 'All fields are required.';
       return;
     }
-    
-    const username = usernameElem.value.trim();
-    const gmail = gmailElem.value.trim();
-    const password = passwordElem.value;
-    
-    // common validation
-    if (!validateCommonFields(username, gmail, password)) return;
-    
-    if (currentMode === 'login') {
-      // LOGIN simulation (admin / user)
-      // For demo, we just accept any non-empty credentials; show successful login with role info.
-      // Since no backend, we mimic successful login with a message and reset.
-      let roleMsg = currentRole === 'admin' ? 'Administrator' : 'User (Student/Tutor)';
-      setFeedback(`✅ Welcome back, ${username}! Logged in as ${roleMsg} (demo mode).`, false);
-      // Optional: clear sensitive fields for better UX? no need, but we show success.
-      // You could also redirect, but for frontend demo we keep.
-      // additional: console log success.
-      console.log(`[LOGIN] role=${currentRole}, user=${username}, email=${gmail}`);
-    } 
-    else {  // SIGNUP mode
-      // birthday validation for signup
-      const birthdayElem = document.getElementById('birthday');
-      if (!birthdayElem) {
-        setFeedback('Missing birthday field, please refresh.', true);
-        return;
-      }
-      const birthday = birthdayElem.value;
-      if (!birthday || birthday.trim() === '') {
-        setFeedback('🎂 Please enter your birthday (required for sign up).', true);
-        return;
-      }
-      // basic date check: birthday not in future too extreme? just ensure it's a valid date string
-      const birthDateObj = new Date(birthday);
-      if (isNaN(birthDateObj.getTime())) {
-        setFeedback('Please provide a valid birthday date.', true);
-        return;
-      }
-      const today = new Date();
-      if (birthDateObj > today) {
-        setFeedback('Birthday cannot be in the future.', true);
-        return;
-      }
-      
-      // signup success message (admin/user)
-      let roleMsg = currentRole === 'admin' ? 'Admin account' : 'User account';
-      setFeedback(`🎉 Signup successful! Welcome ${username} (${roleMsg}). Birthday: ${birthday}. You can now log in.`, false);
-      console.log(`[SIGNUP] role=${currentRole}, username=${username}, gmail=${gmail}, birthday=${birthday}`);
-      // optional: clear password for better demo UX, but keep as is.
-      // we could also reset fields but not mandatory.
-      // After signup success, we do NOT automatically switch mode by design (user can manually click login)
-      // However we can gently remind.
-      setTimeout(() => {
-        if(confirm("Signup demo successful! Would you like to switch to login mode?")){
-          currentMode = 'login';
-          updateModeToggleUI();
-          renderFormFields();
-          setFeedback('Switched to login. Use your new credentials!', false);
-        }
-      }, 100);
+    if (password.length < 4) {
+      formErrorDiv.innerText = 'Password must be at least 4 characters.';
+      return;
     }
+    const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      formErrorDiv.innerText = 'Please provide a valid Gmail or email address.';
+      return;
+    }
+
+    // simulate success message based on mode
+    if (currentAuthMode === 'login') {
+      // Login simulation (admin/user)
+      alert(`✅ Welcome back, ${username}!\nLogged in as ${role === 'admin' ? 'Admin/Tutor' : 'Student'}.\n( Demo mode - dashboard ready )`);
+      closeModal();
+      // you could optionally reset UI or show logged state, but for landing we just alert.
+    } else {
+      // Signup simulation
+      alert(`🎉 Signup successful, ${username}!\nRole: ${role === 'admin' ? 'Admin/Tutor' : 'Student'}\nBirthday: ${birthday}\nYou can now log in.`);
+      closeModal();
+      // After signup, switch modal to login mode if user wants, but we just close.
+      // Optionally, you can reopen login? not needed.
+    }
+    formErrorDiv.innerText = '';
   }
+
+  // attach form submit
+  authForm.addEventListener('submit', handleAuthSubmit);
+
+  // open modal triggers from multiple buttons
+  function openLoginModal() { openModal('login'); }
+  function openSignupModal() { openModal('signup'); }
+
+  // get all login/signup buttons across the landing page
+  document.getElementById('navLoginBtn')?.addEventListener('click', openLoginModal);
+  document.getElementById('navSignupBtn')?.addEventListener('click', openSignupModal);
+  document.getElementById('heroSignupBtn')?.addEventListener('click', openSignupModal);
+  document.getElementById('heroLoginBtn')?.addEventListener('click', openLoginModal);
+  document.getElementById('ctaSignupBtn')?.addEventListener('click', openSignupModal);
   
-  // attach event to form
-  function attachFormListener() {
-    const form = document.getElementById('mainForm');
-    // remove previous listener to avoid duplicate
-    form.removeEventListener('submit', handleFormSubmit);
-    form.addEventListener('submit', handleFormSubmit);
-  }
-  
-  // Combine full UI update: mode + role -> re-render fields, toggle active styles, attach event
-  function fullRefresh() {
-    updateModeToggleUI();
-    updateRoleUI();
-    renderFormFields();
-    attachFormListener();
-  }
-  
-  // ---- EVENT HANDLERS for toggles ----
-  loginBtn.addEventListener('click', () => {
-    if (currentMode === 'login') return;
-    currentMode = 'login';
-    setFeedback('');
-    fullRefresh();
-  });
-  
-  signupBtn.addEventListener('click', () => {
-    if (currentMode === 'signup') return;
-    currentMode = 'signup';
-    setFeedback('');
-    fullRefresh();
-  });
-  
-  roleAdminBtn.addEventListener('click', () => {
-    if (currentRole === 'admin') return;
-    currentRole = 'admin';
-    setFeedback('');
-    fullRefresh();
-  });
-  
-  roleUserBtn.addEventListener('click', () => {
-    if (currentRole === 'user') return;
-    currentRole = 'user';
-    setFeedback('');
-    fullRefresh();
-  });
-  
-  // initial render: default mode = login, role = user
-  function init() {
-    currentMode = 'login';
-    currentRole = 'user';
-    fullRefresh();
-  }
-  
-  init();
+  // close modal event
+  document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+  window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+  // optional: any extra animations or logged-in state placeholder
+  console.log('LesGo landing page ready — vibrant tutoring platform');
 </script>
 </body>
 </html>
