@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>LesGo · 2000s fresh tutoring</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>LesGo · Private Tutoring Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -14,15 +14,13 @@
     }
 
     body {
-      background: linear-gradient(135deg, #b5e4f0 0%, #8fd0e0 40%, #6fc2d4 100%);
-      font-family: 'Plus Jakarta Sans', 'Segoe UI', 'Arial', sans-serif;
-      color: #035c5e;
-      min-height: 100vh;
-      padding: 2rem 1.5rem;
-      position: relative;
+      background: #e8f0f8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.5;
     }
 
-    /* frutiger aero bubbles / glassmorphism overlay */
+    /* halftone pattern overlay for 2000s look */
     body::before {
       content: "";
       position: fixed;
@@ -30,52 +28,38 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 20% 40%, rgba(255,255,240,0.2) 0%, rgba(175,225,235,0.1) 100%);
+      background-image: radial-gradient(circle at 25% 40%, rgba(0,0,0,0.03) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 1300px;
+      max-width: 1280px;
       margin: 0 auto;
+      padding: 0 2rem;
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
-    /* glossy card effect */
-    .glass-panel {
-      background: rgba(240, 255, 250, 0.75);
-      backdrop-filter: blur(10px);
-      border-radius: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 8px 20px rgba(0, 100, 100, 0.15), inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    /* navbar y2k style */
+    /* navigation */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1.2rem 0;
       flex-wrap: wrap;
-      gap: 1.2rem;
-      background: rgba(235, 255, 250, 0.85);
-      backdrop-filter: blur(12px);
-      padding: 0.8rem 2rem;
-      border-radius: 60px;
-      margin-bottom: 3rem;
-      border: 1px solid rgba(255,255,230,0.9);
-      box-shadow: 0 5px 15px rgba(0,80,80,0.1);
+      gap: 1rem;
+      border-bottom: 2px solid rgba(0,0,0,0.08);
     }
 
     .logo h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 800;
-      background: linear-gradient(125deg, #038f8f, #00b4b0, #57d6c9);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      color: white;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
       letter-spacing: -0.5px;
-      text-shadow: 2px 2px 8px rgba(0,150,150,0.2);
     }
 
     .nav-buttons {
@@ -84,163 +68,195 @@
     }
 
     .btn-outline {
-      background: rgba(255,255,250,0.5);
-      border: 1.5px solid #2fbfb0;
+      background: transparent;
+      border: 2px solid rgba(0,0,0,0.25);
       padding: 0.6rem 1.5rem;
-      border-radius: 40px;
+      border-radius: 2rem;
       font-weight: 600;
-      color: #047c7a;
+      color: black;
       cursor: pointer;
-      transition: 0.2s;
-      font-family: inherit;
-      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
     }
 
     .btn-outline:hover {
-      background: #e2fff5;
-      transform: translateY(-2px);
-      border-color: #0fa396;
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
     }
 
     .btn-primary {
-      background: linear-gradient(105deg, #25b6a8, #139c8f);
+      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
       border: none;
       padding: 0.6rem 1.8rem;
-      border-radius: 40px;
+      border-radius: 2rem;
       font-weight: 700;
-      color: white;
+      color: #1a3a2a;
       cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 4px 10px rgba(0,150,140,0.3);
-      font-family: inherit;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 2px 6px rgba(100, 150, 50, 0.15);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(105deg, #1faa9b, #0d8b7e);
-      box-shadow: 0 8px 18px rgba(0,140,130,0.4);
+      background: linear-gradient(to bottom, #f0ffc0, #e0ffaa);
+      transform: translateY(-1px);
     }
 
-    /* hero with y2k illustrations */
+    /* hero section */
     .hero {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 2rem;
-      background: rgba(220, 255, 245, 0.65);
-      backdrop-filter: blur(8px);
-      border-radius: 3rem;
-      padding: 2rem 2.2rem;
-      margin-bottom: 3rem;
-      border: 1px solid rgba(255,255,240,0.8);
-      box-shadow: 0 12px 28px rgba(0, 90, 90, 0.12);
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 3rem 0 3rem;
     }
 
     .hero-content {
-      flex: 1.2;
-    }
-
-    .badge {
-      background: rgba(35, 180, 166, 0.2);
-      backdrop-filter: blur(4px);
-      color: #0a7b72;
-      padding: 0.2rem 1rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      display: inline-block;
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.5px;
-      border: 0.5px solid #b9f3ec;
+      flex: 1;
+      min-width: 280px;
     }
 
     .hero-content h1 {
-      font-size: 3.4rem;
+      font-size: 3rem;
       font-weight: 800;
       line-height: 1.2;
-      color: #046c64;
-      text-shadow: 3px 3px 0 rgba(180, 240, 230, 0.6);
+      color: white;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
+      margin-bottom: 1.2rem;
     }
 
     .hero-content h1 span {
-      background: linear-gradient(135deg, #027d7a, #0fbcb0);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
     }
 
     .hero-content p {
-      font-size: 1rem;
-      color: #116b66;
-      margin: 1rem 0 1.8rem;
-      line-height: 1.45;
+      font-size: 1.05rem;
+      color: black;
       font-weight: 500;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      background: rgba(255,255,240,0.5);
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 1rem;
     }
 
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* laptop mockup with chat gradient */
     .hero-image {
       flex: 0.9;
-      background: radial-gradient(ellipse at 30% 40%, #bef1ec, #9be0da);
-      border-radius: 2rem;
-      min-height: 260px;
+      min-width: 300px;
+    }
+
+    .laptop {
+      background: linear-gradient(145deg, #5a6e7e, #3a4a5a);
+      border-radius: 1.2rem 1.2rem 0.8rem 0.8rem;
+      padding: 1rem 1rem 0.5rem 1rem;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+    }
+
+    .laptop-screen {
+      background: #c8d8e8;
+      border-radius: 0.6rem;
+      padding: 1rem;
+      aspect-ratio: 16 / 10;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid rgba(255,255,240,0.7);
-      box-shadow: inset 0 0 20px rgba(255,255,210,0.6), 0 10px 20px rgba(0,0,0,0.05);
+      flex-direction: column;
+      background: linear-gradient(135deg, #b0c4de, #8bb0c8);
     }
 
-    .hero-image-content {
-      text-align: center;
+    .chat-container {
+      background: rgba(255,255,250,0.9);
+      border-radius: 1rem;
+      padding: 0.8rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow-y: auto;
     }
 
-    .hero-image-content i {
-      font-size: 3.8rem;
-      color: #fffbe3;
-      text-shadow: 0 2px 5px #14aa9b;
-      margin: 0 0.3rem;
+    .chat-bubble-left {
+      background: white;
+      padding: 0.5rem 0.8rem;
+      border-radius: 1rem 1rem 1rem 0.3rem;
+      max-width: 80%;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1a1a1a;
+      align-self: flex-start;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
-    /* features section ( y2k bubbles  ) */
+    .chat-bubble-right {
+      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
+      padding: 0.5rem 0.8rem;
+      border-radius: 1rem 1rem 0.3rem 1rem;
+      max-width: 80%;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1a3a2a;
+      align-self: flex-end;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .chat-time {
+      font-size: 0.55rem;
+      color: #6a6a6a;
+      margin-top: 0.2rem;
+    }
+
+    .laptop-base {
+      background: #4a5a6a;
+      height: 0.5rem;
+      width: 80%;
+      margin: 0 auto;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+
+    /* features section */
     .section-title {
+      text-align: center;
       font-size: 1.8rem;
       font-weight: 800;
-      text-align: center;
-      margin: 2rem 0 1.8rem;
-      background: linear-gradient(110deg, #035c5e, #21b2a3);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      display: inline-block;
-      width: auto;
-      padding: 0 1rem;
+      color: white;
+      -webkit-text-stroke: 1.2px black;
+      text-stroke: 1.2px black;
+      margin: 2rem 0 2rem;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.8rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
     .feature-card {
-      background: rgba(244, 255, 250, 0.8);
-      backdrop-filter: blur(6px);
-      padding: 1.8rem 1.2rem;
-      border-radius: 2rem;
+      background: rgba(255,255,250,0.92);
+      padding: 1.8rem;
+      border-radius: 1.2rem;
       text-align: center;
       transition: all 0.2s ease;
-      border: 1px solid #c5f3ec;
-      box-shadow: 0 8px 18px rgba(0, 90, 85, 0.08);
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
     }
 
     .feature-card:hover {
-      transform: translateY(-6px);
-      background: rgba(255, 255, 250, 0.95);
-      border-color: #8be6db;
+      transform: translateY(-3px);
+      background: white;
     }
 
     .feature-icon {
-      background: #c4f3ec;
+      background: #e0ece8;
       width: 70px;
       height: 70px;
       display: flex;
@@ -249,130 +265,124 @@
       border-radius: 35px;
       margin: 0 auto 1rem;
       font-size: 2rem;
-      color: #0f8f84;
-      box-shadow: inset 0 -1px 0 #fff8e0, 0 4px 12px rgba(0,0,0,0.02);
+      color: #2c6e5c;
     }
 
-    /* steps like 2000s web */
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: black;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      color: #2a2a2a;
+      font-size: 0.85rem;
+    }
+
+    /* benefits section (replaces cta) */
+    .benefits-section {
+      background: rgba(255,255,250,0.92);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 2rem 0 3rem;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .benefits-section h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      -webkit-text-stroke: 1.2px black;
+      text-stroke: 1.2px black;
+      margin-bottom: 1.5rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .benefit-item {
+      padding: 1rem;
+    }
+
+    .benefit-item i {
+      font-size: 2rem;
+      color: #5a9c3a;
+      margin-bottom: 0.6rem;
+    }
+
+    .benefit-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: black;
+      margin-bottom: 0.3rem;
+    }
+
+    .benefit-item p {
+      font-size: 0.8rem;
+      color: #2a2a2a;
+    }
+
+    /* how it works */
     .steps {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      margin: 2rem 0 2.5rem;
+      margin: 2rem 0 3rem;
     }
 
     .step {
-      background: rgba(235, 255, 248, 0.8);
-      backdrop-filter: blur(4px);
-      width: 210px;
-      padding: 1.3rem;
-      border-radius: 2rem;
+      background: rgba(255,255,250,0.92);
+      padding: 1.5rem;
+      border-radius: 1.2rem;
+      width: 220px;
       text-align: center;
-      border: 1px solid #b0f0e6;
-      transition: 0.2s;
+      border: 1px solid rgba(0,0,0,0.08);
     }
 
     .step-number {
-      background: linear-gradient(145deg, #2bc3b2, #179e90);
-      width: 44px;
-      height: 44px;
-      border-radius: 30px;
+      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
+      width: 48px;
+      height: 48px;
+      border-radius: 2rem;
       display: flex;
-      margin: 0 auto 0.8rem;
       align-items: center;
       justify-content: center;
+      margin: 0 auto 1rem;
       font-weight: 800;
-      color: white;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      font-size: 1.3rem;
+      color: #1a3a2a;
     }
 
-    /* Daily fresh zone ( inspired by nwjn / y2k notebook ) */
-    .resources-zone {
-      background: rgba(210, 248, 240, 0.7);
-      backdrop-filter: blur(6px);
-      border-radius: 2rem;
-      padding: 1.8rem;
-      margin: 2.5rem 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      border: 1px solid #ccf7ef;
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: black;
+      font-weight: 700;
     }
 
-    .routine-card {
-      flex: 1;
-      background: rgba(255, 255, 250, 0.8);
-      border-radius: 1.5rem;
-      padding: 1.2rem;
+    .step p {
+      font-size: 0.8rem;
+      color: #2a2a2a;
     }
 
-    .routine-card h3 {
-      font-size: 1.1rem;
-      border-left: 4px solid #16baab;
-      padding-left: 0.7rem;
-      margin-bottom: 1rem;
-      color: #04645e;
-    }
-
-    .mini-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.7rem;
-    }
-
-    .mini-table td {
-      padding: 0.3rem;
-      border-bottom: 1px solid #bfefe6;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .tag {
-      background: #c6f0e8;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #026f68;
-    }
-
-    /* CTA - 2000s glossy banner */
-    .cta-banner {
-      background: linear-gradient(115deg, #b3ede4, #88ddcf);
-      border-radius: 2.5rem;
-      padding: 2rem;
-      text-align: center;
-      margin: 2rem 0 2rem;
-      border: 1px solid #ebfff5;
-      box-shadow: 0 10px 20px rgba(0,100,90,0.15);
-    }
-
-    .cta-banner h2 {
-      font-weight: 800;
-      color: #025c58;
-    }
-
-    .cta-banner .btn-primary {
-      background: #067b70;
-      margin-top: 1rem;
-    }
-
+    /* footer */
     footer {
       text-align: center;
-      padding: 2rem 0 0.5rem;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      color: black;
       font-size: 0.75rem;
-      color: #166f67;
-      border-top: 1px solid #9fe2d8;
+      font-weight: 500;
     }
 
-    /* MODAL fresh & glossy */
+    /* modal styles */
     .modal {
       display: none;
       position: fixed;
@@ -380,209 +390,257 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 100, 90, 0.3);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
 
     .modal-card {
-      background: #f2fffcf0;
-      backdrop-filter: blur(16px);
-      max-width: 440px;
+      background: white;
+      max-width: 450px;
       width: 90%;
-      border-radius: 2rem;
+      border-radius: 1.5rem;
       padding: 2rem;
-      border: 1px solid #c1f0e6;
-      box-shadow: 0 20px 35px rgba(0,90,80,0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      -webkit-text-stroke: 1px black;
+      text-stroke: 1px black;
     }
 
     .close-modal {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       cursor: pointer;
       background: none;
       border: none;
-      color: #2f9b8f;
+      color: #666;
     }
 
     .input-group {
       margin-bottom: 1rem;
     }
 
-    .input-group input, .input-group select {
+    .input-group input,
+    .input-group select {
       width: 100%;
-      padding: 0.7rem 1rem;
-      border-radius: 1.5rem;
-      border: 1px solid #afddd4;
-      background: rgba(255,255,250,0.9);
-      font-family: inherit;
+      padding: 0.8rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid #ccc;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: #a8d85c;
     }
 
     .error-txt {
-      color: #cb6e57;
-      font-size: 0.7rem;
+      color: #d9534f;
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-footer {
+      text-align: center;
+      margin-top: 1.2rem;
     }
 
     .toggle-auth {
-      color: #1f9b8e;
+      color: #6a9c3a;
       cursor: pointer;
       font-weight: 600;
     }
 
-    /* little y2k decorations */
-    .bubble-deco {
-      position: absolute;
-      background: radial-gradient(circle, rgba(210,255,240,0.4) 0%, rgba(140,230,210,0.2) 100%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @media (max-width: 760px) {
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
       .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <!-- nav bar y2k fresh -->
+  <!-- navigation -->
   <div class="navbar">
-    <div class="logo"><h1>🌊 LesGo</h1></div>
+    <div class="logo"><h1>LesGo</h1></div>
     <div class="nav-buttons">
-      <button class="btn-outline" id="navLoginBtn">🎧 log in</button>
-      <button class="btn-primary" id="navSignupBtn">✨ sign up</button>
+      <button class="btn-outline" id="navLoginBtn">Log in</button>
+      <button class="btn-primary" id="navSignupBtn">Sign up</button>
     </div>
   </div>
 
-  <!-- hero with 2000's blue/green watery vibes -->
+  <!-- hero section with laptop chat instead of buttons -->
   <div class="hero">
     <div class="hero-content">
-      <span class="badge">🍃 1:1 · private tutoring · y2k fresh</span>
-      <h1>unlock your <span>best</span> <br>with <span>LesGo</span> wave</h1>
-      <p>⚡ match with mentors who get your vibe. modern, cozy & effective — learn like it's the 2000s but smarter.</p>
+      <h1>Find your perfect <span>private tutor</span> and excel</h1>
+      <p>LesGo connects students with qualified tutors across all subjects. Book personalized 1-on-1 sessions that fit your schedule and learning style.</p>
       <div class="hero-buttons">
-        <button class="btn-primary" id="heroSignupBtn">🌊 start the journey</button>
-        <button class="btn-outline" id="heroLoginBtn">🎀 i'm a tutor</button>
+        <button class="btn-primary" id="heroLoginBtn">Log in</button>
+        <button class="btn-outline" id="heroSignupBtn">Sign up</button>
       </div>
-      <div style="margin-top: 1rem;"><span style="background:#c3f0e6; padding:0.2rem 0.8rem; border-radius:40px; font-size:0.7rem;">✨ 800+ active learners</span></div>
     </div>
     <div class="hero-image">
-      <div class="hero-image-content">
-        <i class="fas fa-compact-disc"></i>
-        <i class="fas fa-headphones"></i>
-        <i class="fas fa-cloud-sun"></i>
-        <div style="margin-top: 12px; font-size: 0.8rem; font-weight: 600;">newjeans energy • frutiger aero</div>
+      <div class="laptop">
+        <div class="laptop-screen">
+          <div class="chat-container">
+            <div class="chat-bubble-left">
+              <strong>Student:</strong> Hi! I need help with algebra prep for my exam.
+              <div class="chat-time">10:32 AM</div>
+            </div>
+            <div class="chat-bubble-right">
+              <strong>Tutor:</strong> Of course! I specialize in algebra. What topics are challenging you?
+              <div class="chat-time">10:33 AM</div>
+            </div>
+            <div class="chat-bubble-left">
+              <strong>Student:</strong> Mostly quadratic equations and factoring.
+              <div class="chat-time">10:34 AM</div>
+            </div>
+            <div class="chat-bubble-right">
+              <strong>Tutor:</strong> Great, I can walk you through step by step. Want to start with a free 20-min session?
+              <div class="chat-time">10:35 AM</div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
       </div>
     </div>
   </div>
 
-  <!-- features section / clean cards -->
-  <div style="text-align: center;">
-    <span class="section-title">🌼 how we glow up your learning</span>
-  </div>
+  <!-- features section -->
+  <h2 class="section-title">Why students choose LesGo</h2>
   <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-chalkboard-user"></i></div><h3>fresh tutors</h3><p>vetted experts, artsy & stem — all backgrounds.</p></div>
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar-alt"></i></div><h3>flex scheduling</h3><p>pick hours that fit your daily wave.</p></div>
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-compass"></i></div><h3>custom plans</h3><p>personal roadmap + study kit.</p></div>
-    <div class="feature-card"><div class="feature-icon"><i class="fas fa-music"></i></div><h3>aesthetic sessions</h3><p>lo-fi beats & interactive tools.</p></div>
-  </div>
-
-  <!-- daily routine / "nwjn" style section (inspired by ur file) -->
-  <div class="resources-zone">
-    <div class="routine-card">
-      <h3><i class="fas fa-heart"></i> weekly focus</h3>
-      <table class="mini-table">
-        <tr><th></th><th>mon</th><th>wed</th><th>fri</th></tr>
-        <tr><td>📘 tutoring</td><td>math</td><td>lang</td><td>coding</td></tr>
-        <tr><td>🎮 group study</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-        <tr><td>🎧 feedback</td><td>✅</td><td>✅</td><td>✅</td></tr>
-      </table>
-      <div class="tag-list"><span class="tag">#editUI</span><span class="tag">#filming</span><span class="tag">#prep</span></div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-user-check"></i></div>
+      <h3>Verified Tutors</h3>
+      <p>All tutors go through a screening process to ensure quality instruction.</p>
     </div>
-    <div class="routine-card">
-      <h3><i class="fas fa-folder"></i> apps / folders</h3>
-      <p style="font-size:0.75rem;">📁 notion · zoom · rhythm · canva</p>
-      <p style="margin-top: 0.5rem; font-size:0.75rem;">⭐ "do well!" — anonym</p>
-      <div class="tag-list"><span class="tag">team news</span><span class="tag">dailywork</span><span class="tag">copy</span></div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+      <h3>Flexible Scheduling</h3>
+      <p>Book lessons at times that work for you, morning or evening.</p>
     </div>
-    <div class="routine-card">
-      <h3><i class="fas fa-camera-retro"></i> inspo picks</h3>
-      <p style="font-size:0.75rem;">🎵 newjeans · y2k study playlists · pastel notes</p>
-      <div style="background:#c6f0e6; border-radius: 28px; padding: 0.3rem; margin-top:0.5rem; text-align:center; font-size:0.7rem;">favorite: frutiger aero archive</div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Progress Tracking</h3>
+      <p>Monitor your improvement with detailed session reports.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-laptop"></i></div>
+      <h3>Online Platform</h3>
+      <p>Learn from anywhere with our integrated video tools.</p>
     </div>
   </div>
 
-  <!-- how lesgo works: y2k steps -->
-  <div style="text-align: center;">
-    <span class="section-title">⚡ 3 .. 2 .. 1 .. lesgo</span>
-  </div>
-  <div class="steps">
-    <div class="step"><div class="step-number">1</div><h3>pick your subject</h3><p>math, music, design, languages</p></div>
-    <div class="step"><div class="step-number">2</div><h3>meet your tutor</h3><p>free 20min vibe check</p></div>
-    <div class="step"><div class="step-number">3</div><h3>learn & level up</h3><p>goals + weekly milestones</p></div>
-  </div>
-
-  <!-- card credit / luviebin inspired note -->
-  <div style="background: rgba(215, 250, 240, 0.75); backdrop-filter: blur(6px); border-radius: 2rem; padding: 1.4rem; margin: 2rem 0; border-left: 8px solid #39bfae;">
-    <div style="display: flex; gap: 0.8rem; align-items: flex-start; flex-wrap: wrap;">
-      <div><i class="fas fa-dove" style="font-size: 2rem; color: #11988a;"></i></div>
-      <div>
-        <p style="font-weight: 700;">📀 card credit: luviebin / lin</p>
-        <p style="font-size: 0.8rem;">inspired by the card community & y2k web revival. lesgo shares free study templates + tutoring copies whenever allowed. not commissions — just good energy. 🧃</p>
-        <p style="font-size: 0.7rem; margin-top: 0.20rem;">🎧 note: i'm a uni student, so replies may be slow. but i drop 2-3 tutor spotlights / week. check youtube link in bio!</p>
+  <!-- benefits section (replaces ready to transform) -->
+  <div class="benefits-section">
+    <h2>Benefits of learning with LesGo</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <i class="fas fa-clock"></i>
+        <h4>Flexible hours</h4>
+        <p>Schedule sessions when it's convenient for you, no rigid timetables.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-dollar-sign"></i>
+        <h4>Affordable rates</h4>
+        <p>Transparent pricing with no hidden fees. Pay per session.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-chalkboard"></i>
+        <h4>Personalized approach</h4>
+        <p>Every student gets a customized learning plan.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-mobile-alt"></i>
+        <h4>Learn anywhere</h4>
+        <p>Access your lessons from desktop, tablet, or phone.</p>
       </div>
     </div>
   </div>
 
-  <!-- cta -->
-  <div class="cta-banner">
-    <h2>ready to ride the new wave?</h2>
-    <p>join lesgo · fresh private tutoring starts here</p>
-    <button class="btn-primary" id="ctaSignupBtn">✨ create account →</button>
+  <!-- how it works -->
+  <h2 class="section-title">How LesGo works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Create account</h3>
+      <p>Sign up as a student or tutor in minutes.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Find your match</h3>
+      <p>Browse tutor profiles and read reviews.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Start learning</h3>
+      <p>Book sessions and achieve your goals.</p>
+    </div>
   </div>
 
   <footer>
-    <p>© 2025 LesGo — 2000s energy, modern education. frutiger aero dream. 🍥</p>
+    <p>© 2025 LesGo — Connecting students with expert tutors. All rights reserved.</p>
   </footer>
 </div>
 
-<!-- MODAL -->
+<!-- Login/Signup Modal -->
 <div id="authModal" class="modal">
   <div class="modal-card">
     <div class="modal-header">
-      <h2 id="modalTitle" style="color:#04645e;">log in 🌊</h2>
+      <h2 id="modalTitle">Log in</h2>
       <button class="close-modal" id="closeModalBtn">&times;</button>
     </div>
     <form id="authForm">
-      <div class="input-group"><input type="text" id="authUsername" placeholder="username" required></div>
-      <div class="input-group"><input type="email" id="authEmail" placeholder="gmail address" required></div>
-      <div class="input-group"><input type="password" id="authPassword" placeholder="password" required></div>
-      <div class="input-group" id="birthdayGroup" style="display: none;"><input type="date" id="authBirthday" placeholder="birthday"></div>
+      <div class="input-group">
+        <input type="text" id="authUsername" placeholder="Username" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="authEmail" placeholder="Email address" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="authPassword" placeholder="Password" required>
+      </div>
+      <div class="input-group" id="birthdayGroup" style="display: none;">
+        <input type="date" id="authBirthday" placeholder="Birthday">
+      </div>
       <div class="input-group">
         <select id="authRole">
-          <option value="user">👩‍🎓 student / user</option>
-          <option value="admin">👾 tutor / admin</option>
+          <option value="user">Student / User</option>
+          <option value="admin">Tutor / Admin</option>
         </select>
       </div>
       <div id="formError" class="error-txt"></div>
-      <button type="submit" class="btn-primary" style="width:100%; background:#119e90;">continue →</button>
+      <button type="submit" class="btn-primary" style="width:100%;">Continue</button>
     </form>
-    <div class="modal-footer"><span id="toggleAuthText">don't have an account? <span class="toggle-auth" id="toggleAuthMode">sign up ☆</span></span></div>
+    <div class="modal-footer">
+      <span id="toggleAuthText">Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span></span>
+    </div>
   </div>
 </div>
 
 <script>
-  // fresh js with y2k modal logic
+  // Modal logic
   const modal = document.getElementById('authModal');
   const modalTitle = document.getElementById('modalTitle');
   const authForm = document.getElementById('authForm');
@@ -616,26 +674,28 @@
 
   function updateModalUI() {
     if (currentAuthMode === 'login') {
-      modalTitle.innerHTML = 'log in 🌊 lesgo';
+      modalTitle.innerText = 'Log in to LesGo';
       birthdayGroup.style.display = 'none';
       authBirthday.removeAttribute('required');
-      toggleTextSpan.innerHTML = `don't have an account? <span class="toggle-auth" id="toggleAuthMode">sign up ☆</span>`;
+      toggleTextSpan.innerHTML = `Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span>`;
     } else {
-      modalTitle.innerHTML = 'sign up 🎧 fresh account';
+      modalTitle.innerText = 'Create your LesGo account';
       birthdayGroup.style.display = 'block';
       authBirthday.setAttribute('required', 'required');
-      toggleTextSpan.innerHTML = `already have an account? <span class="toggle-auth" id="toggleAuthMode">log in ✨</span>`;
+      toggleTextSpan.innerHTML = `Already have an account? <span class="toggle-auth" id="toggleAuthMode">Log in</span>`;
     }
     const newToggle = document.getElementById('toggleAuthMode');
-    if (newToggle) newToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
-      updateModalUI();
-      formErrorDiv.innerText = '';
-    });
+    if (newToggle) {
+      newToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
+        updateModalUI();
+        formErrorDiv.innerText = '';
+      });
+    }
   }
 
-  function handleSubmit(e) {
+  function handleAuthSubmit(e) {
     e.preventDefault();
     const username = authUsername.value.trim();
     const email = authEmail.value.trim();
@@ -643,47 +703,55 @@
     const role = authRoleSelect.value;
 
     if (!username || !email || !password) {
-      formErrorDiv.innerText = '❌ all fields required 🎧';
+      formErrorDiv.innerText = 'All fields are required.';
       return;
     }
-    if (password.length < 3) {
-      formErrorDiv.innerText = 'password must be 3+ chars~';
+    if (password.length < 4) {
+      formErrorDiv.innerText = 'Password must be at least 4 characters.';
       return;
     }
     const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      formErrorDiv.innerText = 'enter a valid gmail/email.';
+      formErrorDiv.innerText = 'Please enter a valid email address.';
       return;
     }
+
     if (currentAuthMode === 'signup') {
       const birthday = authBirthday.value;
       if (!birthday) {
-        formErrorDiv.innerText = 'birthday required 🧃';
+        formErrorDiv.innerText = 'Birthday is required.';
         return;
       }
-      if (new Date(birthday) > new Date()) {
-        formErrorDiv.innerText = 'birthday cannot be future 🌊';
+      const birthDate = new Date(birthday);
+      if (birthDate > new Date()) {
+        formErrorDiv.innerText = 'Birthday cannot be in the future.';
         return;
       }
-      alert(`✨ y2k signup success, ${username}! ✨\nrole: ${role === 'admin' ? 'tutor/admin' : 'student'}\nbday: ${birthday}\nwelcome to lesgo wave.`);
+      alert(`Signup successful, ${username}!\n\nRole: ${role === 'admin' ? 'Tutor/Admin' : 'Student'}\nBirthday: ${birthday}\n\nWelcome to LesGo!`);
       closeModalFunc();
     } else {
-      alert(`🍥 welcome back, ${username}!\nlogged in as ${role === 'admin' ? 'tutor/admin' : 'student'}.\nlet's study with good vibes.`);
+      alert(`Welcome back, ${username}!\n\nLogged in as ${role === 'admin' ? 'Tutor/Admin' : 'Student'}.\n\nLet's continue learning.`);
       closeModalFunc();
     }
     formErrorDiv.innerText = '';
   }
 
+  // Button event listeners - all buttons now point to login/signup
   document.getElementById('navLoginBtn')?.addEventListener('click', () => openModal('login'));
   document.getElementById('navSignupBtn')?.addEventListener('click', () => openModal('signup'));
-  document.getElementById('heroSignupBtn')?.addEventListener('click', () => openModal('signup'));
   document.getElementById('heroLoginBtn')?.addEventListener('click', () => openModal('login'));
-  document.getElementById('ctaSignupBtn')?.addEventListener('click', () => openModal('signup'));
+  document.getElementById('heroSignupBtn')?.addEventListener('click', () => openModal('signup'));
+
   closeModalBtn?.addEventListener('click', closeModalFunc);
-  window.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
-  authForm.addEventListener('submit', handleSubmit);
-  if(document.getElementById('toggleAuthMode')) {
-    document.getElementById('toggleAuthMode').addEventListener('click', (e) => {
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModalFunc();
+  });
+
+  authForm.addEventListener('submit', handleAuthSubmit);
+
+  const initialToggle = document.getElementById('toggleAuthMode');
+  if (initialToggle) {
+    initialToggle.addEventListener('click', (e) => {
       e.preventDefault();
       currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
       updateModalUI();
