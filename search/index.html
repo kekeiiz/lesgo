@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LesGo · Find Tutors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e8f0f8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 25% 40%, rgba(0,0,0,0.03) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+      text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .logo h1:hover { opacity: 0.8; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-icon {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.2);
+      width: 42px;
+      height: 42px;
+      border-radius: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1.2rem;
+      color: #1a3a2a;
+      background: rgba(255,255,250,0.9);
+    }
+    .btn-icon:hover {
+      background: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .user-avatar {
+      background: #d4f59e;
+      width: 44px;
+      height: 44px;
+      border-radius: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1a3a2a;
+      cursor: pointer;
+      border: 2px solid white;
+    }
+
+    /* search hero */
+    .search-hero {
+      background: rgba(255,255,250,0.92);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 2rem 0 1.8rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .search-title {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .search-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: flex-end;
+    }
+    .input-group {
+      flex: 1;
+      min-width: 180px;
+    }
+    .input-group label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2c5a3a;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .input-group input:focus, .input-group select:focus {
+      border-color: #8fc93a;
+      box-shadow: 0 0 0 3px rgba(143, 201, 58, 0.2);
+    }
+    .search-btn {
+      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      color: #1a3a2a;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(100,150,50,0.2);
+    }
+    .search-btn:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(to bottom, #f0ffc0, #e0ffaa);
+    }
+
+    /* results header */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 1rem;
+    }
+    .results-count {
+      background: rgba(0,0,0,0.05);
+      padding: 0.2rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* tutors grid (classroom style) */
+    .tutors-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .tutor-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.4rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+    }
+    .tutor-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+    }
+    .tutor-avatar-lg {
+      background: #c8d8e8;
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #1a3a2a;
+      margin-right: 1rem;
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .tutor-info h3 {
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .tutor-info p {
+      font-size: 0.8rem;
+      color: #4a6a5a;
+    }
+    .subject-tag {
+      background: #eef3e8;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-block;
+      margin: 0.5rem 0;
+    }
+    .rate-badge {
+      background: #f1f5f9;
+      padding: 0.3rem 0.8rem;
+      border-radius: 1rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #1f5e3a;
+    }
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #edf2f0;
+    }
+    .hire-btn {
+      background: #1a3a2a;
+      color: white;
+      border: none;
+      border-radius: 2rem;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hire-btn:hover {
+      background: #2b5a42;
+      transform: scale(0.97);
+    }
+    .chat-icon-small {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 2rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .chat-icon-small:hover {
+      background: #eef2ff;
+    }
+    .empty-results {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(255,255,250,0.7);
+      border-radius: 2rem;
+    }
+    .footer-note {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      color: #4a4a4a;
+      font-size: 0.8rem;
+    }
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a2e28;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 3rem;
+      font-weight: 500;
+      font-size: 0.85rem;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 1rem; }
+      .search-fields { flex-direction: column; align-items: stretch; }
+      .search-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="navbar">
+    <div class="logo" id="logoHomeBtn"><h1>LesGo</h1></div>
+    <div class="nav-actions">
+      <button class="btn-icon" id="dashboardBackBtn" title="Dashboard"><i class="fas fa-tachometer-alt"></i></button>
+      <button class="btn-icon" id="searchNavBtn" title="Search tutors"><i class="fas fa-search"></i></button>
+      <div class="user-avatar" id="userAvatarBtn">JD</div>
+    </div>
+  </div>
+
+  <!-- Search section -->
+  <div class="search-hero">
+    <div class="search-title">
+      <i class="fas fa-chalkboard-user" style="color:#3b7a5e;"></i> 
+      <span>Find the perfect tutor</span>
+    </div>
+    <div class="search-fields">
+      <div class="input-group">
+        <label><i class="fas fa-graduation-cap"></i> Subject / Topic</label>
+        <input type="text" id="subjectInput" placeholder="e.g., Algebra, French, Coding" value="">
+      </div>
+      <div class="input-group">
+        <label><i class="fas fa-dollar-sign"></i> Max hourly rate ($)</label>
+        <input type="number" id="budgetInput" placeholder="Any" step="5" min="0" value="">
+      </div>
+      <div class="input-group">
+        <label><i class="fas fa-sort-amount-down"></i> Sort by</label>
+        <select id="sortSelect">
+          <option value="default">Relevance</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="rating">Rating (Highest first)</option>
+        </select>
+      </div>
+      <button class="search-btn" id="performSearchBtn"><i class="fas fa-magnifying-glass"></i> Search</button>
+    </div>
+  </div>
+
+  <div class="results-header">
+    <h3 style="font-weight: 800; font-size: 1.5rem;">🎓 Available Tutors</h3>
+    <div class="results-count" id="resultsCountSpan">0 tutors found</div>
+  </div>
+
+  <div id="tutorsResultsContainer" class="tutors-results-grid">
+    <!-- dynamic cards appear here -->
+  </div>
+
+  <div class="footer-note">
+    © 2025 LesGo · Connect with expert tutors
+  </div>
+</div>
+
+<script>
+  // ---------- MOCK TUTOR DATABASE ----------
+  const TUTORS_DB = [
+    { id: 1, name: "Dr. Emily Chen", subject: "Algebra", subcategories: ["Algebra", "Math", "Calculus"], hourlyRate: 45, rating: 4.9, avatarInitials: "EC", about: "PhD in Mathematics, 8+ years experience" },
+    { id: 2, name: "Marcus Rivera", subject: "Physics", subcategories: ["Physics", "Science", "Mechanics"], hourlyRate: 55, rating: 4.8, avatarInitials: "MR", about: "Physics Olympiad coach" },
+    { id: 3, name: "Sophia Laurent", subject: "French", subcategories: ["French", "Languages", "Writing"], hourlyRate: 38, rating: 4.95, avatarInitials: "SL", about: "Native French speaker, DELF certified" },
+    { id: 4, name: "James Wang", subject: "Coding", subcategories: ["Coding", "Python", "Web Dev"], hourlyRate: 60, rating: 4.85, avatarInitials: "JW", about: "Full-stack developer, teaches JS/Python" },
+    { id: 5, name: "Nina Kaur", subject: "Chemistry", subcategories: ["Chemistry", "Science", "Biology"], hourlyRate: 42, rating: 4.7, avatarInitials: "NK", about: "MCAT prep, organic chem specialist" },
+    { id: 6, name: "Oliver Schmidt", subject: "History", subcategories: ["History", "Social Studies", "Geography"], hourlyRate: 35, rating: 4.6, avatarInitials: "OS", about: "World history & exam prep" },
+    { id: 7, name: "Zara Ahmed", subject: "Economics", subcategories: ["Economics", "Business", "Statistics"], hourlyRate: 50, rating: 4.9, avatarInitials: "ZA", about: "Former investment analyst" },
+    { id: 8, name: "Liam Chen", subject: "Spanish", subcategories: ["Spanish", "Languages", "Conversation"], hourlyRate: 32, rating: 4.75, avatarInitials: "LC", about: "Fun immersive lessons" },
+    { id: 9, name: "Grace Mbeki", subject: "Biology", subcategories: ["Biology", "Science", "Genetics"], hourlyRate: 48, rating: 4.88, avatarInitials: "GM", about: "Medical student, great at breaking down concepts" }
+  ];
+
+  // Helper to check if tutor matches search (subject text & budget)
+  function matchesSearch(tutor, subjectQuery, budgetMax) {
+    let subjectMatch = true;
+    if (subjectQuery && subjectQuery.trim() !== "") {
+      const lowerQuery = subjectQuery.toLowerCase();
+      const tutorSubjects = [tutor.subject.toLowerCase(), ...tutor.subcategories.map(s => s.toLowerCase())];
+      subjectMatch = tutorSubjects.some(sub => sub.includes(lowerQuery));
+    }
+    let budgetMatch = true;
+    if (budgetMax && !isNaN(parseFloat(budgetMax)) && parseFloat(budgetMax) > 0) {
+      budgetMatch = tutor.hourlyRate <= parseFloat(budgetMax);
+    }
+    return subjectMatch && budgetMatch;
+  }
+
+  // Sorting function
+  function sortTutors(tutors, sortType) {
+    const sorted = [...tutors];
+    if (sortType === "price_asc") {
+      sorted.sort((a, b) => a.hourlyRate - b.hourlyRate);
+    } else if (sortType === "price_desc") {
+      sorted.sort((a, b) => b.hourlyRate - a.hourlyRate);
+    } else if (sortType === "rating") {
+      sorted.sort((a, b) => b.rating - a.rating);
+    } else {
+      // default: keep original order (id based)
+      sorted.sort((a, b) => a.id - b.id);
+    }
+    return sorted;
+  }
+
+  // Render tutors inside container
+  function renderTutorCards(tutorsArray) {
+    const container = document.getElementById("tutorsResultsContainer");
+    const countSpan = document.getElementById("resultsCountSpan");
+    if (!container) return;
+    
+    if (!tutorsArray || tutorsArray.length === 0) {
+      container.innerHTML = `<div class="empty-results">
+        <i class="fas fa-user-graduate" style="font-size: 3rem; opacity: 0.4;"></i>
+        <p style="margin-top: 1rem; font-size: 1rem;">No tutors match your criteria.<br>Try adjusting subject or budget.</p>
+      </div>`;
+      countSpan.innerText = "0 tutors found";
+      return;
+    }
+    
+    countSpan.innerText = `${tutorsArray.length} tutor${tutorsArray.length !== 1 ? 's' : ''} found`;
+    container.innerHTML = tutorsArray.map(tutor => `
+      <div class="tutor-card" data-tutor-id="${tutor.id}">
+        <div class="card-top">
+          <div class="tutor-avatar-lg">${tutor.avatarInitials}</div>
+          <div class="tutor-info">
+            <h3>${escapeHtml(tutor.name)}</h3>
+            <p>${escapeHtml(tutor.about.substring(0, 50))}</p>
+          </div>
+        </div>
+        <div>
+          <span class="subject-tag"><i class="fas fa-book-open"></i> ${escapeHtml(tutor.subject)}</span>
+          <span class="rate-badge" style="margin-left: 0.5rem;"><i class="fas fa-star" style="color:#f5b042;"></i> ${tutor.rating} ★</span>
+          <div style="margin: 0.6rem 0 0.3rem; font-weight: 700; color: #1f5e3a;">
+            <i class="fas fa-dollar-sign"></i> ${tutor.hourlyRate}/hr
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="hire-btn" data-tutor='${JSON.stringify({id: tutor.id, name: tutor.name, rate: tutor.hourlyRate, avatar: tutor.avatarInitials})}'>
+            <i class="fas fa-handshake"></i> Request session
+          </button>
+          <button class="chat-icon-small message-preview-btn" data-tutor-name="${escapeHtml(tutor.name)}" data-tutor-id="${tutor.id}">
+            <i class="far fa-comment-dots"></i> Message
+          </button>
+        </div>
+      </div>
+    `).join("");
+    
+    // attach event listeners to hire buttons and message buttons after render
+    document.querySelectorAll('.hire-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tutorDataAttr = btn.getAttribute('data-tutor');
+        if (tutorDataAttr) {
+          try {
+            const tutor = JSON.parse(tutorDataAttr);
+            handleHireTutor(tutor);
+          } catch(e) { console.warn(e); }
+        }
+      });
+    });
+    
+    document.querySelectorAll('.message-preview-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tutorName = btn.getAttribute('data-tutor-name') || "Tutor";
+        const tutorId = btn.getAttribute('data-tutor-id');
+        showToast(`💬 Start chatting with ${tutorName} — messaging feature will open soon.`);
+        // In full version, navigate to chat page or open conversation
+      });
+    });
+  }
+  
+  function escapeHtml(str) { 
+    if(!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if(m === '&') return '&amp;';
+      if(m === '<') return '&lt;';
+      if(m === '>') return '&gt;';
+      return m;
+    });
+  }
+  
+  // Hire / request session logic (simulate interaction + alert)
+  function handleHireTutor(tutor) {
+    // In a real app, this would send booking request. For demo, show nice notification
+    showToast(`✨ Session request sent to ${tutor.name} ($${tutor.rate}/hr). They will contact you soon!`);
+    // Additionally store to localStorage to simulate "hired" reflection on dashboard? Not needed but nice.
+    // For continuity we can add to localstorage as a "recent tutor class" but that's outside spec.
+    // just a friendly alert popup
+    setTimeout(() => {
+      alert(`📚 Request sent to ${tutor.name}! Your dashboard will update when they accept.\n💰 Rate: $${tutor.rate}/hour`);
+    }, 50);
+  }
+  
+  function showToast(message) {
+    let existingToast = document.querySelector('.toast-msg');
+    if(existingToast) existingToast.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2500);
+  }
+  
+  // Perform search based on current inputs
+  function performSearch() {
+    const subjectRaw = document.getElementById("subjectInput").value;
+    const budgetRaw = document.getElementById("budgetInput").value;
+    const sortType = document.getElementById("sortSelect").value;
+    
+    let filtered = TUTORS_DB.filter(tutor => matchesSearch(tutor, subjectRaw, budgetRaw));
+    filtered = sortTutors(filtered, sortType);
+    renderTutorCards(filtered);
+    
+    // save last search query (optional UI)
+    const totalFound = filtered.length;
+    const resultsSpan = document.getElementById("resultsCountSpan");
+    if(resultsSpan) resultsSpan.innerText = `${totalFound} tutor${totalFound !== 1 ? 's' : ''} found`;
+  }
+  
+  // Initialize search page and event handlers; also sync with localStorage "balance" mock if needed, but not critical.
+  document.addEventListener('DOMContentLoaded', function() {
+    // ---- navigation / back to dashboard ----
+    const dashboardBtn = document.getElementById("dashboardBackBtn");
+    if(dashboardBtn) {
+      dashboardBtn.addEventListener("click", () => {
+        window.location.href = "dashboard.html"; // we assume the main dashboard is at dashboard.html
+        // fallback: if in same tab demo, we can redirect to same origin or alert
+        // To improve, we simulate by warning, but main page would be dashboard.
+        // For this standalone page, we can alert and mention user can return via logo.
+        alert("🔁 Return to main dashboard (this would redirect to dashboard page in production).");
+        // In real environment, use window.location = '/';
+      });
+    }
+    
+    const logoHome = document.getElementById("logoHomeBtn");
+    if(logoHome) {
+      logoHome.addEventListener("click", () => {
+        alert("🏠 Go back to LesGo main dashboard.");
+        // similarly simulation
+      });
+    }
+    
+    const searchNav = document.getElementById("searchNavBtn");
+    if(searchNav) {
+      searchNav.addEventListener("click", () => {
+        performSearch(); // re-run search if on same page
+        showToast("Refreshed tutor search");
+      });
+    }
+    
+    const userAvatar = document.getElementById("userAvatarBtn");
+    if(userAvatar) {
+      userAvatar.addEventListener("click", () => {
+        alert("👤 Profile settings, payment methods, and learning preferences.");
+      });
+    }
+    
+    const searchBtn = document.getElementById("performSearchBtn");
+    if(searchBtn) {
+      searchBtn.addEventListener("click", performSearch);
+    }
+    
+    // allow Enter key on input fields
+    const subjectInput = document.getElementById("subjectInput");
+    const budgetInput = document.getElementById("budgetInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const triggerSearch = () => performSearch();
+    subjectInput.addEventListener("keypress", (e) => { if(e.key === "Enter") triggerSearch(); });
+    budgetInput.addEventListener("keypress", (e) => { if(e.key === "Enter") triggerSearch(); });
+    sortSelect.addEventListener("change", triggerSearch);
+    
+    // On page load, show all tutors (default empty search shows all)
+    performSearch();
+    
+    // slight improvement: show initial balance display from parent? Not needed, but we mock nothing more
+    // Provide a demo message if there's no tutors: fine.
+    
+    // Simulate initial toast hint (optional)
+    setTimeout(() => {
+      showToast("🔍 Search by subject and budget — find your ideal tutor");
+    }, 500);
+  });
+</script>
+</body>
+</html>
