@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>LesGo · Find Tutors & Cart</title>
+  <title>LesGo · Find Tutors</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -42,7 +42,6 @@
       z-index: 1;
     }
 
-    /* navigation */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -57,8 +56,6 @@
       font-size: 2rem;
       font-weight: 800;
       color: #1a1a1a;
-      letter-spacing: -0.5px;
-      text-shadow: -1px -1px 0 white, 1px -1px 0 white;
       cursor: pointer;
       transition: opacity 0.2s;
     }
@@ -126,7 +123,6 @@
       border: 2px solid white;
     }
 
-    /* search hero */
     .search-hero {
       background: rgba(255,255,250,0.92);
       border-radius: 1.5rem;
@@ -197,7 +193,6 @@
       background: linear-gradient(to bottom, #f0ffc0, #e0ffaa);
     }
 
-    /* main layout: tutors grid + cart sidebar */
     .main-two-columns {
       display: flex;
       gap: 2rem;
@@ -290,44 +285,29 @@
     }
     .card-actions {
       margin-top: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       padding-top: 1rem;
       border-top: 1px solid #edf2f0;
-      gap: 0.6rem;
     }
     .add-to-cart-btn {
       background: #2c3e50;
       color: white;
       border: none;
       border-radius: 2rem;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       cursor: pointer;
       transition: 0.2s;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      flex: 1;
+      gap: 0.5rem;
       justify-content: center;
+      width: 100%;
     }
     .add-to-cart-btn:hover {
       background: #1e2f3e;
       transform: scale(0.98);
     }
-    .chat-icon-small {
-      background: transparent;
-      border: 1px solid #cbd5e1;
-      border-radius: 2rem;
-      padding: 0.4rem 0.8rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    /* Cart styles */
     .cart-card {
       background: white;
       border-radius: 1.5rem;
@@ -437,7 +417,6 @@
       z-index: 1000;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       pointer-events: none;
-      transition: opacity 0.2s;
     }
     @media (max-width: 900px) {
       .main-two-columns { flex-direction: column; }
@@ -461,11 +440,10 @@
     </div>
   </div>
 
-  <!-- Search hero -->
   <div class="search-hero">
     <div class="search-title">
       <i class="fas fa-chalkboard-user" style="color:#3b7a5e;"></i> 
-      <span>Find expert tutors & add to cart</span>
+      <span>Find expert tutors</span>
     </div>
     <div class="search-fields">
       <div class="input-group">
@@ -489,7 +467,6 @@
     </div>
   </div>
 
-  <!-- Two columns: tutors + cart -->
   <div class="main-two-columns">
     <div class="tutors-section">
       <div class="results-header">
@@ -520,7 +497,7 @@
 </div>
 
 <script>
-  // ---------- EXPANDED TUTOR DATABASE (20+ tutors) ----------
+  // TUTOR DATABASE
   const TUTORS_DB = [
     { id: 1, name: "Dr. Emily Chen", subject: "Calculus", subcategories: ["Calculus", "Math", "AP Math"], hourlyRate: 45, rating: 4.9, avatarInitials: "EC", about: "PhD in Math, 10+ years" },
     { id: 2, name: "Marcus Rivera", subject: "Physics", subcategories: ["Physics", "Mechanics", "Astrophysics"], hourlyRate: 55, rating: 4.8, avatarInitials: "MR", about: "Physics Olympiad coach" },
@@ -542,8 +519,8 @@
     { id: 18, name: "Samuel Lee", subject: "Web Dev", subcategories: ["Web Dev", "React"], hourlyRate: 58, rating: 4.9, avatarInitials: "SL", about: "Senior frontend" }
   ];
 
-  // ---------- CART STATE (stored in localStorage) ----------
-  let cart = []; // each item: { id, name, hourlyRate, subject, avatarInitials }
+  // CART STATE
+  let cart = [];
 
   function saveCartToLocal() {
     localStorage.setItem('lesgo_tutor_cart', JSON.stringify(cart));
@@ -552,18 +529,11 @@
 
   function loadCartFromLocal() {
     const stored = localStorage.getItem('lesgo_tutor_cart');
-    if (stored) {
-      try {
-        cart = JSON.parse(stored);
-      } catch(e) { cart = []; }
-    } else {
-      cart = [];
-    }
+    cart = stored ? JSON.parse(stored) : [];
     updateCartUI();
   }
 
   function addToCart(tutor) {
-    // check duplicate
     if (cart.some(item => item.id === tutor.id)) {
       showToast(`⚠️ ${tutor.name} already in cart!`);
       return false;
@@ -592,7 +562,6 @@
     const cartTotalSpan = document.getElementById('cartTotalAmount');
     const cartCountBadge = document.getElementById('cartCountBadge');
     const cartItemCountDisplay = document.getElementById('cartItemCountDisplay');
-    
     if (!container) return;
     if (cart.length === 0) {
       container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>Cart is empty. Add tutors!</p></div>`;
@@ -601,13 +570,12 @@
       if (cartItemCountDisplay) cartItemCountDisplay.innerText = "0 items";
       return;
     }
-    
     let total = 0;
     let itemsHtml = '';
     cart.forEach(item => {
       total += item.hourlyRate;
       itemsHtml += `
-        <div class="cart-item" data-cart-id="${item.id}">
+        <div class="cart-item">
           <div class="cart-item-info">
             <h4>${escapeHtml(item.name)}</h4>
             <p>${escapeHtml(item.subject)} • $${item.hourlyRate}/hr</p>
@@ -623,8 +591,6 @@
     if (cartTotalSpan) cartTotalSpan.innerText = `$${total.toFixed(2)}`;
     if (cartCountBadge) cartCountBadge.innerText = cart.length;
     if (cartItemCountDisplay) cartItemCountDisplay.innerText = `${cart.length} item${cart.length !== 1 ? 's' : ''}`;
-    
-    // attach remove events
     document.querySelectorAll('.remove-item-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = parseInt(btn.getAttribute('data-id'));
@@ -633,6 +599,7 @@
     });
   }
 
+  // CHECKOUT - Navigate to transaction page
   function checkout() {
     if (cart.length === 0) {
       showToast("🛒 Your cart is empty! Add tutors first.");
@@ -640,18 +607,19 @@
     }
     const total = cart.reduce((sum, i) => sum + i.hourlyRate, 0);
     const tutorNames = cart.map(t => t.name).join(', ');
-    // simulate checkout - clear cart, show summary
-    if (confirm(`💳 Checkout Summary:\n📚 Tutors: ${tutorNames}\n💰 Total: $${total.toFixed(2)}\n\nConfirm purchase? (Demo)`)) {
-      showToast(`🎉 Purchase successful! You've booked ${cart.length} tutor(s). Total $${total.toFixed(2)}`);
-      cart = [];
-      saveCartToLocal();
-      updateCartUI();
-      // additional interaction: alert for demonstration
-      setTimeout(() => alert(`✅ Checkout completed! Your sessions will be scheduled.\nTutors: ${tutorNames}\nTotal: $${total.toFixed(2)}`), 300);
-    }
+    
+    // Store cart data for transaction page
+    localStorage.setItem('lesgo_checkout_cart', JSON.stringify(cart));
+    
+    // Build the correct path to transaction folder
+    const currentPath = window.location.pathname;
+    let transactionPath = '../transaction/index.html';
+    
+    // Try to navigate to transaction page
+    window.location.href = transactionPath;
   }
 
-  // Helper functions for tutor rendering
+  // Search and filter functions
   function matchesSearch(tutor, subjectQuery, budgetMax) {
     let subjectMatch = true;
     if (subjectQuery && subjectQuery.trim() !== "") {
@@ -703,12 +671,11 @@
           <button class="add-to-cart-btn" data-tutor='${JSON.stringify({id:tutor.id, name:tutor.name, hourlyRate:tutor.hourlyRate, subject:tutor.subject, avatarInitials:tutor.avatarInitials})}'>
             <i class="fas fa-cart-plus"></i> Add to Cart
           </button>
-          <button class="chat-icon-small message-btn" data-name="${escapeHtml(tutor.name)}"><i class="far fa-comment-dots"></i> Chat</button>
         </div>
       </div>
     `).join("");
     
-    // attach add-to-cart events
+    // Add to cart events
     document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -721,9 +688,6 @@
         }
       });
     });
-    document.querySelectorAll('.message-btn').forEach(btn => {
-      btn.addEventListener('click', () => showToast(`💬 Messaging will be available after adding tutor to cart.`));
-    });
   }
 
   function performSearch() {
@@ -735,7 +699,16 @@
     renderTutorCards(filtered);
   }
 
-  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+  function escapeHtml(str) { 
+    if(!str) return ''; 
+    return str.replace(/[&<>]/g, function(m){ 
+      if(m==='&') return '&amp;'; 
+      if(m==='<') return '&lt;'; 
+      if(m==='>') return '&gt;'; 
+      return m;
+    }); 
+  }
+  
   function showToast(msg) {
     let existing = document.querySelector('.toast-msg');
     if(existing) existing.remove();
@@ -756,9 +729,9 @@
     document.getElementById("sortSelect")?.addEventListener("change", performSearch);
     document.getElementById("checkoutBtn")?.addEventListener("click", checkout);
     document.getElementById("cartIconBtn")?.addEventListener("click", () => { document.querySelector('.cart-section')?.scrollIntoView({ behavior: 'smooth' }); });
-    document.getElementById("dashboardBackBtn")?.addEventListener("click", () => { alert("🔙 Return to main dashboard (simulated)."); });
-    document.getElementById("logoHomeBtn")?.addEventListener("click", () => { alert("🏠 LesGo Home"); });
-    document.getElementById("userAvatarBtn")?.addEventListener("click", () => { alert("👤 Profile & settings"); });
+    document.getElementById("dashboardBackBtn")?.addEventListener("click", () => { window.location.href = '../dashboard.html'; });
+    document.getElementById("logoHomeBtn")?.addEventListener("click", () => { window.location.href = '../dashboard.html'; });
+    document.getElementById("userAvatarBtn")?.addEventListener("click", () => { alert("👤 Student: Jordan Davis\nEmail: jordan@lesgo.com"); });
   });
 </script>
 </body>

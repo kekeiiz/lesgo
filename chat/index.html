@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LesGo · Tutor Chat & Confirm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #e8f0f8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 25% 40%, rgba(0,0,0,0.03) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+    }
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      cursor: pointer;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .btn-icon {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.2);
+      width: 44px;
+      height: 44px;
+      border-radius: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #1a3a2a;
+      transition: 0.2s;
+    }
+    .btn-icon:hover { background: #f0f5ea; transform: translateY(-2px); }
+    .user-avatar {
+      background: #d4f59e;
+      width: 44px;
+      height: 44px;
+      border-radius: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .chat-layout {
+      display: flex;
+      gap: 1.8rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    .conversations-panel {
+      flex: 1;
+      min-width: 280px;
+      background: white;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      overflow: hidden;
+      height: fit-content;
+      max-height: 75vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-header {
+      padding: 1.2rem;
+      border-bottom: 1px solid #eef2f0;
+      font-weight: 800;
+      background: #fafcf8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .conversation-list {
+      overflow-y: auto;
+      flex: 1;
+    }
+    .conv-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem;
+      border-bottom: 1px solid #f0f2f5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .conv-item:hover { background: #f8faf5; }
+    .conv-item.active {
+      background: #eef5e5;
+      border-left: 4px solid #a8d85c;
+    }
+    .conv-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #c8d8e8, #a0b8d0);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .conv-info h4 { font-size: 1rem; font-weight: 700; }
+    .conv-info p { font-size: 0.75rem; color: #5a6e5a; }
+    .status-badge {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 1rem;
+      background: #f1f5f9;
+    }
+    .status-badge.confirmed { background: #d4f59e; color: #2c5a2c; }
+    .status-badge.pending { background: #fff3cc; color: #b86f0c; }
+    .status-badge.paid { background: #c8e6df; color: #1e5a4a; }
+    .chat-panel {
+      flex: 2.2;
+      min-width: 380px;
+      background: white;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+    }
+    .chat-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #eef2f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .confirm-badge {
+      background: #fef3c7;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .confirm-badge.agreed { background: #d4f59e; color: #1e4a1e; }
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .message {
+      max-width: 70%;
+      padding: 0.6rem 1rem;
+      border-radius: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .message.student {
+      background: #d4f59e;
+      align-self: flex-end;
+      border-bottom-right-radius: 0.2rem;
+    }
+    .message.tutor {
+      background: #f1f5f9;
+      align-self: flex-start;
+      border-bottom-left-radius: 0.2rem;
+    }
+    .message-system {
+      background: #eef2ff;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #4b5563;
+      align-self: center;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      max-width: 90%;
+    }
+    .chat-input-area {
+      padding: 1rem;
+      border-top: 1px solid #eef2f0;
+      display: flex;
+      gap: 0.8rem;
+    }
+    .chat-input-area input {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 2rem;
+      border: 1px solid #ddd;
+      font-family: 'Inter', sans-serif;
+    }
+    .send-btn {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 2rem;
+      padding: 0 1.4rem;
+      cursor: pointer;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem 1rem 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-confirm {
+      background: #2c6e2c;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-cancel {
+      background: #e0e0e0;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-checkout {
+      background: #d4f59e;
+      color: #1a3a2a;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 2rem;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      box-shadow: 0 2px 8px rgba(100,150,50,0.3);
+    }
+    .btn-checkout:hover {
+      background: #c8e888;
+      transform: translateY(-2px);
+    }
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a2e28;
+      color: white;
+      padding: 0.75rem 1.8rem;
+      border-radius: 3rem;
+      z-index: 1000;
+      font-size: 0.85rem;
+    }
+    .empty-state-chat {
+      text-align: center;
+      padding: 3rem;
+      color: #8a9a8a;
+    }
+    .demo-note {
+      font-size: 0.7rem;
+      background: #f9fafb;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      color: #6c7a6c;
+    }
+    @media (max-width: 800px) {
+      .chat-layout { flex-direction: column; }
+      .chat-panel { min-width: auto; height: 60vh; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="navbar">
+    <div class="logo" id="homeBtn"><h1>LesGo · Chat</h1></div>
+    <div class="nav-actions">
+      <button class="btn-icon" id="dashboardBtn" title="Go to Dashboard"><i class="fas fa-tachometer-alt"></i></button>
+      <button class="btn-icon" id="searchPageBtn" title="Find Tutors"><i class="fas fa-search"></i></button>
+      <div class="user-avatar" id="userMenu">JD</div>
+    </div>
+  </div>
+
+  <div class="chat-layout">
+    <!-- Conversations sidebar -->
+    <div class="conversations-panel">
+      <div class="panel-header">
+        <span><i class="fas fa-comments"></i> My Conversations</span>
+        <span class="demo-note"><i class="fas fa-info-circle"></i> Only tutors you messaged appear</span>
+      </div>
+      <div class="conversation-list" id="conversationList">
+        <div class="empty-state-chat" style="padding: 2rem; text-align: center;">
+          <i class="fas fa-comment-dots" style="font-size: 2rem; opacity: 0.4;"></i>
+          <p style="margin-top: 0.5rem;">No conversations yet</p>
+          <p style="font-size: 0.8rem;">Go to <strong>Find Tutors</strong> and click <strong>Message</strong> on any tutor to start chatting.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat area -->
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-header">
+        <div>
+          <h3 id="chatTutorName">Select a conversation</h3>
+          <div id="confirmationStatusArea"></div>
+        </div>
+        <div id="paymentActionArea"></div>
+      </div>
+      <div class="messages-area" id="messagesArea">
+        <div class="message-system">👈 Choose a conversation from the left to start chatting</div>
+      </div>
+      <div class="chat-input-area" id="chatInputArea" style="display: none;">
+        <input type="text" id="messageInput" placeholder="Discuss timing, price, subject details..." />
+        <button class="send-btn" id="sendMsgBtn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+      <div class="action-buttons" id="actionButtons" style="display: none;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ----------------- DATA MODELS -----------------
+  // conversations = only created when user clicks "Message" on search page
+  let conversations = [];
+  let activeConversationId = null;
+  const STORAGE_KEY = 'lesgo_chat_conversations_v3';
+
+  function saveConversations() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
+  }
+
+  function loadConversations() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      conversations = JSON.parse(stored);
+    } else {
+      conversations = [];
+    }
+    renderConversationList();
+    if (conversations.length > 0 && !activeConversationId) {
+      setActiveConversation(conversations[0].id);
+    } else if (conversations.length === 0) {
+      clearChatPanelForEmpty();
+    }
+  }
+
+  // Called from search page when user clicks "Message" button
+  window.startOrOpenChat = function(tutor) {
+    if (!tutor || !tutor.id) {
+      console.warn("Invalid tutor data");
+      return false;
+    }
+    let existing = conversations.find(c => c.tutorId === tutor.id);
+    if (existing) {
+      setActiveConversation(existing.id);
+      showToast(`Continuing chat with ${tutor.name}`);
+      return true;
+    }
+    const newConv = {
+      id: `conv_${Date.now()}_${tutor.id}`,
+      tutorId: tutor.id,
+      tutorName: tutor.name,
+      tutorAvatar: tutor.avatarInitials || tutor.name.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase(),
+      subject: tutor.subject,
+      hourlyRate: tutor.hourlyRate,
+      studentConfirmed: false,
+      tutorConfirmed: false,
+      paymentCompleted: false,
+      scheduled: false,
+      messages: [
+        { sender: "system", text: `🤝 You started a conversation with ${tutor.name}. Discuss session details (timing, price, topics) and then both confirm.`, timestamp: Date.now() }
+      ]
+    };
+    conversations.push(newConv);
+    saveConversations();
+    renderConversationList();
+    setActiveConversation(newConv.id);
+    showToast(`💬 Chat started with ${tutor.name}. Negotiate then confirm!`);
+    return true;
+  };
+
+  // Listen for cross-tab / same-window events from search page
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+      loadConversations();
+    }
+  });
+  window.addEventListener('lesgo-start-chat', (event) => {
+    if (event.detail && event.detail.tutor) {
+      window.startOrOpenChat(event.detail.tutor);
+    }
+  });
+
+  function renderConversationList() {
+    const container = document.getElementById('conversationList');
+    if (!container) return;
+    if (conversations.length === 0) {
+      container.innerHTML = `<div class="empty-state-chat" style="padding: 2rem; text-align: center;">
+          <i class="fas fa-comment-dots" style="font-size: 2rem; opacity: 0.4;"></i>
+          <p style="margin-top: 0.5rem;">No conversations yet</p>
+          <p style="font-size: 0.8rem;">Go to <strong>Find Tutors</strong> and click <strong>Message</strong> on any tutor to start chatting.</p>
+        </div>`;
+      return;
+    }
+    container.innerHTML = conversations.map(conv => {
+      let statusClass = 'pending';
+      let statusText = '💬 Negotiating';
+      if (conv.paymentCompleted) {
+        statusClass = 'paid';
+        statusText = '✅ Scheduled & Paid';
+      } else if (conv.studentConfirmed && conv.tutorConfirmed) {
+        statusClass = 'confirmed';
+        statusText = '✓ Both Confirmed - Ready';
+      } else if (conv.studentConfirmed) {
+        statusText = 'You confirmed · awaiting tutor';
+      } else if (conv.tutorConfirmed) {
+        statusText = 'Tutor confirmed · your turn';
+      }
+      return `
+        <div class="conv-item ${activeConversationId === conv.id ? 'active' : ''}" data-id="${conv.id}">
+          <div class="conv-avatar">${escapeHtml(conv.tutorAvatar)}</div>
+          <div class="conv-info">
+            <h4>${escapeHtml(conv.tutorName)}</h4>
+            <p>${escapeHtml(conv.subject)} · $${conv.hourlyRate}/hr</p>
+            <span class="status-badge ${statusClass}">${statusText}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+    document.querySelectorAll('.conv-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = el.getAttribute('data-id');
+        if (id) setActiveConversation(id);
+      });
+    });
+  }
+
+  function setActiveConversation(convId) {
+    activeConversationId = convId;
+    renderConversationList();
+    renderChatArea();
+  }
+
+  function clearChatPanelForEmpty() {
+    const messagesDiv = document.getElementById('messagesArea');
+    const chatInputDiv = document.getElementById('chatInputArea');
+    const actionDiv = document.getElementById('actionButtons');
+    const chatTutorNameSpan = document.getElementById('chatTutorName');
+    const confirmationStatusArea = document.getElementById('confirmationStatusArea');
+    const paymentActionArea = document.getElementById('paymentActionArea');
+    if (chatTutorNameSpan) chatTutorNameSpan.innerText = 'No conversation selected';
+    if (confirmationStatusArea) confirmationStatusArea.innerHTML = '';
+    if (paymentActionArea) paymentActionArea.innerHTML = '';
+    if (messagesDiv) messagesDiv.innerHTML = '<div class="message-system">👈 Start by messaging a tutor from the search page</div>';
+    if (chatInputDiv) chatInputDiv.style.display = 'none';
+    if (actionDiv) actionDiv.style.display = 'none';
+  }
+
+  function renderChatArea() {
+    const conv = conversations.find(c => c.id === activeConversationId);
+    const messagesDiv = document.getElementById('messagesArea');
+    const chatInputDiv = document.getElementById('chatInputArea');
+    const actionDiv = document.getElementById('actionButtons');
+    const chatTutorNameSpan = document.getElementById('chatTutorName');
+    const confirmationStatusArea = document.getElementById('confirmationStatusArea');
+    const paymentActionArea = document.getElementById('paymentActionArea');
+
+    if (!conv) {
+      if (conversations.length === 0) {
+        clearChatPanelForEmpty();
+      } else {
+        messagesDiv.innerHTML = '<div class="message-system">Select a conversation</div>';
+        chatInputDiv.style.display = 'none';
+        actionDiv.style.display = 'none';
+        if(chatTutorNameSpan) chatTutorNameSpan.innerText = 'No chat selected';
+      }
+      return;
+    }
+
+    chatTutorNameSpan.innerText = `${conv.tutorName} · ${conv.subject} ($${conv.hourlyRate}/hr)`;
+    
+    let confirmHtml = '';
+    if (conv.paymentCompleted) {
+      confirmHtml = `<span class="confirm-badge agreed"><i class="fas fa-check-circle"></i> Paid & Scheduled ✓</span>`;
+    } else if (conv.studentConfirmed && conv.tutorConfirmed) {
+      confirmHtml = `<span class="confirm-badge agreed"><i class="fas fa-handshake"></i> Both agreed! Ready to checkout</span>`;
+    } else if (conv.studentConfirmed) {
+      confirmHtml = `<span class="confirm-badge"><i class="fas fa-clock"></i> You confirmed · waiting tutor</span>`;
+    } else if (conv.tutorConfirmed) {
+      confirmHtml = `<span class="confirm-badge"><i class="fas fa-clock"></i> Tutor confirmed · click "Confirm" to accept</span>`;
+    } else {
+      confirmHtml = `<span class="confirm-badge">💬 Discuss timing/price, then confirm</span>`;
+    }
+    confirmationStatusArea.innerHTML = confirmHtml;
+
+    // Show CHECKOUT button when both confirmed AND not paid yet
+    if (!conv.paymentCompleted && conv.studentConfirmed && conv.tutorConfirmed) {
+      paymentActionArea.innerHTML = `<button class="btn-checkout" id="checkoutNowBtn"><i class="fas fa-shopping-cart"></i> Proceed to Checkout ($${conv.hourlyRate})</button>`;
+      const checkoutBtn = document.getElementById('checkoutNowBtn');
+      if (checkoutBtn) checkoutBtn.onclick = () => redirectToTransactionPage(conv);
+    } else if (!conv.paymentCompleted && (conv.studentConfirmed || conv.tutorConfirmed)) {
+      paymentActionArea.innerHTML = `<span style="font-size:0.75rem; color:#5a6e5a;"><i class="fas fa-info-circle"></i> Both need to confirm before checkout</span>`;
+    } else if (conv.paymentCompleted) {
+      paymentActionArea.innerHTML = `<span class="confirm-badge agreed"><i class="fas fa-calendar-check"></i> Session scheduled! Chat continues.</span>`;
+    } else {
+      paymentActionArea.innerHTML = '';
+    }
+
+    // Render messages
+    messagesDiv.innerHTML = '';
+    conv.messages.forEach(msg => {
+      const msgDiv = document.createElement('div');
+      if (msg.sender === 'student') msgDiv.className = 'message student';
+      else if (msg.sender === 'tutor') msgDiv.className = 'message tutor';
+      else msgDiv.className = 'message-system';
+      msgDiv.innerText = msg.text;
+      messagesDiv.appendChild(msgDiv);
+    });
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    chatInputDiv.style.display = 'flex';
+    
+    // Action buttons for confirmation (only if not paid)
+    if (!conv.paymentCompleted) {
+      let confirmBtnHtml = '';
+      if (!conv.studentConfirmed && !conv.tutorConfirmed) {
+        confirmBtnHtml = `<button class="btn-confirm" id="studentConfirmBtn"><i class="fas fa-check"></i> I Confirm Agreement</button>`;
+      } else if (conv.studentConfirmed && !conv.tutorConfirmed) {
+        confirmBtnHtml = `<span style="font-size:0.8rem; padding:0.5rem;">⏳ Waiting for tutor confirmation...</span>
+                          <button class="btn-cancel" id="cancelAgreementBtn">Cancel</button>`;
+      } else if (!conv.studentConfirmed && conv.tutorConfirmed) {
+        confirmBtnHtml = `<button class="btn-confirm" id="studentConfirmBtn"><i class="fas fa-handshake"></i> Accept & Confirm</button>`;
+      } else if (conv.studentConfirmed && conv.tutorConfirmed) {
+        confirmBtnHtml = `<span style="color:#2e7d32;"><i class="fas fa-check-circle"></i> Agreement reached! Use the checkout button above.</span>`;
+      }
+      actionDiv.style.display = 'flex';
+      actionDiv.innerHTML = confirmBtnHtml + (conv.studentConfirmed && !conv.tutorConfirmed ? '' : (conv.tutorConfirmed && !conv.studentConfirmed ? '' : (conv.studentConfirmed && conv.tutorConfirmed ? '' : `<button class="btn-cancel" id="cancelAgreementBtn">Cancel / Decline</button>`)));
+      
+      const confirmBtn = document.getElementById('studentConfirmBtn');
+      if (confirmBtn) confirmBtn.onclick = () => studentConfirm(conv.id);
+      const cancelBtn = document.getElementById('cancelAgreementBtn');
+      if (cancelBtn) cancelBtn.onclick = () => cancelAgreement(conv.id);
+      
+      // Demo tutor confirm button (simulates second party)
+      if (!conv.tutorConfirmed && !conv.paymentCompleted) {
+        if (!document.getElementById('simTutorConfirmBtn')) {
+          const tutorBtn = document.createElement('button');
+          tutorBtn.id = 'simTutorConfirmBtn';
+          tutorBtn.style.background = '#edf2f0';
+          tutorBtn.style.border = 'none';
+          tutorBtn.style.borderRadius = '2rem';
+          tutorBtn.style.padding = '0.4rem 1rem';
+          tutorBtn.style.fontSize = '0.75rem';
+          tutorBtn.style.cursor = 'pointer';
+          tutorBtn.innerHTML = '<i class="fas fa-user-check"></i> 🧑‍🏫 Tutor: Confirm';
+          tutorBtn.onclick = () => simulateTutorConfirm(conv.id);
+          actionDiv.appendChild(tutorBtn);
+        }
+      }
+    } else {
+      actionDiv.style.display = 'flex';
+      actionDiv.innerHTML = `<span style="color:#2b5e2b;"><i class="fas fa-chalkboard-user"></i> Session scheduled! You can continue chatting.</span>`;
+    }
+  }
+
+  // Student confirms agreement
+  function studentConfirm(convId) {
+    const conv = conversations.find(c => c.id === convId);
+    if (!conv || conv.paymentCompleted) return;
+    if (conv.tutorConfirmed) {
+      conv.studentConfirmed = true;
+      addSystemMessage(convId, "🎉 You confirmed the agreement! Both parties have accepted. Now proceed to checkout.");
+    } else {
+      conv.studentConfirmed = true;
+      addSystemMessage(convId, "✅ You confirmed the terms. Waiting for tutor confirmation...");
+    }
+    saveConversations();
+    renderConversationList();
+    renderChatArea();
+    showToast("You confirmed the agreement.");
+  }
+
+  // Tutor confirm (demo button)
+  function simulateTutorConfirm(convId) {
+    const conv = conversations.find(c => c.id === convId);
+    if (!conv || conv.paymentCompleted) return;
+    if (!conv.tutorConfirmed) {
+      conv.tutorConfirmed = true;
+      addSystemMessage(convId, "📚 Tutor confirmed the agreement!");
+      if (conv.studentConfirmed) {
+        addSystemMessage(convId, "🎉 Both parties have confirmed! Click 'Proceed to Checkout' to complete payment.");
+      } else {
+        addSystemMessage(convId, "Tutor accepted. Please click 'Confirm Agreement' to finalize.");
+      }
+      saveConversations();
+      renderConversationList();
+      renderChatArea();
+      showToast("Tutor confirmed the agreement.");
+    } else {
+      showToast("Tutor already confirmed.");
+    }
+  }
+
+  function cancelAgreement(convId) {
+    const conv = conversations.find(c => c.id === convId);
+    if (conv && !conv.paymentCompleted) {
+      conv.studentConfirmed = false;
+      conv.tutorConfirmed = false;
+      addSystemMessage(convId, "❌ Agreement cancelled. You can renegotiate terms in chat.");
+      saveConversations();
+      renderConversationList();
+      renderChatArea();
+      showToast("Agreement cancelled.");
+    }
+  }
+
+  // ----- REDIRECT TO TRANSACTION PAGE (folder called "transaction") -----
+  // This function redirects to the user's existing transaction page
+  // Assumes folder structure: /transaction/ (e.g., transaction.html or index.html)
+  function redirectToTransactionPage(conv) {
+    if (!conv.studentConfirmed || !conv.tutorConfirmed) {
+      showToast("Both parties must confirm the agreement before checkout.");
+      return;
+    }
+    if (conv.paymentCompleted) {
+      showToast("This session has already been paid for.");
+      return;
+    }
+    
+    // Store pending transaction details so transaction page can pick them up
+    const pendingTx = {
+      tutorId: conv.tutorId,
+      tutorName: conv.tutorName,
+      subject: conv.subject,
+      amount: conv.hourlyRate,
+      conversationId: conv.id,
+      timestamp: Date.now()
+    };
+    localStorage.setItem('lesgo_pending_transaction', JSON.stringify(pendingTx));
+    
+    // Redirect to transaction folder
+    // The user said: "connect it to a folder called transaction"
+    // We'll navigate to /transaction/index.html or /transaction/transaction.html
+    // Try common patterns
+    showToast("Redirecting to checkout...");
+    setTimeout(() => {
+      // Attempt to go to transaction page (adjust path as needed)
+      window.location.href = './transaction/index.html';
+    }, 300);
+    
+    // Fallback after 1 second if redirect fails? We'll add a safety console log
+    setTimeout(() => {
+      // If still on same page, try alternative
+      if (window.location.href.includes('chat')) {
+        console.warn("Transaction folder not found. Please ensure /transaction/index.html exists.");
+        showToast("⚠️ Transaction page not found. Please create /transaction/index.html");
+      }
+    }, 1000);
+  }
+
+  function addSystemMessage(convId, text) {
+    const conv = conversations.find(c => c.id === convId);
+    if (conv) {
+      conv.messages.push({ sender: "system", text: text, timestamp: Date.now() });
+      saveConversations();
+    }
+  }
+
+  function sendMessage() {
+    if (!activeConversationId) return;
+    const input = document.getElementById('messageInput');
+    const text = input.value.trim();
+    if (!text) return;
+    const conv = conversations.find(c => c.id === activeConversationId);
+    if (conv) {
+      conv.messages.push({ sender: "student", text: text, timestamp: Date.now() });
+      saveConversations();
+      renderChatArea();
+      input.value = '';
+      const msgsDiv = document.getElementById('messagesArea');
+      if (msgsDiv) msgsDiv.scrollTop = msgsDiv.scrollHeight;
+    }
+  }
+
+  function escapeHtml(str) {
+    if(!str) return '';
+    return str.replace(/[&<>]/g, function(m) { if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m;});
+  }
+
+  function showToast(msg) {
+    let existing = document.querySelector('.toast-msg');
+    if(existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; setTimeout(()=>toast.remove(), 300); }, 2500);
+  }
+
+  // Navigation buttons
+  document.getElementById('dashboardBtn')?.addEventListener('click', () => {
+    window.location.href = 'dashboard.html';
+  });
+  document.getElementById('searchPageBtn')?.addEventListener('click', () => {
+    window.location.href = 'search.html';
+  });
+  document.getElementById('homeBtn')?.addEventListener('click', () => location.reload());
+  document.getElementById('userMenu')?.addEventListener('click', () => alert("Student: Jordan Davis"));
+
+  document.getElementById('sendMsgBtn')?.addEventListener('click', sendMessage);
+  document.getElementById('messageInput')?.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+
+  loadConversations();
+</script>
+</body>
+</html>
