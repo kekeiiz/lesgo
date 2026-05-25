@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>LesGo · Find Tutors</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <title>LesGo · Find Tutors & Cart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -35,7 +35,7 @@
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 2rem;
       position: relative;
@@ -58,7 +58,7 @@
       font-weight: 800;
       color: #1a1a1a;
       letter-spacing: -0.5px;
-      text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+      text-shadow: -1px -1px 0 white, 1px -1px 0 white;
       cursor: pointer;
       transition: opacity 0.2s;
     }
@@ -67,16 +67,36 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1.2rem;
       flex-wrap: wrap;
     }
 
+    .cart-icon-wrapper {
+      position: relative;
+      cursor: pointer;
+    }
+    .cart-count-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: #ff6b6b;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #2c3e50;
+    }
     .btn-icon {
       background: white;
       border: 1px solid rgba(0,0,0,0.2);
-      width: 42px;
-      height: 42px;
-      border-radius: 42px;
+      width: 44px;
+      height: 44px;
+      border-radius: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -88,10 +108,9 @@
     }
     .btn-icon:hover {
       background: white;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
     .user-avatar {
       background: #d4f59e;
       width: 44px;
@@ -116,7 +135,6 @@
       border: 1px solid rgba(0,0,0,0.08);
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
-
     .search-title {
       font-size: 1.9rem;
       font-weight: 800;
@@ -125,7 +143,6 @@
       align-items: center;
       gap: 0.75rem;
     }
-
     .search-fields {
       display: flex;
       flex-wrap: wrap;
@@ -174,20 +191,33 @@
       gap: 0.6rem;
       font-size: 1rem;
       transition: all 0.2s;
-      box-shadow: 0 2px 8px rgba(100,150,50,0.2);
     }
     .search-btn:hover {
       transform: translateY(-2px);
       background: linear-gradient(to bottom, #f0ffc0, #e0ffaa);
     }
 
-    /* results header */
+    /* main layout: tutors grid + cart sidebar */
+    .main-two-columns {
+      display: flex;
+      gap: 2rem;
+      margin: 1.5rem 0 2rem;
+      flex-wrap: wrap;
+    }
+    .tutors-section {
+      flex: 2;
+      min-width: 260px;
+    }
+    .cart-section {
+      flex: 1.2;
+      min-width: 300px;
+    }
     .results-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
-      margin: 1.5rem 0 1rem;
+      margin-bottom: 1.2rem;
     }
     .results-count {
       background: rgba(0,0,0,0.05);
@@ -196,15 +226,11 @@
       font-size: 0.85rem;
       font-weight: 500;
     }
-
-    /* tutors grid (classroom style) */
     .tutors-results-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1.4rem;
-      margin-bottom: 2rem;
     }
-
     .tutor-card {
       background: white;
       border-radius: 1.2rem;
@@ -220,7 +246,7 @@
       box-shadow: 0 12px 20px rgba(0,0,0,0.08);
     }
     .tutor-avatar-lg {
-      background: #c8d8e8;
+      background: linear-gradient(135deg, #c8d8e8, #a0b8d0);
       width: 56px;
       height: 56px;
       border-radius: 28px;
@@ -242,7 +268,7 @@
       font-size: 1.2rem;
     }
     .tutor-info p {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #4a6a5a;
     }
     .subject-tag {
@@ -269,13 +295,14 @@
       align-items: center;
       padding-top: 1rem;
       border-top: 1px solid #edf2f0;
+      gap: 0.6rem;
     }
-    .hire-btn {
-      background: #1a3a2a;
+    .add-to-cart-btn {
+      background: #2c3e50;
       color: white;
       border: none;
       border-radius: 2rem;
-      padding: 0.5rem 1.2rem;
+      padding: 0.5rem 1rem;
       font-weight: 600;
       font-size: 0.8rem;
       cursor: pointer;
@@ -283,29 +310,113 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      flex: 1;
+      justify-content: center;
     }
-    .hire-btn:hover {
-      background: #2b5a42;
-      transform: scale(0.97);
+    .add-to-cart-btn:hover {
+      background: #1e2f3e;
+      transform: scale(0.98);
     }
     .chat-icon-small {
       background: transparent;
       border: 1px solid #cbd5e1;
       border-radius: 2rem;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 0.8rem;
       font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
     }
-    .chat-icon-small:hover {
-      background: #eef2ff;
+    /* Cart styles */
+    .cart-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 1rem;
     }
-    .empty-results {
-      text-align: center;
-      padding: 3rem;
-      background: rgba(255,255,250,0.7);
+    .cart-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 2px solid #eef2f0;
+      padding-bottom: 0.6rem;
+    }
+    .cart-items-list {
+      max-height: 380px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f0f2f5;
+    }
+    .cart-item-info h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .cart-item-info p {
+      font-size: 0.75rem;
+      color: #5a6e5a;
+    }
+    .cart-item-price {
+      font-weight: 700;
+      color: #2c5a3a;
+    }
+    .remove-item-btn {
+      background: none;
+      border: none;
+      color: #e07c7c;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0 0.3rem;
+      transition: 0.2s;
+    }
+    .remove-item-btn:hover {
+      color: #c0392b;
+      transform: scale(1.1);
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1.2rem;
+      padding: 1rem 0;
+      border-top: 2px dashed #ddd;
+      margin-top: 0.5rem;
+    }
+    .checkout-btn {
+      background: linear-gradient(135deg, #d4f59e, #b8e074);
+      width: 100%;
+      border: none;
+      padding: 0.9rem;
       border-radius: 2rem;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .checkout-btn:hover {
+      background: linear-gradient(135deg, #e0ffaa, #c8ec84);
+      transform: translateY(-1px);
+    }
+    .empty-cart {
+      text-align: center;
+      color: #9aa6a0;
+      padding: 2rem 0;
     }
     .footer-note {
       text-align: center;
@@ -320,19 +431,19 @@
       transform: translateX(-50%);
       background: #1a2e28;
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1.8rem;
       border-radius: 3rem;
       font-weight: 500;
-      font-size: 0.85rem;
       z-index: 1000;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       pointer-events: none;
       transition: opacity 0.2s;
     }
-    @media (max-width: 640px) {
+    @media (max-width: 900px) {
+      .main-two-columns { flex-direction: column; }
+      .cart-section { order: 2; }
+      .tutors-section { order: 1; }
       .container { padding: 0 1rem; }
-      .search-fields { flex-direction: column; align-items: stretch; }
-      .search-btn { justify-content: center; }
     }
   </style>
 </head>
@@ -342,68 +453,205 @@
     <div class="logo" id="logoHomeBtn"><h1>LesGo</h1></div>
     <div class="nav-actions">
       <button class="btn-icon" id="dashboardBackBtn" title="Dashboard"><i class="fas fa-tachometer-alt"></i></button>
-      <button class="btn-icon" id="searchNavBtn" title="Search tutors"><i class="fas fa-search"></i></button>
+      <div class="cart-icon-wrapper" id="cartIconBtn">
+        <i class="fas fa-shopping-cart btn-icon" style="margin:0;"></i>
+        <span class="cart-count-badge" id="cartCountBadge">0</span>
+      </div>
       <div class="user-avatar" id="userAvatarBtn">JD</div>
     </div>
   </div>
 
-  <!-- Search section -->
+  <!-- Search hero -->
   <div class="search-hero">
     <div class="search-title">
       <i class="fas fa-chalkboard-user" style="color:#3b7a5e;"></i> 
-      <span>Find the perfect tutor</span>
+      <span>Find expert tutors & add to cart</span>
     </div>
     <div class="search-fields">
       <div class="input-group">
-        <label><i class="fas fa-graduation-cap"></i> Subject / Topic</label>
-        <input type="text" id="subjectInput" placeholder="e.g., Algebra, French, Coding" value="">
+        <label><i class="fas fa-graduation-cap"></i> Subject</label>
+        <input type="text" id="subjectInput" placeholder="e.g., Calculus, Guitar, Coding" value="">
       </div>
       <div class="input-group">
-        <label><i class="fas fa-dollar-sign"></i> Max hourly rate ($)</label>
+        <label><i class="fas fa-dollar-sign"></i> Max rate ($/hr)</label>
         <input type="number" id="budgetInput" placeholder="Any" step="5" min="0" value="">
       </div>
       <div class="input-group">
-        <label><i class="fas fa-sort-amount-down"></i> Sort by</label>
+        <label><i class="fas fa-sort"></i> Sort by</label>
         <select id="sortSelect">
           <option value="default">Relevance</option>
           <option value="price_asc">Price: Low to High</option>
           <option value="price_desc">Price: High to Low</option>
-          <option value="rating">Rating (Highest first)</option>
+          <option value="rating">Rating (Highest)</option>
         </select>
       </div>
       <button class="search-btn" id="performSearchBtn"><i class="fas fa-magnifying-glass"></i> Search</button>
     </div>
   </div>
 
-  <div class="results-header">
-    <h3 style="font-weight: 800; font-size: 1.5rem;">🎓 Available Tutors</h3>
-    <div class="results-count" id="resultsCountSpan">0 tutors found</div>
-  </div>
+  <!-- Two columns: tutors + cart -->
+  <div class="main-two-columns">
+    <div class="tutors-section">
+      <div class="results-header">
+        <h3 style="font-weight: 800; font-size: 1.5rem;">🎓 Available Tutors</h3>
+        <div class="results-count" id="resultsCountSpan">0 tutors</div>
+      </div>
+      <div id="tutorsResultsContainer" class="tutors-results-grid"></div>
+    </div>
 
-  <div id="tutorsResultsContainer" class="tutors-results-grid">
-    <!-- dynamic cards appear here -->
+    <div class="cart-section">
+      <div class="cart-card">
+        <div class="cart-title">
+          <i class="fas fa-shopping-cart"></i> Your Cart
+          <span style="font-size: 0.8rem; background:#eef2f0; padding:0.2rem 0.6rem; border-radius:2rem;" id="cartItemCountDisplay">0 items</span>
+        </div>
+        <div id="cartItemsContainer" class="cart-items-list">
+          <div class="empty-cart">🛒 Cart is empty. Add tutors!</div>
+        </div>
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotalAmount">$0.00</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> Proceed to Checkout</button>
+      </div>
+    </div>
   </div>
-
-  <div class="footer-note">
-    © 2025 LesGo · Connect with expert tutors
-  </div>
+  <div class="footer-note">© 2025 LesGo · Add tutors to cart, then checkout!</div>
 </div>
 
 <script>
-  // ---------- MOCK TUTOR DATABASE ----------
+  // ---------- EXPANDED TUTOR DATABASE (20+ tutors) ----------
   const TUTORS_DB = [
-    { id: 1, name: "Dr. Emily Chen", subject: "Algebra", subcategories: ["Algebra", "Math", "Calculus"], hourlyRate: 45, rating: 4.9, avatarInitials: "EC", about: "PhD in Mathematics, 8+ years experience" },
-    { id: 2, name: "Marcus Rivera", subject: "Physics", subcategories: ["Physics", "Science", "Mechanics"], hourlyRate: 55, rating: 4.8, avatarInitials: "MR", about: "Physics Olympiad coach" },
-    { id: 3, name: "Sophia Laurent", subject: "French", subcategories: ["French", "Languages", "Writing"], hourlyRate: 38, rating: 4.95, avatarInitials: "SL", about: "Native French speaker, DELF certified" },
-    { id: 4, name: "James Wang", subject: "Coding", subcategories: ["Coding", "Python", "Web Dev"], hourlyRate: 60, rating: 4.85, avatarInitials: "JW", about: "Full-stack developer, teaches JS/Python" },
-    { id: 5, name: "Nina Kaur", subject: "Chemistry", subcategories: ["Chemistry", "Science", "Biology"], hourlyRate: 42, rating: 4.7, avatarInitials: "NK", about: "MCAT prep, organic chem specialist" },
-    { id: 6, name: "Oliver Schmidt", subject: "History", subcategories: ["History", "Social Studies", "Geography"], hourlyRate: 35, rating: 4.6, avatarInitials: "OS", about: "World history & exam prep" },
-    { id: 7, name: "Zara Ahmed", subject: "Economics", subcategories: ["Economics", "Business", "Statistics"], hourlyRate: 50, rating: 4.9, avatarInitials: "ZA", about: "Former investment analyst" },
-    { id: 8, name: "Liam Chen", subject: "Spanish", subcategories: ["Spanish", "Languages", "Conversation"], hourlyRate: 32, rating: 4.75, avatarInitials: "LC", about: "Fun immersive lessons" },
-    { id: 9, name: "Grace Mbeki", subject: "Biology", subcategories: ["Biology", "Science", "Genetics"], hourlyRate: 48, rating: 4.88, avatarInitials: "GM", about: "Medical student, great at breaking down concepts" }
+    { id: 1, name: "Dr. Emily Chen", subject: "Calculus", subcategories: ["Calculus", "Math", "AP Math"], hourlyRate: 45, rating: 4.9, avatarInitials: "EC", about: "PhD in Math, 10+ years" },
+    { id: 2, name: "Marcus Rivera", subject: "Physics", subcategories: ["Physics", "Mechanics", "Astrophysics"], hourlyRate: 55, rating: 4.8, avatarInitials: "MR", about: "Physics Olympiad coach" },
+    { id: 3, name: "Sophia Laurent", subject: "French", subcategories: ["French", "Languages", "DELF"], hourlyRate: 38, rating: 4.95, avatarInitials: "SL", about: "Native French speaker" },
+    { id: 4, name: "James Wang", subject: "Coding", subcategories: ["Coding", "Python", "JavaScript"], hourlyRate: 60, rating: 4.85, avatarInitials: "JW", about: "Full-stack dev" },
+    { id: 5, name: "Nina Kaur", subject: "Chemistry", subcategories: ["Chemistry", "Organic Chem"], hourlyRate: 42, rating: 4.7, avatarInitials: "NK", about: "MCAT specialist" },
+    { id: 6, name: "Oliver Schmidt", subject: "History", subcategories: ["History", "World History"], hourlyRate: 35, rating: 4.6, avatarInitials: "OS", about: "Exam prep expert" },
+    { id: 7, name: "Zara Ahmed", subject: "Economics", subcategories: ["Economics", "Microeconomics"], hourlyRate: 50, rating: 4.9, avatarInitials: "ZA", about: "Investment analyst" },
+    { id: 8, name: "Liam Chen", subject: "Spanish", subcategories: ["Spanish", "Conversation"], hourlyRate: 32, rating: 4.75, avatarInitials: "LC", about: "Fun immersive lessons" },
+    { id: 9, name: "Grace Mbeki", subject: "Biology", subcategories: ["Biology", "Genetics"], hourlyRate: 48, rating: 4.88, avatarInitials: "GM", about: "Medical student" },
+    { id: 10, name: "Ryan Patel", subject: "Guitar", subcategories: ["Guitar", "Music"], hourlyRate: 40, rating: 4.9, avatarInitials: "RP", about: "Professional guitarist" },
+    { id: 11, name: "Elena Dubois", subject: "Art History", subcategories: ["Art", "History"], hourlyRate: 36, rating: 4.7, avatarInitials: "ED", about: "Museum curator" },
+    { id: 12, name: "Hiroshi Tanaka", subject: "Japanese", subcategories: ["Japanese", "Languages"], hourlyRate: 44, rating: 4.85, avatarInitials: "HT", about: "JLPT certified" },
+    { id: 13, name: "Clara Martinez", subject: "Statistics", subcategories: ["Statistics", "Data Science"], hourlyRate: 52, rating: 4.8, avatarInitials: "CM", about: "Data scientist" },
+    { id: 14, name: "David Kim", subject: "SAT Prep", subcategories: ["SAT", "Test Prep"], hourlyRate: 65, rating: 4.95, avatarInitials: "DK", about: "Perfect score coach" },
+    { id: 15, name: "Anna Wilson", subject: "Writing", subcategories: ["Writing", "Essay"], hourlyRate: 39, rating: 4.8, avatarInitials: "AW", about: "Published author" },
+    { id: 16, name: "Mohamed Ali", subject: "Arabic", subcategories: ["Arabic", "Languages"], hourlyRate: 34, rating: 4.7, avatarInitials: "MA", about: "Native speaker" },
+    { id: 17, name: "Isabella Rossi", subject: "Italian", subcategories: ["Italian", "Languages"], hourlyRate: 37, rating: 4.85, avatarInitials: "IR", about: "Conversational expert" },
+    { id: 18, name: "Samuel Lee", subject: "Web Dev", subcategories: ["Web Dev", "React"], hourlyRate: 58, rating: 4.9, avatarInitials: "SL", about: "Senior frontend" }
   ];
 
-  // Helper to check if tutor matches search (subject text & budget)
+  // ---------- CART STATE (stored in localStorage) ----------
+  let cart = []; // each item: { id, name, hourlyRate, subject, avatarInitials }
+
+  function saveCartToLocal() {
+    localStorage.setItem('lesgo_tutor_cart', JSON.stringify(cart));
+    updateCartUI();
+  }
+
+  function loadCartFromLocal() {
+    const stored = localStorage.getItem('lesgo_tutor_cart');
+    if (stored) {
+      try {
+        cart = JSON.parse(stored);
+      } catch(e) { cart = []; }
+    } else {
+      cart = [];
+    }
+    updateCartUI();
+  }
+
+  function addToCart(tutor) {
+    // check duplicate
+    if (cart.some(item => item.id === tutor.id)) {
+      showToast(`⚠️ ${tutor.name} already in cart!`);
+      return false;
+    }
+    cart.push({
+      id: tutor.id,
+      name: tutor.name,
+      hourlyRate: tutor.hourlyRate,
+      subject: tutor.subject,
+      avatarInitials: tutor.avatarInitials
+    });
+    saveCartToLocal();
+    showToast(`➕ Added ${tutor.name} ($${tutor.hourlyRate}/hr) to cart`);
+    return true;
+  }
+
+  function removeFromCart(tutorId) {
+    const removed = cart.find(item => item.id === tutorId);
+    cart = cart.filter(item => item.id !== tutorId);
+    saveCartToLocal();
+    if (removed) showToast(`🗑️ Removed ${removed.name} from cart`);
+  }
+
+  function updateCartUI() {
+    const container = document.getElementById('cartItemsContainer');
+    const cartTotalSpan = document.getElementById('cartTotalAmount');
+    const cartCountBadge = document.getElementById('cartCountBadge');
+    const cartItemCountDisplay = document.getElementById('cartItemCountDisplay');
+    
+    if (!container) return;
+    if (cart.length === 0) {
+      container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>Cart is empty. Add tutors!</p></div>`;
+      if (cartTotalSpan) cartTotalSpan.innerText = "$0.00";
+      if (cartCountBadge) cartCountBadge.innerText = "0";
+      if (cartItemCountDisplay) cartItemCountDisplay.innerText = "0 items";
+      return;
+    }
+    
+    let total = 0;
+    let itemsHtml = '';
+    cart.forEach(item => {
+      total += item.hourlyRate;
+      itemsHtml += `
+        <div class="cart-item" data-cart-id="${item.id}">
+          <div class="cart-item-info">
+            <h4>${escapeHtml(item.name)}</h4>
+            <p>${escapeHtml(item.subject)} • $${item.hourlyRate}/hr</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <span class="cart-item-price">$${item.hourlyRate}</span>
+            <button class="remove-item-btn" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = itemsHtml;
+    if (cartTotalSpan) cartTotalSpan.innerText = `$${total.toFixed(2)}`;
+    if (cartCountBadge) cartCountBadge.innerText = cart.length;
+    if (cartItemCountDisplay) cartItemCountDisplay.innerText = `${cart.length} item${cart.length !== 1 ? 's' : ''}`;
+    
+    // attach remove events
+    document.querySelectorAll('.remove-item-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.getAttribute('data-id'));
+        removeFromCart(id);
+      });
+    });
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      showToast("🛒 Your cart is empty! Add tutors first.");
+      return;
+    }
+    const total = cart.reduce((sum, i) => sum + i.hourlyRate, 0);
+    const tutorNames = cart.map(t => t.name).join(', ');
+    // simulate checkout - clear cart, show summary
+    if (confirm(`💳 Checkout Summary:\n📚 Tutors: ${tutorNames}\n💰 Total: $${total.toFixed(2)}\n\nConfirm purchase? (Demo)`)) {
+      showToast(`🎉 Purchase successful! You've booked ${cart.length} tutor(s). Total $${total.toFixed(2)}`);
+      cart = [];
+      saveCartToLocal();
+      updateCartUI();
+      // additional interaction: alert for demonstration
+      setTimeout(() => alert(`✅ Checkout completed! Your sessions will be scheduled.\nTutors: ${tutorNames}\nTotal: $${total.toFixed(2)}`), 300);
+    }
+  }
+
+  // Helper functions for tutor rendering
   function matchesSearch(tutor, subjectQuery, budgetMax) {
     let subjectMatch = true;
     if (subjectQuery && subjectQuery.trim() !== "") {
@@ -418,203 +666,99 @@
     return subjectMatch && budgetMatch;
   }
 
-  // Sorting function
   function sortTutors(tutors, sortType) {
     const sorted = [...tutors];
-    if (sortType === "price_asc") {
-      sorted.sort((a, b) => a.hourlyRate - b.hourlyRate);
-    } else if (sortType === "price_desc") {
-      sorted.sort((a, b) => b.hourlyRate - a.hourlyRate);
-    } else if (sortType === "rating") {
-      sorted.sort((a, b) => b.rating - a.rating);
-    } else {
-      // default: keep original order (id based)
-      sorted.sort((a, b) => a.id - b.id);
-    }
+    if (sortType === "price_asc") sorted.sort((a,b) => a.hourlyRate - b.hourlyRate);
+    else if (sortType === "price_desc") sorted.sort((a,b) => b.hourlyRate - a.hourlyRate);
+    else if (sortType === "rating") sorted.sort((a,b) => b.rating - a.rating);
+    else sorted.sort((a,b) => a.id - b.id);
     return sorted;
   }
 
-  // Render tutors inside container
   function renderTutorCards(tutorsArray) {
     const container = document.getElementById("tutorsResultsContainer");
     const countSpan = document.getElementById("resultsCountSpan");
     if (!container) return;
-    
     if (!tutorsArray || tutorsArray.length === 0) {
-      container.innerHTML = `<div class="empty-results">
-        <i class="fas fa-user-graduate" style="font-size: 3rem; opacity: 0.4;"></i>
-        <p style="margin-top: 1rem; font-size: 1rem;">No tutors match your criteria.<br>Try adjusting subject or budget.</p>
-      </div>`;
-      countSpan.innerText = "0 tutors found";
+      container.innerHTML = `<div class="empty-results" style="text-align:center; padding:3rem; background:white; border-radius:2rem;"><i class="fas fa-user-graduate" style="font-size:3rem; opacity:0.4;"></i><p style="margin-top:1rem;">No tutors match. Try different subject.</p></div>`;
+      if(countSpan) countSpan.innerText = "0 tutors found";
       return;
     }
-    
-    countSpan.innerText = `${tutorsArray.length} tutor${tutorsArray.length !== 1 ? 's' : ''} found`;
+    if(countSpan) countSpan.innerText = `${tutorsArray.length} tutor${tutorsArray.length !== 1 ? 's' : ''} found`;
     container.innerHTML = tutorsArray.map(tutor => `
-      <div class="tutor-card" data-tutor-id="${tutor.id}">
+      <div class="tutor-card" data-id="${tutor.id}">
         <div class="card-top">
-          <div class="tutor-avatar-lg">${tutor.avatarInitials}</div>
+          <div class="tutor-avatar-lg">${escapeHtml(tutor.avatarInitials)}</div>
           <div class="tutor-info">
             <h3>${escapeHtml(tutor.name)}</h3>
-            <p>${escapeHtml(tutor.about.substring(0, 50))}</p>
+            <p>${escapeHtml(tutor.about.substring(0,50))}</p>
           </div>
         </div>
         <div>
-          <span class="subject-tag"><i class="fas fa-book-open"></i> ${escapeHtml(tutor.subject)}</span>
-          <span class="rate-badge" style="margin-left: 0.5rem;"><i class="fas fa-star" style="color:#f5b042;"></i> ${tutor.rating} ★</span>
-          <div style="margin: 0.6rem 0 0.3rem; font-weight: 700; color: #1f5e3a;">
-            <i class="fas fa-dollar-sign"></i> ${tutor.hourlyRate}/hr
-          </div>
+          <span class="subject-tag"><i class="fas fa-tag"></i> ${escapeHtml(tutor.subject)}</span>
+          <span class="rate-badge" style="margin-left:0.5rem;"><i class="fas fa-star" style="color:#f5b042;"></i> ${tutor.rating}</span>
+          <div style="margin:0.6rem 0 0.3rem; font-weight:800; color:#1f5e3a;"><i class="fas fa-dollar-sign"></i> ${tutor.hourlyRate}/hr</div>
         </div>
         <div class="card-actions">
-          <button class="hire-btn" data-tutor='${JSON.stringify({id: tutor.id, name: tutor.name, rate: tutor.hourlyRate, avatar: tutor.avatarInitials})}'>
-            <i class="fas fa-handshake"></i> Request session
+          <button class="add-to-cart-btn" data-tutor='${JSON.stringify({id:tutor.id, name:tutor.name, hourlyRate:tutor.hourlyRate, subject:tutor.subject, avatarInitials:tutor.avatarInitials})}'>
+            <i class="fas fa-cart-plus"></i> Add to Cart
           </button>
-          <button class="chat-icon-small message-preview-btn" data-tutor-name="${escapeHtml(tutor.name)}" data-tutor-id="${tutor.id}">
-            <i class="far fa-comment-dots"></i> Message
-          </button>
+          <button class="chat-icon-small message-btn" data-name="${escapeHtml(tutor.name)}"><i class="far fa-comment-dots"></i> Chat</button>
         </div>
       </div>
     `).join("");
     
-    // attach event listeners to hire buttons and message buttons after render
-    document.querySelectorAll('.hire-btn').forEach(btn => {
+    // attach add-to-cart events
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const tutorDataAttr = btn.getAttribute('data-tutor');
-        if (tutorDataAttr) {
+        const tutorData = btn.getAttribute('data-tutor');
+        if(tutorData) {
           try {
-            const tutor = JSON.parse(tutorDataAttr);
-            handleHireTutor(tutor);
-          } catch(e) { console.warn(e); }
+            const tutor = JSON.parse(tutorData);
+            addToCart(tutor);
+          } catch(e) {}
         }
       });
     });
-    
-    document.querySelectorAll('.message-preview-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const tutorName = btn.getAttribute('data-tutor-name') || "Tutor";
-        const tutorId = btn.getAttribute('data-tutor-id');
-        showToast(`💬 Start chatting with ${tutorName} — messaging feature will open soon.`);
-        // In full version, navigate to chat page or open conversation
-      });
+    document.querySelectorAll('.message-btn').forEach(btn => {
+      btn.addEventListener('click', () => showToast(`💬 Messaging will be available after adding tutor to cart.`));
     });
   }
-  
-  function escapeHtml(str) { 
-    if(!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if(m === '&') return '&amp;';
-      if(m === '<') return '&lt;';
-      if(m === '>') return '&gt;';
-      return m;
-    });
-  }
-  
-  // Hire / request session logic (simulate interaction + alert)
-  function handleHireTutor(tutor) {
-    // In a real app, this would send booking request. For demo, show nice notification
-    showToast(`✨ Session request sent to ${tutor.name} ($${tutor.rate}/hr). They will contact you soon!`);
-    // Additionally store to localStorage to simulate "hired" reflection on dashboard? Not needed but nice.
-    // For continuity we can add to localstorage as a "recent tutor class" but that's outside spec.
-    // just a friendly alert popup
-    setTimeout(() => {
-      alert(`📚 Request sent to ${tutor.name}! Your dashboard will update when they accept.\n💰 Rate: $${tutor.rate}/hour`);
-    }, 50);
-  }
-  
-  function showToast(message) {
-    let existingToast = document.querySelector('.toast-msg');
-    if(existingToast) existingToast.remove();
-    const toast = document.createElement('div');
-    toast.className = 'toast-msg';
-    toast.innerText = message;
-    document.body.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      setTimeout(() => toast.remove(), 300);
-    }, 2500);
-  }
-  
-  // Perform search based on current inputs
+
   function performSearch() {
     const subjectRaw = document.getElementById("subjectInput").value;
     const budgetRaw = document.getElementById("budgetInput").value;
     const sortType = document.getElementById("sortSelect").value;
-    
-    let filtered = TUTORS_DB.filter(tutor => matchesSearch(tutor, subjectRaw, budgetRaw));
+    let filtered = TUTORS_DB.filter(t => matchesSearch(t, subjectRaw, budgetRaw));
     filtered = sortTutors(filtered, sortType);
     renderTutorCards(filtered);
-    
-    // save last search query (optional UI)
-    const totalFound = filtered.length;
-    const resultsSpan = document.getElementById("resultsCountSpan");
-    if(resultsSpan) resultsSpan.innerText = `${totalFound} tutor${totalFound !== 1 ? 's' : ''} found`;
   }
-  
-  // Initialize search page and event handlers; also sync with localStorage "balance" mock if needed, but not critical.
-  document.addEventListener('DOMContentLoaded', function() {
-    // ---- navigation / back to dashboard ----
-    const dashboardBtn = document.getElementById("dashboardBackBtn");
-    if(dashboardBtn) {
-      dashboardBtn.addEventListener("click", () => {
-        window.location.href = "dashboard.html"; // we assume the main dashboard is at dashboard.html
-        // fallback: if in same tab demo, we can redirect to same origin or alert
-        // To improve, we simulate by warning, but main page would be dashboard.
-        // For this standalone page, we can alert and mention user can return via logo.
-        alert("🔁 Return to main dashboard (this would redirect to dashboard page in production).");
-        // In real environment, use window.location = '/';
-      });
-    }
-    
-    const logoHome = document.getElementById("logoHomeBtn");
-    if(logoHome) {
-      logoHome.addEventListener("click", () => {
-        alert("🏠 Go back to LesGo main dashboard.");
-        // similarly simulation
-      });
-    }
-    
-    const searchNav = document.getElementById("searchNavBtn");
-    if(searchNav) {
-      searchNav.addEventListener("click", () => {
-        performSearch(); // re-run search if on same page
-        showToast("Refreshed tutor search");
-      });
-    }
-    
-    const userAvatar = document.getElementById("userAvatarBtn");
-    if(userAvatar) {
-      userAvatar.addEventListener("click", () => {
-        alert("👤 Profile settings, payment methods, and learning preferences.");
-      });
-    }
-    
-    const searchBtn = document.getElementById("performSearchBtn");
-    if(searchBtn) {
-      searchBtn.addEventListener("click", performSearch);
-    }
-    
-    // allow Enter key on input fields
-    const subjectInput = document.getElementById("subjectInput");
-    const budgetInput = document.getElementById("budgetInput");
-    const sortSelect = document.getElementById("sortSelect");
-    const triggerSearch = () => performSearch();
-    subjectInput.addEventListener("keypress", (e) => { if(e.key === "Enter") triggerSearch(); });
-    budgetInput.addEventListener("keypress", (e) => { if(e.key === "Enter") triggerSearch(); });
-    sortSelect.addEventListener("change", triggerSearch);
-    
-    // On page load, show all tutors (default empty search shows all)
+
+  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+  function showToast(msg) {
+    let existing = document.querySelector('.toast-msg');
+    if(existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity='0'; setTimeout(()=>toast.remove(),300); }, 2300);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadCartFromLocal();
     performSearch();
     
-    // slight improvement: show initial balance display from parent? Not needed, but we mock nothing more
-    // Provide a demo message if there's no tutors: fine.
-    
-    // Simulate initial toast hint (optional)
-    setTimeout(() => {
-      showToast("🔍 Search by subject and budget — find your ideal tutor");
-    }, 500);
+    document.getElementById("performSearchBtn")?.addEventListener("click", performSearch);
+    document.getElementById("subjectInput")?.addEventListener("keypress", (e) => { if(e.key === "Enter") performSearch(); });
+    document.getElementById("budgetInput")?.addEventListener("keypress", (e) => { if(e.key === "Enter") performSearch(); });
+    document.getElementById("sortSelect")?.addEventListener("change", performSearch);
+    document.getElementById("checkoutBtn")?.addEventListener("click", checkout);
+    document.getElementById("cartIconBtn")?.addEventListener("click", () => { document.querySelector('.cart-section')?.scrollIntoView({ behavior: 'smooth' }); });
+    document.getElementById("dashboardBackBtn")?.addEventListener("click", () => { alert("🔙 Return to main dashboard (simulated)."); });
+    document.getElementById("logoHomeBtn")?.addEventListener("click", () => { alert("🏠 LesGo Home"); });
+    document.getElementById("userAvatarBtn")?.addEventListener("click", () => { alert("👤 Profile & settings"); });
   });
 </script>
 </body>
