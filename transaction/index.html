@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LesGo · Checkout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, #b8cfe0 0%, #d2e4f0 40%, #e8f0f8 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 25% 40%, rgba(0, 0, 0, 0.04) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header */
+    .checkout-header {
+      background: #3a4a5a;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .logo-icon {
+      background: #d4f59e;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #1a3a2a;
+    }
+
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .checkout-steps {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .step.active {
+      color: #d4f59e;
+      font-weight: 600;
+    }
+
+    .step.completed {
+      color: #a8d85c;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .step.active .step-number {
+      background: #d4f59e;
+      color: #1a3a2a;
+    }
+
+    .step.completed .step-number {
+      background: #a8d85c;
+      color: #1a3a2a;
+    }
+
+    /* Main Container */
+    .checkout-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Column - Forms */
+    .form-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e8ecef;
+      color: #1a1a1a;
+    }
+
+    .section-title i {
+      color: #4f772d;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #4a5568;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #a8d85c;
+      box-shadow: 0 0 0 3px rgba(168, 216, 92, 0.2);
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    /* Payment Methods */
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .payment-option {
+      flex: 1;
+      min-width: 100px;
+      border: 2px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      background: white;
+    }
+
+    .payment-option.selected {
+      border-color: #4f772d;
+      background: #f0f7e8;
+    }
+
+    .payment-option i {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+      display: block;
+      color: #3a4a5a;
+    }
+
+    .payment-option span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* Right Column - Order Summary */
+    .order-summary {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 90px;
+    }
+
+    .summary-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e8ecef;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .summary-title i {
+      color: #4f772d;
+    }
+
+    .cart-items-summary {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e8ecef;
+    }
+
+    .summary-item-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .summary-item-info p {
+      font-size: 0.7rem;
+      color: #718096;
+    }
+
+    .summary-item-price {
+      font-weight: 700;
+      color: #2c6e5c;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+
+    .summary-row.total {
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-top: 2px dashed #cbd5e0;
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      color: #1a3a2a;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
+      border: none;
+      padding: 1rem;
+      border-radius: 2rem;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: #1a3a2a;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .place-order-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(100, 150, 50, 0.3);
+    }
+
+    /* Success Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .success-modal {
+      background: white;
+      max-width: 450px;
+      width: 90%;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #d4f59e, #a8d85c);
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .success-icon i {
+      font-size: 3rem;
+      color: #1a3a2a;
+    }
+
+    .success-modal h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .success-modal p {
+      color: #718096;
+      margin-bottom: 1.5rem;
+    }
+
+    .order-details {
+      background: #f0f7e8;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      text-align: left;
+    }
+
+    .order-details p {
+      margin: 0.5rem 0;
+      font-size: 0.85rem;
+      color: #1a1a1a;
+    }
+
+    .btn-back-dashboard {
+      background: linear-gradient(135deg, #3a4a5a, #2c3e50);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-back-dashboard:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #4a5a6a, #3a4a5a);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #4a5568;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Scrollbar */
+    .cart-items-summary::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cart-items-summary::-webkit-scrollbar-track {
+      background: #e8ecef;
+      border-radius: 10px;
+    }
+
+    .cart-items-summary::-webkit-scrollbar-thumb {
+      background: #a8d85c;
+      border-radius: 10px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-header">
+    <div class="header-container">
+      <div class="logo-section" id="logoHomeBtn">
+        <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span class="logo-text">LesGo</span>
+      </div>
+      <div class="checkout-steps">
+        <div class="step completed">
+          <span class="step-number"><i class="fas fa-check"></i></span>
+          <span>Cart</span>
+        </div>
+        <i class="fas fa-chevron-right" style="color: rgba(255,255,255,0.3); font-size:0.7rem;"></i>
+        <div class="step active">
+          <span class="step-number">2</span>
+          <span>Checkout</span>
+        </div>
+        <i class="fas fa-chevron-right" style="color: rgba(255,255,255,0.3); font-size:0.7rem;"></i>
+        <div class="step">
+          <span class="step-number">3</span>
+          <span>Confirmation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-container">
+    <div class="two-columns">
+      <!-- Left Column - Forms -->
+      <div>
+        <!-- Contact Information -->
+        <div class="form-section">
+          <div class="section-title">
+            <i class="fas fa-user"></i>
+            <span>Contact Information</span>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="fullName" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" id="email" placeholder="john@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="phone" placeholder="+1 234 567 8900">
+          </div>
+        </div>
+
+        <!-- Shipping / Session Details -->
+        <div class="form-section">
+          <div class="section-title">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Session Preferences</span>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Date *</label>
+              <input type="date" id="sessionDate">
+            </div>
+            <div class="form-group">
+              <label>Preferred Time *</label>
+              <select id="sessionTime">
+                <option value="">Select time</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+                <option value="17:00">05:00 PM</option>
+                <option value="18:00">06:00 PM</option>
+                <option value="19:00">07:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label>Additional Notes (optional)</label>
+            <textarea rows="3" id="notes" placeholder="Any specific topics or questions for the tutor?"></textarea>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="form-section">
+          <div class="section-title">
+            <i class="fas fa-credit-card"></i>
+            <span>Payment Method</span>
+          </div>
+          <div class="payment-methods">
+            <div class="payment-option" data-method="credit">
+              <i class="fab fa-cc-visa"></i>
+              <span>Credit Card</span>
+            </div>
+            <div class="payment-option" data-method="paypal">
+              <i class="fab fa-paypal"></i>
+              <span>PayPal</span>
+            </div>
+            <div class="payment-option" data-method="bank">
+              <i class="fas fa-university"></i>
+              <span>Bank Transfer</span>
+            </div>
+            <div class="payment-option" data-method="balance">
+              <i class="fas fa-wallet"></i>
+              <span>LesGo Balance</span>
+            </div>
+          </div>
+          <div id="creditCardFields" style="display: none; margin-top: 1rem;">
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label>Card Number</label>
+                <input type="text" placeholder="4242 4242 4242 4242">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="text" placeholder="MM/YY">
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input type="text" placeholder="123">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Order Summary -->
+      <div>
+        <div class="order-summary">
+          <div class="summary-title">
+            <i class="fas fa-shopping-cart"></i> Order Summary
+          </div>
+          <div id="cartItemsSummary" class="cart-items-summary">
+            <div style="text-align:center; padding:2rem; color:#999;">Loading...</div>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Platform Fee</span>
+            <span>$2.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="totalAmount">$0.00</span>
+          </div>
+          <button class="place-order-btn" id="placeOrderBtn">
+            <i class="fas fa-lock"></i> Place Order
+          </button>
+          <div style="font-size: 0.7rem; text-align: center; margin-top: 0.8rem; color: #a0aec0;">
+            <i class="fas fa-shield-alt"></i> Secure payment protected
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>© 2025 LesGo — Secure Checkout. All rights reserved.</p>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal-overlay">
+    <div class="success-modal">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Order Confirmed! 🎉</h2>
+      <p>Your tutoring session has been booked successfully</p>
+      <div class="order-details" id="orderDetailsModal">
+        <!-- Dynamic order details -->
+      </div>
+      <button class="btn-back-dashboard" id="backToDashboardBtn">
+        <i class="fas fa-home"></i> Back to Dashboard
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+    let selectedPaymentMethod = 'credit';
+    let currentUser = null;
+
+    function loadUser() {
+      const storedUser = localStorage.getItem('lesgo_user');
+      if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+        if (currentUser.username) {
+          document.getElementById('fullName').value = currentUser.username;
+          document.getElementById('email').value = currentUser.email || `${currentUser.username}@example.com`;
+        }
+      }
+    }
+
+    function loadCart() {
+      const storedCart = localStorage.getItem('lesgo_tutor_cart');
+      if (storedCart) {
+        cart = JSON.parse(storedCart);
+      }
+      if (cart.length === 0) {
+        alert("Your cart is empty! Please add tutors first.");
+        window.location.href = '../search/index.html';
+      }
+      renderOrderSummary();
+    }
+
+    function renderOrderSummary() {
+      const container = document.getElementById('cartItemsSummary');
+      const subtotalSpan = document.getElementById('subtotal');
+      const totalSpan = document.getElementById('totalAmount');
+      
+      if (!container) return;
+      
+      if (cart.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:2rem; color:#999;">No items in cart</div>';
+        subtotalSpan.innerText = '$0.00';
+        totalSpan.innerText = '$0.00';
+        return;
+      }
+      
+      let subtotal = 0;
+      let itemsHtml = '';
+      cart.forEach(item => {
+        subtotal += item.hourlyRate;
+        itemsHtml += `
+          <div class="summary-item">
+            <div class="summary-item-info">
+              <h4>${escapeHtml(item.name)}</h4>
+              <p>${escapeHtml(item.subject)} • 1 session (1 hour)</p>
+            </div>
+            <div class="summary-item-price">$${item.hourlyRate}.00</div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = itemsHtml;
+      const platformFee = 2.00;
+      const total = subtotal + platformFee;
+      
+      subtotalSpan.innerText = `$${subtotal.toFixed(2)}`;
+      totalSpan.innerText = `$${total.toFixed(2)}`;
+    }
+
+    document.querySelectorAll('.payment-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        selectedPaymentMethod = option.dataset.method;
+        
+        const creditFields = document.getElementById('creditCardFields');
+        if (selectedPaymentMethod === 'credit') {
+          creditFields.style.display = 'block';
+        } else {
+          creditFields.style.display = 'none';
+        }
+      });
+    });
+
+    document.querySelector('.payment-option')?.classList.add('selected');
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
+
+    function validateForm() {
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const sessionDate = document.getElementById('sessionDate').value;
+      const sessionTime = document.getElementById('sessionTime').value;
+      
+      if (!fullName) {
+        alert('Please enter your full name');
+        return false;
+      }
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address');
+        return false;
+      }
+      if (!phone) {
+        alert('Please enter your phone number');
+        return false;
+      }
+      if (!sessionDate) {
+        alert('Please select a preferred date');
+        return false;
+      }
+      if (!sessionTime) {
+        alert('Please select a preferred time');
+        return false;
+      }
+      return true;
+    }
+
+    function generateOrderId() {
+      return 'LES' + Date.now().toString().slice(-8) + Math.floor(Math.random() * 1000);
+    }
+
+    function placeOrder() {
+      if (!validateForm()) return;
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const sessionDate = document.getElementById('sessionDate').value;
+      const sessionTime = document.getElementById('sessionTime').value;
+      const notes = document.getElementById('notes').value;
+      
+      const subtotal = cart.reduce((sum, item) => sum + item.hourlyRate, 0);
+      const platformFee = 2.00;
+      const total = subtotal + platformFee;
+      const orderId = generateOrderId();
+      
+      const order = {
+        orderId: orderId,
+        date: new Date().toISOString(),
+        customer: { fullName, email, phone },
+        session: { date: sessionDate, time: sessionTime, notes: notes || 'No additional notes' },
+        items: cart.map(item => ({ name: item.name, subject: item.subject, rate: item.hourlyRate })),
+        paymentMethod: selectedPaymentMethod,
+        subtotal: subtotal,
+        platformFee: platformFee,
+        total: total,
+        status: 'confirmed'
+      };
+      
+      const existingOrders = localStorage.getItem('lesgo_orders');
+      const orders = existingOrders ? JSON.parse(existingOrders) : [];
+      orders.push(order);
+      localStorage.setItem('lesgo_orders', JSON.stringify(orders));
+      
+      localStorage.removeItem('lesgo_tutor_cart');
+      
+      showSuccessModal(order);
+    }
+    
+    function showSuccessModal(order) {
+      const modal = document.getElementById('successModal');
+      const orderDetailsDiv = document.getElementById('orderDetailsModal');
+      
+      const tutorNames = order.items.map(item => item.name).join(', ');
+      const formattedDate = new Date(order.session.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      
+      orderDetailsDiv.innerHTML = `
+        <p><strong>📋 Order ID:</strong> ${order.orderId}</p>
+        <p><strong>👨‍🏫 Tutors:</strong> ${tutorNames}</p>
+        <p><strong>📅 Session:</strong> ${formattedDate} at ${order.session.time}</p>
+        <p><strong>💰 Total Paid:</strong> $${order.total.toFixed(2)}</p>
+        <p><strong>💳 Payment:</strong> ${order.paymentMethod.charAt(0).toUpperCase() + order.paymentMethod.slice(1)}</p>
+        <p><strong>📧 Confirmation sent to:</strong> ${order.customer.email}</p>
+      `;
+      
+      modal.style.display = 'flex';
+    }
+    
+    document.getElementById('placeOrderBtn')?.addEventListener('click', placeOrder);
+    document.getElementById('backToDashboardBtn')?.addEventListener('click', () => {
+      window.location.href = '../landing/index.html';
+    });
+    document.getElementById('logoHomeBtn')?.addEventListener('click', () => {
+      window.location.href = '../landing/index.html';
+    });
+    
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('sessionDate').min = today;
+    
+    loadUser();
+    loadCart();
+  </script>
+</body>
+</html>

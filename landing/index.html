@@ -7,12 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: linear-gradient(180deg, #b8cfe0 0%, #d2e4f0 40%, #e8f0f8 100%);
       font-family: 'Inter', sans-serif;
@@ -20,8 +15,6 @@
       line-height: 1.5;
       min-height: 100vh;
     }
-
-    /* halftone pattern overlay */
     body::before {
       content: "";
       position: fixed;
@@ -34,23 +27,13 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* --- navigation: dark greyish blue, full width rectangle --- */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
       background: #3a4a5a;
-      /* full width from edge to edge */
       margin: 0 -2rem;
       padding-left: calc(2rem + 1rem);
       padding-right: calc(2rem + 1rem);
@@ -58,8 +41,6 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       position: relative;
     }
-
-    /* small decorative line across the navbar */
     .navbar::after {
       content: '';
       position: absolute;
@@ -70,42 +51,9 @@
       background: linear-gradient(90deg, #d4f59e 0%, #6a9c3a 30%, #b8cfe0 70%, #d4f59e 100%);
       opacity: 0.3;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo i {
-      font-size: 2.4rem;
-      color: #d4f59e;
-      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-      transition: transform 0.2s;
-    }
-
-    .logo i:hover {
-      transform: rotate(-6deg) scale(1.02);
-    }
-
-    .logo h1 {
-      font-family: 'Inter', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
-      letter-spacing: -0.5px;
-      margin: 0;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      /* completely empty — no buttons */
-    }
-
-    /* --- hero section with white backdrop --- */
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo i { font-size: 2.4rem; color: #d4f59e; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2)); }
+    .logo h1 { font-family: 'Inter', sans-serif; font-size: 2.4rem; font-weight: 800; color: white; text-shadow: 0 3px 6px rgba(0, 0, 0, 0.35); }
     .hero {
       display: flex;
       flex-wrap: wrap;
@@ -114,7 +62,6 @@
       gap: 3rem;
       padding: 2.5rem 0 3rem;
     }
-
     .hero-content {
       flex: 1;
       min-width: 280px;
@@ -125,688 +72,463 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.6);
     }
-
-    /* titles: white with soft shadow (no harsh outline) */
-    .hero-content h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.2;
-      color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-      margin-bottom: 1.2rem;
-      letter-spacing: -0.3px;
-    }
-
-    .hero-content h1 span {
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-content p {
-      font-size: 1.05rem;
-      color: black;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-      background: rgba(255, 255, 240, 0.3);
-      padding: 0.4rem 1rem;
-      border-radius: 1rem;
-      display: inline-block;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* both buttons same shape, login is white, signup is lime gradient */
-    .btn-login {
-      background: white;
-      border: 2px solid #3a4a5a;
-      padding: 0.6rem 2rem;
-      border-radius: 2rem;
-      font-weight: 700;
-      color: #1a1a1a;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-    }
-
-    .btn-login:hover {
-      background: #f0f4f8;
-      transform: translateY(-1px);
-    }
-
-    .btn-signup {
-      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
-      border: none;
-      padding: 0.6rem 2rem;
-      border-radius: 2rem;
-      font-weight: 700;
-      color: #1a3a2a;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 2px 6px rgba(100, 150, 50, 0.15);
-    }
-
-    .btn-signup:hover {
-      background: linear-gradient(to bottom, #f0ffc0, #e0ffaa);
-      transform: translateY(-1px);
-    }
-
-    /* laptop mockup */
-    .hero-image {
-      flex: 0.9;
-      min-width: 300px;
-    }
-
-    .laptop {
-      background: linear-gradient(145deg, #5a6e7e, #3a4a5a);
-      border-radius: 1.2rem 1.2rem 0.8rem 0.8rem;
-      padding: 1rem 1rem 0.5rem 1rem;
-      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.25);
-    }
-
-    .laptop-screen {
-      background: #c8d8e8;
-      border-radius: 0.6rem;
-      padding: 1rem;
-      aspect-ratio: 16 / 10;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(135deg, #b0c4de, #8bb0c8);
-    }
-
-    .chat-container {
-      background: rgba(255, 255, 250, 0.9);
-      border-radius: 1rem;
-      padding: 0.8rem;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      overflow-y: auto;
-    }
-
-    .chat-bubble-left {
-      background: white;
-      padding: 0.5rem 0.8rem;
-      border-radius: 1rem 1rem 1rem 0.3rem;
-      max-width: 80%;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #1a1a1a;
-      align-self: flex-start;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-
-    .chat-bubble-right {
-      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
-      padding: 0.5rem 0.8rem;
-      border-radius: 1rem 1rem 0.3rem 1rem;
-      max-width: 80%;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #1a3a2a;
-      align-self: flex-end;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-
-    .chat-time {
-      font-size: 0.55rem;
-      color: #6a6a6a;
-      margin-top: 0.2rem;
-    }
-
-    .laptop-base {
-      background: #4a5a6a;
-      height: 0.5rem;
-      width: 80%;
-      margin: 0 auto;
-      border-radius: 0 0 0.5rem 0.5rem;
-    }
-
-    /* features section */
-    .section-title {
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-      margin: 2rem 0 2rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 250, 0.92);
-      padding: 1.8rem;
-      border-radius: 1.2rem;
-      text-align: center;
-      transition: all 0.2s ease;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-3px);
-      background: white;
-    }
-
-    .feature-icon {
-      background: #e0ece8;
-      width: 70px;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 35px;
-      margin: 0 auto 1rem;
-      font-size: 2rem;
-      color: #2c6e5c;
-    }
-
-    .feature-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: black;
-      font-weight: 700;
-    }
-
-    .feature-card p {
-      color: #2a2a2a;
-      font-size: 0.85rem;
-    }
-
-    /* benefits section */
-    .benefits-section {
-      background: rgba(255, 255, 250, 0.92);
-      border-radius: 1.5rem;
-      padding: 2rem;
-      margin: 2rem 0 3rem;
-      text-align: center;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .benefits-section h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: white;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-      margin-bottom: 1.5rem;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.8rem;
-      margin-top: 0.5rem;
-    }
-
-    .benefit-item {
-      padding: 1rem;
-    }
-
-    .benefit-item i {
-      font-size: 2rem;
-      color: #5a9c3a;
-      margin-bottom: 0.6rem;
-    }
-
-    .benefit-item h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: black;
-      margin-bottom: 0.3rem;
-    }
-
-    .benefit-item p {
-      font-size: 0.8rem;
-      color: #2a2a2a;
-    }
-
-    /* how it works */
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0 3rem;
-    }
-
-    .step {
-      background: rgba(255, 255, 250, 0.92);
-      padding: 1.5rem;
-      border-radius: 1.2rem;
-      width: 220px;
-      text-align: center;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .step-number {
-      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
-      width: 48px;
-      height: 48px;
-      border-radius: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: #1a3a2a;
-    }
-
-    .step h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: black;
-      font-weight: 700;
-    }
-
-    .step p {
-      font-size: 0.8rem;
-      color: #2a2a2a;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      color: black;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    /* modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .modal-card {
-      background: white;
-      max-width: 450px;
-      width: 90%;
-      border-radius: 1.5rem;
-      padding: 2rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.2rem;
-    }
-
-    .modal-header h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .close-modal {
-      font-size: 1.8rem;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: #666;
-    }
-
-    .input-group {
-      margin-bottom: 1rem;
-    }
-
-    .input-group input,
-    .input-group select {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border-radius: 1rem;
-      border: 1px solid #ccc;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-    }
-
-    .input-group input:focus,
-    .input-group select:focus {
-      outline: none;
-      border-color: #a8d85c;
-    }
-
-    .error-txt {
-      color: #d9534f;
-      font-size: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-footer {
-      text-align: center;
-      margin-top: 1.2rem;
-    }
-
-    .toggle-auth {
-      color: #6a9c3a;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
+    .hero-content h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; color: white; text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); margin-bottom: 1.2rem; }
+    .hero-content p { font-size: 1.05rem; color: black; font-weight: 500; margin-bottom: 2rem; background: rgba(255, 255, 240, 0.3); padding: 0.4rem 1rem; border-radius: 1rem; display: inline-block; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-login { background: white; border: 2px solid #3a4a5a; padding: 0.6rem 2rem; border-radius: 2rem; font-weight: 700; color: #1a1a1a; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn-login:hover { background: #f0f4f8; transform: translateY(-1px); }
+    .btn-signup { background: linear-gradient(to bottom, #e5ffb3, #d4f59e); border: none; padding: 0.6rem 2rem; border-radius: 2rem; font-weight: 700; color: #1a3a2a; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn-signup:hover { transform: translateY(-1px); }
+    .hero-image { flex: 0.9; min-width: 300px; }
+    .laptop { background: linear-gradient(145deg, #5a6e7e, #3a4a5a); border-radius: 1.2rem 1.2rem 0.8rem 0.8rem; padding: 1rem 1rem 0.5rem 1rem; box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.25); }
+    .laptop-screen { background: #c8d8e8; border-radius: 0.6rem; padding: 1rem; aspect-ratio: 16 / 10; background: linear-gradient(135deg, #b0c4de, #8bb0c8); }
+    .chat-container { background: rgba(255, 255, 250, 0.9); border-radius: 1rem; padding: 0.8rem; height: 100%; display: flex; flex-direction: column; gap: 0.6rem; overflow-y: auto; }
+    .chat-bubble-left { background: white; padding: 0.5rem 0.8rem; border-radius: 1rem 1rem 1rem 0.3rem; max-width: 80%; font-size: 0.7rem; align-self: flex-start; }
+    .chat-bubble-right { background: linear-gradient(to bottom, #e5ffb3, #d4f59e); padding: 0.5rem 0.8rem; border-radius: 1rem 1rem 0.3rem 1rem; max-width: 80%; font-size: 0.7rem; color: #1a3a2a; align-self: flex-end; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+    .feature-card { background: rgba(255, 255, 250, 0.92); padding: 1.8rem; border-radius: 1.2rem; text-align: center; transition: all 0.2s; }
+    .feature-card:hover { transform: translateY(-3px); background: white; }
+    .feature-icon { background: #e0ece8; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 35px; margin: 0 auto 1rem; font-size: 2rem; color: #2c6e5c; }
+    .section-title { text-align: center; font-size: 1.8rem; font-weight: 800; color: white; text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); margin: 2rem 0 2rem; }
+    .benefits-section { background: rgba(255, 255, 250, 0.92); border-radius: 1.5rem; padding: 2rem; margin: 2rem 0 3rem; text-align: center; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.8rem; }
+    .steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin: 2rem 0 3rem; }
+    .step { background: rgba(255, 255, 250, 0.92); padding: 1.5rem; border-radius: 1.2rem; width: 220px; text-align: center; }
+    .step-number { background: linear-gradient(to bottom, #e5ffb3, #d4f59e); width: 48px; height: 48px; border-radius: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 800; font-size: 1.3rem; }
+    footer { text-align: center; padding: 2rem 0; border-top: 1px solid rgba(0, 0, 0, 0.1); color: black; font-size: 0.75rem; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; }
+    .modal-card { background: white; max-width: 450px; width: 90%; border-radius: 1.5rem; padding: 2rem; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+    .modal-header h2 { font-size: 1.5rem; font-weight: 700; color: #1a1a1a; }
+    .close-modal { font-size: 1.8rem; cursor: pointer; background: none; border: none; color: #666; }
+    .input-group { margin-bottom: 1rem; }
+    .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; border-radius: 1rem; border: 1px solid #ccc; font-family: 'Inter', sans-serif; }
+    .error-txt { color: #d9534f; font-size: 0.75rem; margin-bottom: 0.5rem; }
+    .toggle-auth { color: #6a9c3a; cursor: pointer; font-weight: 600; }
+    .dashboard-view { display: none; }
+    .header-banner { background: linear-gradient(135deg, #2c3e50, #34495e); padding: 1rem 0; position: relative; }
+    .header-content { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .btn-icon { background: rgba(255,255,255,0.15); border: none; width: 42px; height: 42px; border-radius: 12px; color: white; cursor: pointer; transition: all 0.2s; }
+    .btn-icon:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .user-avatar { background: linear-gradient(135deg,#d4f59e,#a8d85c); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .user-avatar:hover { transform: scale(1.05); }
+    .welcome-section { background: rgba(255,255,255,0.95); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; position: relative; overflow: hidden; }
+    .welcome-section::before { content: ""; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(212,245,158,0.2), transparent 70%); border-radius: 50%; }
+    .btn-primary { background: linear-gradient(to bottom,#e5ffb3,#d4f59e); border: none; padding: 0.8rem 2rem; border-radius: 2rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(100,150,50,0.3); }
+    .btn-outline { background: white; border: 2px solid rgba(0,0,0,0.15); padding: 0.8rem 2rem; border-radius: 2rem; cursor: pointer; transition: all 0.2s; }
+    .btn-outline:hover { border-color: #a8d85c; transform: translateY(-2px); }
+    .tutor-class-card { background: white; border-radius: 1.2rem; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(0,0,0,0.08); }
+    .tutor-class-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+    .chat-tutor-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.2s; border-radius: 0.5rem; }
+    .chat-tutor-item:hover { background: #f0f7e8; }
+    .tutor-avatar-small { width: 48px; height: 48px; background: #c8d8e8; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .start-chat-btn { background: #d4f59e; border: none; padding: 0.5rem 1rem; border-radius: 2rem; cursor: pointer; margin-top: 0.5rem; font-size: 0.8rem; transition: all 0.2s; width: 100%; }
+    .start-chat-btn:hover { background: #c0e87a; transform: scale(1.02); }
+    .stat-value { font-size: 1.4rem; font-weight: 800; color: #2c3e50; }
+    .stat-label { font-size: 0.75rem; color: #666; }
     @media (max-width: 768px) {
-      .container {
-        padding: 0 1rem;
-      }
-      .navbar {
-        margin: 0 -1rem;
-        padding: 0.8rem 1.5rem;
-      }
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .hero-content {
-        padding: 1.5rem;
-      }
+      .container { padding: 0 1rem; }
+      .hero-content h1 { font-size: 2rem; }
+      .main-grid { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- navigation: dark greyish blue, full width, no buttons on right -->
-    <div class="navbar">
-      <div class="logo">
-        <i class="fas fa-graduation-cap"></i>
-        <h1>LesGo</h1>
+  <!-- LANDING PAGE (shown first ONLY if not logged in) -->
+  <div id="landingContainer">
+    <div class="container">
+      <div class="navbar">
+        <div class="logo"><i class="fas fa-graduation-cap"></i><h1>LesGo</h1></div>
+        <div class="nav-right"></div>
       </div>
-      <div class="nav-right">
-        <!-- completely empty — no login/signup buttons -->
-      </div>
-    </div>
-
-    <!-- hero section with white backdrop -->
-    <div class="hero">
-      <div class="hero-content">
-        <h1>Find your perfect <span>private tutor</span> and excel</h1>
-        <p>LesGo connects students with qualified tutors across all subjects. Book personalized 1-on-1 sessions that fit your schedule and learning style.</p>
-        <div class="hero-buttons">
-          <button class="btn-login" id="heroLoginBtn">Log in</button>
-          <button class="btn-signup" id="heroSignupBtn">Sign up</button>
+      <div class="hero">
+        <div class="hero-content">
+          <h1>Find your perfect <span>private tutor</span> and excel</h1>
+          <p>LesGo connects students with qualified tutors across all subjects. Book personalized 1-on-1 sessions that fit your schedule and learning style.</p>
+          <div class="hero-buttons">
+            <button class="btn-login" id="landingLoginBtn">Log in</button>
+            <button class="btn-signup" id="landingSignupBtn">Sign up</button>
+          </div>
         </div>
-      </div>
-      <div class="hero-image">
-        <div class="laptop">
-          <div class="laptop-screen">
-            <div class="chat-container">
-              <div class="chat-bubble-left">
-                <strong>Student:</strong> Hi! I need help with algebra prep for my exam.
-                <div class="chat-time">10:32 AM</div>
-              </div>
-              <div class="chat-bubble-right">
-                <strong>Tutor:</strong> Of course! I specialize in algebra. What topics are challenging you?
-                <div class="chat-time">10:33 AM</div>
-              </div>
-              <div class="chat-bubble-left">
-                <strong>Student:</strong> Mostly quadratic equations and factoring.
-                <div class="chat-time">10:34 AM</div>
-              </div>
-              <div class="chat-bubble-right">
-                <strong>Tutor:</strong> Great, I can walk you through step by step. Want to start with a free 20-min session?
-                <div class="chat-time">10:35 AM</div>
+        <div class="hero-image">
+          <div class="laptop">
+            <div class="laptop-screen">
+              <div class="chat-container">
+                <div class="chat-bubble-left"><strong>Student:</strong> Need help with algebra for my exam!</div>
+                <div class="chat-bubble-right"><strong>Tutor:</strong> I specialize in algebra. What topics are challenging you?</div>
+                <div class="chat-bubble-left"><strong>Student:</strong> Quadratic equations and factoring.</div>
+                <div class="chat-bubble-right"><strong>Tutor:</strong> Great! Want to start with a free 20-min session?</div>
               </div>
             </div>
+            <div class="laptop-base"></div>
           </div>
-          <div class="laptop-base"></div>
         </div>
       </div>
+      <h2 class="section-title">Why students choose LesGo</h2>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-user-check"></i></div><h3>Verified Tutors</h3><p>All tutors go through a screening process to ensure quality instruction.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-calendar-alt"></i></div><h3>Flexible Scheduling</h3><p>Book lessons at times that work for you, morning or evening.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Progress Tracking</h3><p>Monitor your improvement with detailed session reports.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-laptop"></i></div><h3>Online Platform</h3><p>Learn from anywhere with our integrated video tools.</p></div>
+      </div>
+      <div class="benefits-section">
+        <h2>Benefits of learning with LesGo</h2>
+        <div class="benefits-grid">
+          <div class="benefit-item"><i class="fas fa-clock"></i><h4>Flexible hours</h4><p>Schedule sessions when it's convenient for you.</p></div>
+          <div class="benefit-item"><i class="fas fa-dollar-sign"></i><h4>Affordable rates</h4><p>Transparent pricing with no hidden fees.</p></div>
+          <div class="benefit-item"><i class="fas fa-chalkboard"></i><h4>Personalized approach</h4><p>Every student gets a customized learning plan.</p></div>
+          <div class="benefit-item"><i class="fas fa-mobile-alt"></i><h4>Learn anywhere</h4><p>Access your lessons from any device.</p></div>
+        </div>
+      </div>
+      <h2 class="section-title">How LesGo works</h2>
+      <div class="steps">
+        <div class="step"><div class="step-number">1</div><h3>Create account</h3><p>Sign up as a student or tutor in minutes.</p></div>
+        <div class="step"><div class="step-number">2</div><h3>Find your match</h3><p>Browse tutor profiles and read reviews.</p></div>
+        <div class="step"><div class="step-number">3</div><h3>Start learning</h3><p>Book sessions and achieve your goals.</p></div>
+      </div>
+      <footer><p>© 2025 LesGo — Connecting students with expert tutors. All rights reserved.</p></footer>
     </div>
-
-    <!-- features -->
-    <h2 class="section-title">Why students choose LesGo</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-user-check"></i></div>
-        <h3>Verified Tutors</h3>
-        <p>All tutors go through a screening process to ensure quality instruction.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
-        <h3>Flexible Scheduling</h3>
-        <p>Book lessons at times that work for you, morning or evening.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-        <h3>Progress Tracking</h3>
-        <p>Monitor your improvement with detailed session reports.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-laptop"></i></div>
-        <h3>Online Platform</h3>
-        <p>Learn from anywhere with our integrated video tools.</p>
-      </div>
-    </div>
-
-    <!-- benefits -->
-    <div class="benefits-section">
-      <h2>Benefits of learning with LesGo</h2>
-      <div class="benefits-grid">
-        <div class="benefit-item">
-          <i class="fas fa-clock"></i>
-          <h4>Flexible hours</h4>
-          <p>Schedule sessions when it's convenient for you, no rigid timetables.</p>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-dollar-sign"></i>
-          <h4>Affordable rates</h4>
-          <p>Transparent pricing with no hidden fees. Pay per session.</p>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-chalkboard"></i>
-          <h4>Personalized approach</h4>
-          <p>Every student gets a customized learning plan.</p>
-        </div>
-        <div class="benefit-item">
-          <i class="fas fa-mobile-alt"></i>
-          <h4>Learn anywhere</h4>
-          <p>Access your lessons from desktop, tablet, or phone.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- how it works -->
-    <h2 class="section-title">How LesGo works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Create account</h3>
-        <p>Sign up as a student or tutor in minutes.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Find your match</h3>
-        <p>Browse tutor profiles and read reviews.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Start learning</h3>
-        <p>Book sessions and achieve your goals.</p>
-      </div>
-    </div>
-
-    <footer>
-      <p>© 2025 LesGo — Connecting students with expert tutors. All rights reserved.</p>
-    </footer>
   </div>
 
-  <!-- Login/Signup Modal -->
+  <!-- DASHBOARD (shown automatically if logged in) -->
+  <div id="dashboardContainer" class="dashboard-view">
+    <div class="header-banner">
+      <div class="header-content">
+        <div class="logo-section" style="display:flex; align-items:center; gap:0.8rem; cursor:pointer;" id="homeLogoBtn">
+          <div class="logo-icon" style="background:#d4f59e; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;"><i class="fas fa-graduation-cap"></i></div>
+          <div class="logo"><h1 style="font-size:2rem; color:white;">LesGo</h1></div>
+        </div>
+        <div class="nav-actions" style="display:flex; gap:1.2rem;">
+          <button class="btn-icon" id="transactionBtn"><i class="fas fa-receipt"></i></button>
+          <button class="btn-icon" id="chatPageBtn"><i class="fas fa-comment-dots"></i></button>
+          <div class="user-avatar" id="userAvatarBtn">JD</div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 2rem;">
+      <div style="display:grid; grid-template-columns:1fr 320px; gap:2rem;">
+        <div>
+          <div class="welcome-section">
+            <h2 id="welcomeUserName" style="font-size:2rem; font-weight:800;">Welcome back 👋</h2>
+            <p class="subtitle" style="color:#666; margin-bottom:1rem;">Your learning journey continues</p>
+            <div style="display:flex; gap:1.5rem; margin:1.5rem 0;">
+              <div><div class="stat-value" id="totalSessions">0</div><div class="stat-label">Total Sessions</div></div>
+              <div><div class="stat-value" id="activeTutors">0</div><div class="stat-label">Active Tutors</div></div>
+              <div><div class="stat-value" id="hoursLearned">0</div><div class="stat-label">Hours Learned</div></div>
+            </div>
+            <div style="background:#e8f5e0; padding:1rem 1.5rem; border-radius:1rem; display:inline-flex; align-items:center; gap:0.8rem; margin-bottom:1rem;">
+              <i class="fas fa-coins" style="color:#4f772d;"></i> Balance: <span id="balanceAmount" style="font-weight:800;">$0.00</span>
+            </div>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+              <button class="btn-primary" id="findTutorBtn"><i class="fas fa-search"></i> Find a tutor</button>
+              <button class="btn-outline" id="topUpBtn"><i class="fas fa-wallet"></i> Top up balance</button>
+            </div>
+            <div style="margin-top:1rem; background:#fff9e6; border-radius:1rem; padding:0.8rem 1.2rem; font-size:0.85rem;">
+              <i class="fas fa-lightbulb" style="color:#f39c12;"></i> <strong>Tip:</strong> Complete your profile to get matched with the best tutors!
+            </div>
+          </div>
+          <h3 class="section-title" style="font-size:1.5rem; text-align:left; margin:1rem 0 1rem;"><i class="fas fa-chalkboard-user"></i> Available Tutors</h3>
+          <div id="tutorsListGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem;"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:1.5rem;">
+          <div style="background:white; border-radius:1.5rem; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <h3 style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;"><i class="fas fa-comments"></i> My Chats</h3>
+            <div id="myChatsList" style="max-height: 350px; overflow-y: auto;">
+              <div style="text-align:center; color:#999; padding:2rem;">No active chats yet<br>Click "Start Chat" on any tutor above</div>
+            </div>
+            <button class="btn-outline" id="viewAllChatsBtn" style="width:100%; margin-top:1rem; justify-content:center;"><i class="fas fa-comment-dots"></i> Open all chats</button>
+          </div>
+          <div style="background:white; border-radius:1.5rem; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <h3 style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;"><i class="fas fa-exchange-alt"></i> Recent activity</h3>
+            <div id="transactionsList">
+              <div style="text-align:center; color:#999; padding:1rem;">No transactions yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; padding:2rem 0; color:#888; font-size:0.75rem;">© 2025 LesGo · Your personal tutoring platform</div>
+  </div>
+
+  <!-- MODAL -->
   <div id="authModal" class="modal">
     <div class="modal-card">
-      <div class="modal-header">
-        <h2 id="modalTitle">Log in</h2>
-        <button class="close-modal" id="closeModalBtn">&times;</button>
-      </div>
+      <div class="modal-header"><h2 id="modalTitle">Log in to LesGo</h2><button class="close-modal" id="closeModalBtn">&times;</button></div>
       <form id="authForm">
-        <div class="input-group">
-          <input type="text" id="authUsername" placeholder="Username" required />
-        </div>
-        <div class="input-group">
-          <input type="email" id="authEmail" placeholder="Email address" required />
-        </div>
-        <div class="input-group">
-          <input type="password" id="authPassword" placeholder="Password" required />
-        </div>
-        <div class="input-group" id="birthdayGroup" style="display: none;">
-          <input type="date" id="authBirthday" placeholder="Birthday" />
-        </div>
-        <div class="input-group">
-          <select id="authRole">
-            <option value="user">Student / User</option>
-            <option value="admin">Tutor / Admin</option>
-          </select>
-        </div>
+        <div class="input-group"><input type="text" id="authUsername" placeholder="Username" required /></div>
+        <div class="input-group"><input type="email" id="authEmail" placeholder="Email address" required /></div>
+        <div class="input-group"><input type="password" id="authPassword" placeholder="Password (min 4 characters)" required /></div>
+        <div class="input-group" id="birthdayGroup" style="display:none;"><input type="date" id="authBirthday" placeholder="Birthday" /></div>
+        <div class="input-group"><select id="authRole"><option value="user">Student / User</option><option value="admin">Tutor / Admin</option></select></div>
         <div id="formError" class="error-txt"></div>
-        <button type="submit" class="btn-signup" style="width:100%;">Continue</button>
+        <button type="submit" class="btn-signup" style="width:100%; padding:0.8rem;">Continue</button>
       </form>
-      <div class="modal-footer">
-        <span id="toggleAuthText">Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span></span>
-      </div>
+      <div class="modal-footer" style="text-align:center; margin-top:1rem;"><span id="toggleAuthText">Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span></span></div>
     </div>
   </div>
 
   <script>
-    // Modal logic
-    const modal = document.getElementById('authModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const authForm = document.getElementById('authForm');
-    const authUsername = document.getElementById('authUsername');
-    const authEmail = document.getElementById('authEmail');
-    const authPassword = document.getElementById('authPassword');
-    const authBirthday = document.getElementById('authBirthday');
-    const birthdayGroup = document.getElementById('birthdayGroup');
-    const authRoleSelect = document.getElementById('authRole');
-    const toggleTextSpan = document.getElementById('toggleAuthText');
-    const formErrorDiv = document.getElementById('formError');
-    const closeModalBtn = document.getElementById('closeModalBtn');
+    // CONFIGURATION
+    const SEARCH_FOLDER_PATH = '../search/index.html';
+    const CHAT_FOLDER_PATH = '../chat/index.html';
+    
+    // TUTORS DATABASE
+    const AVAILABLE_TUTORS = [
+      { id: 1, name: "Emma Rodriguez", subject: "Mathematics (Calculus)", specialty: "Algebra, Trigonometry, Calculus", rating: "4.9", price: "$35/hr", avatar: "ER", online: true },
+      { id: 2, name: "Dr. James Chen", subject: "Physics", specialty: "Mechanics, Thermodynamics", rating: "4.8", price: "$45/hr", avatar: "JC", online: true },
+      { id: 3, name: "Sarah Johnson", subject: "English Literature", specialty: "Essay Writing, Grammar", rating: "4.9", price: "$30/hr", avatar: "SJ", online: false },
+      { id: 4, name: "Michael Lee", subject: "Computer Science", specialty: "Python, JavaScript", rating: "5.0", price: "$50/hr", avatar: "ML", online: true },
+      { id: 5, name: "Prof. Anna Williams", subject: "Chemistry", specialty: "Organic Chemistry", rating: "4.7", price: "$40/hr", avatar: "AW", online: false },
+    ];
 
-    let currentAuthMode = 'login';
+    let currentUser = null;
+    let userChats = [];
 
-    function openModal(mode = 'login') {
-      currentAuthMode = mode;
-      updateModalUI();
-      modal.style.display = 'flex';
-      formErrorDiv.innerText = '';
-      authUsername.value = '';
-      authEmail.value = '';
-      authPassword.value = '';
-      authBirthday.value = '';
-      authRoleSelect.value = 'user';
-    }
-
-    function closeModalFunc() {
-      modal.style.display = 'none';
-    }
-
-    function updateModalUI() {
-      if (currentAuthMode === 'login') {
-        modalTitle.innerText = 'Log in to LesGo';
-        birthdayGroup.style.display = 'none';
-        authBirthday.removeAttribute('required');
-        toggleTextSpan.innerHTML = `Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span>`;
-      } else {
-        modalTitle.innerText = 'Create your LesGo account';
-        birthdayGroup.style.display = 'block';
-        authBirthday.setAttribute('required', 'required');
-        toggleTextSpan.innerHTML = `Already have an account? <span class="toggle-auth" id="toggleAuthMode">Log in</span>`;
+    function loadUserChats() {
+      if (currentUser) {
+        const saved = localStorage.getItem(`lesgo_chats_${currentUser.username}`);
+        if (saved) {
+          userChats = JSON.parse(saved);
+        } else {
+          userChats = [];
+        }
       }
-      const newToggle = document.getElementById('toggleAuthMode');
-      if (newToggle) {
-        newToggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
-          updateModalUI();
-          formErrorDiv.innerText = '';
+    }
+
+    function saveUserChats() {
+      if (currentUser) {
+        localStorage.setItem(`lesgo_chats_${currentUser.username}`, JSON.stringify(userChats));
+      }
+    }
+
+    function startChatWithTutor(tutor) {
+      if (!currentUser) {
+        alert("Please log in first!");
+        return;
+      }
+      
+      const existingChat = userChats.find(chat => chat.tutorId === tutor.id);
+      if (!existingChat) {
+        userChats.push({
+          tutorId: tutor.id,
+          tutorName: tutor.name,
+          tutorAvatar: tutor.avatar,
+          subject: tutor.subject,
+          lastMessage: "Chat started! Send a message to begin.",
+          timestamp: new Date().toISOString()
+        });
+        saveUserChats();
+        
+        const storedMessages = localStorage.getItem(`lesgo_messages_${currentUser.username}`);
+        let messages = storedMessages ? JSON.parse(storedMessages) : {};
+        if (!messages[tutor.id]) {
+          messages[tutor.id] = [];
+          messages[tutor.id].push({
+            text: `👋 Hi! I'm ${tutor.name}. I specialize in ${tutor.subject}. How can I help you today?`,
+            sentBy: 'tutor',
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          });
+          localStorage.setItem(`lesgo_messages_${currentUser.username}`, JSON.stringify(messages));
+        }
+        
+        alert(`✅ Chat with ${tutor.name} started! Click "Open all chats" to message them.`);
+      } else {
+        alert(`💬 You already have a chat with ${tutor.name}! Click "Open all chats" to continue.`);
+      }
+      
+      renderDashboard();
+    }
+
+    function navigateToChatWithTutor(tutorId = null) {
+      if (tutorId) {
+        sessionStorage.setItem('openChatWithTutor', tutorId);
+      }
+      window.location.href = CHAT_FOLDER_PATH;
+    }
+
+    function navigateToSearchPage() {
+      window.location.href = SEARCH_FOLDER_PATH;
+    }
+
+    function renderDashboard() {
+      if (!currentUser) return;
+      
+      document.getElementById('welcomeUserName').innerHTML = `Welcome back ${currentUser.username} 👋`;
+      document.getElementById('balanceAmount').innerText = `$128.50`;
+      document.getElementById('totalSessions').innerText = userChats.length;
+      document.getElementById('activeTutors').innerText = userChats.length;
+      document.getElementById('hoursLearned').innerText = (userChats.length * 3.5).toFixed(1);
+      document.getElementById('userAvatarBtn').innerText = currentUser.username.slice(0,2).toUpperCase();
+      
+      const tutorsGrid = document.getElementById('tutorsListGrid');
+      tutorsGrid.innerHTML = '';
+      
+      AVAILABLE_TUTORS.forEach(tutor => {
+        const hasChat = userChats.some(chat => chat.tutorId === tutor.id);
+        const card = document.createElement('div');
+        card.className = 'tutor-class-card';
+        card.innerHTML = `
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:50px; height:50px; background:linear-gradient(135deg,#c8d8e8,#a0b8d0); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:bold;">${tutor.avatar}</div>
+            <div style="flex:1;">
+              <strong style="font-size:1.1rem;">${tutor.name}</strong>
+              <div style="color:#666; font-size:0.85rem;">${tutor.subject}</div>
+              <div style="display:flex; gap:0.5rem; margin-top:0.3rem; flex-wrap:wrap;">
+                <span style="background:#f0f4f8; padding:0.2rem 0.6rem; border-radius:1rem; font-size:0.7rem;">⭐ ${tutor.rating}</span>
+                <span style="background:#e8f5e0; padding:0.2rem 0.6rem; border-radius:1rem; font-size:0.7rem;">${tutor.price}</span>
+                <span style="background:${tutor.online ? '#d4f59e' : '#ddd'}; padding:0.2rem 0.6rem; border-radius:1rem; font-size:0.7rem;">${tutor.online ? '🟢 Online' : '⚫ Offline'}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;">
+            <button class="start-chat-btn" data-tutor-id="${tutor.id}" data-tutor-name="${tutor.name}" style="background:${hasChat ? '#a8d85c' : '#d4f59e'};">💬 ${hasChat ? 'Continue Chat' : 'Start Chat'}</button>
+          </div>
+        `;
+        tutorsGrid.appendChild(card);
+      });
+      
+      document.querySelectorAll('.start-chat-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const tutorId = parseInt(btn.dataset.tutorId);
+          const tutor = AVAILABLE_TUTORS.find(t => t.id === tutorId);
+          if (tutor) {
+            startChatWithTutor(tutor);
+          }
+        });
+      });
+      
+      const myChatsDiv = document.getElementById('myChatsList');
+      if (userChats.length === 0) {
+        myChatsDiv.innerHTML = '<div style="text-align:center; color:#999; padding:2rem;"><i class="fas fa-comment-slash"></i><p>No active chats yet<br>Click "Start Chat" on any tutor above</p></div>';
+      } else {
+        myChatsDiv.innerHTML = userChats.map(chat => `
+          <div class="chat-tutor-item" data-tutor-id="${chat.tutorId}" style="cursor:pointer;">
+            <div class="tutor-avatar-small">${chat.tutorAvatar}</div>
+            <div style="flex:1;">
+              <strong>${chat.tutorName}</strong><br>
+              <span style="font-size:0.75rem; color:#666;">${chat.subject}</span>
+              <div style="font-size:0.7rem; color:#999; margin-top:0.2rem;">${chat.lastMessage || 'Say hello!'}</div>
+            </div>
+            <i class="fas fa-chevron-right" style="color:#999;"></i>
+          </div>
+        `).join('');
+        
+        document.querySelectorAll('.chat-tutor-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const tutorId = parseInt(item.dataset.tutorId);
+            navigateToChatWithTutor(tutorId);
+          });
         });
       }
-    }
-
-    function handleAuthSubmit(e) {
-      e.preventDefault();
-      const username = authUsername.value.trim();
-      const email = authEmail.value.trim();
-      const password = authPassword.value;
-      const role = authRoleSelect.value;
-
-      if (!username || !email || !password) {
-        formErrorDiv.innerText = 'All fields are required.';
-        return;
-      }
-      if (password.length < 4) {
-        formErrorDiv.innerText = 'Password must be at least 4 characters.';
-        return;
-      }
-      const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
-      if (!emailPattern.test(email)) {
-        formErrorDiv.innerText = 'Please enter a valid email address.';
-        return;
-      }
-
-      if (currentAuthMode === 'signup') {
-        const birthday = authBirthday.value;
-        if (!birthday) {
-          formErrorDiv.innerText = 'Birthday is required.';
-          return;
-        }
-        const birthDate = new Date(birthday);
-        if (birthDate > new Date()) {
-          formErrorDiv.innerText = 'Birthday cannot be in the future.';
-          return;
-        }
-        alert(`Signup successful, ${username}!\n\nRole: ${role === 'admin' ? 'Tutor/Admin' : 'Student'}\nBirthday: ${birthday}\n\nWelcome to LesGo!`);
-        closeModalFunc();
+      
+      const transactionsDiv = document.getElementById('transactionsList');
+      if (userChats.length > 0) {
+        transactionsDiv.innerHTML = userChats.slice(0,3).map(chat => `
+          <div style="display:flex; justify-content:space-between; padding:0.8rem 0; border-bottom:1px solid #eee;">
+            <span>Chat started with ${chat.tutorName}</span>
+            <span style="color:#2c6e5c;">New</span>
+          </div>
+        `).join('');
       } else {
-        alert(`Welcome back, ${username}!\n\nLogged in as ${role === 'admin' ? 'Tutor/Admin' : 'Student'}.\n\nLet's continue learning.`);
-        closeModalFunc();
+        transactionsDiv.innerHTML = '<div style="text-align:center; color:#999; padding:1rem;">No recent activity</div>';
       }
-      formErrorDiv.innerText = '';
     }
 
-    // Button event listeners — only hero buttons
-    document.getElementById('heroLoginBtn')?.addEventListener('click', () => openModal('login'));
-    document.getElementById('heroSignupBtn')?.addEventListener('click', () => openModal('signup'));
+    function showDashboard() {
+      document.getElementById('landingContainer').style.display = 'none';
+      document.getElementById('dashboardContainer').style.display = 'block';
+      loadUserChats();
+      renderDashboard();
+    }
 
-    closeModalBtn?.addEventListener('click', closeModalFunc);
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) closeModalFunc();
+    function showLanding() {
+      document.getElementById('landingContainer').style.display = 'block';
+      document.getElementById('dashboardContainer').style.display = 'none';
+    }
+
+    let authMode = 'login';
+    const modal = document.getElementById('authModal');
+
+    function openModal(mode) {
+      authMode = mode;
+      document.getElementById('modalTitle').innerText = mode === 'login' ? 'Log in to LesGo' : 'Create your LesGo account';
+      document.getElementById('birthdayGroup').style.display = mode === 'signup' ? 'block' : 'none';
+      const toggleText = document.getElementById('toggleAuthText');
+      if (mode === 'login') {
+        toggleText.innerHTML = `Don't have an account? <span class="toggle-auth" id="toggleAuthMode">Sign up</span>`;
+      } else {
+        toggleText.innerHTML = `Already have an account? <span class="toggle-auth" id="toggleAuthMode">Log in</span>`;
+      }
+      document.getElementById('authForm').reset();
+      document.getElementById('formError').innerText = '';
+      modal.style.display = 'flex';
+      
+      const newToggle = document.getElementById('toggleAuthMode');
+      if (newToggle) {
+        newToggle.onclick = (e) => {
+          e.preventDefault();
+          openModal(authMode === 'login' ? 'signup' : 'login');
+        };
+      }
+    }
+
+    function closeModal() { modal.style.display = 'none'; }
+
+    document.getElementById('authForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('authUsername').value.trim();
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value;
+      const birthday = document.getElementById('authBirthday').value;
+      
+      if (!username || !email || password.length < 4) {
+        document.getElementById('formError').innerText = 'Please fill all fields correctly. Password must be at least 4 characters.';
+        return;
+      }
+      if (!/^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(email)) {
+        document.getElementById('formError').innerText = 'Please enter a valid email address.';
+        return;
+      }
+      if (authMode === 'signup' && !birthday) {
+        document.getElementById('formError').innerText = 'Birthday is required.';
+        return;
+      }
+      
+      currentUser = { username, email, role: document.getElementById('authRole').value };
+      localStorage.setItem('lesgo_user', JSON.stringify(currentUser));
+      closeModal();
+      showDashboard();
     });
 
-    authForm.addEventListener('submit', handleAuthSubmit);
+    document.getElementById('landingLoginBtn')?.addEventListener('click', () => openModal('login'));
+    document.getElementById('landingSignupBtn')?.addEventListener('click', () => openModal('signup'));
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    
+    document.getElementById('findTutorBtn')?.addEventListener('click', navigateToSearchPage);
+    document.getElementById('chatPageBtn')?.addEventListener('click', () => navigateToChatWithTutor());
+    document.getElementById('viewAllChatsBtn')?.addEventListener('click', () => navigateToChatWithTutor());
+    document.getElementById('topUpBtn')?.addEventListener('click', () => {
+      let amount = prompt('Enter amount to add to your balance:', '50');
+      if (amount && !isNaN(amount) && Number(amount) > 0) {
+        alert(`✅ $${amount} added successfully to your balance!`);
+        renderDashboard();
+      } else if (amount !== null) {
+        alert('Please enter a valid amount.');
+      }
+    });
+    document.getElementById('homeLogoBtn')?.addEventListener('click', () => location.reload());
+    document.getElementById('transactionBtn')?.addEventListener('click', () => alert('Transaction history will be available soon!'));
 
-    const initialToggle = document.getElementById('toggleAuthMode');
-    if (initialToggle) {
-      initialToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        currentAuthMode = currentAuthMode === 'login' ? 'signup' : 'login';
-        updateModalUI();
-        formErrorDiv.innerText = '';
-        
-      });
+    // CHECK LOGIN STATUS ON PAGE LOAD
+    const storedUser = localStorage.getItem('lesgo_user');
+    if (storedUser) {
+      currentUser = JSON.parse(storedUser);
+      showDashboard();
+    } else {
+      showLanding();
     }
   </script>
 </body>

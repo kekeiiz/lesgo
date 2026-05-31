@@ -148,3 +148,12 @@ if (initialToggle) {
 }
 
 console.log('LesGo landing page ready — find your perfect tutor today!');
+// Add this function to handle chat navigation
+function navigateToChatPage() {
+    // Navigate to the chat folder (relative path from landing folder)
+    window.location.href = '../chat/index.html';
+}
+
+// Then attach it to the "Open all chats" button
+// Make sure this runs AFTER the dashboard is rendered or when the button exists
+document.getElementById('viewAllChatsBtn')?.addEventListener('click', navigateToChatPage);
