@@ -247,7 +247,7 @@
     function loadUserData() {
       const storedUser = localStorage.getItem('lesgo_user');
       if (!storedUser) {
-        window.location.href = '../landing/index.html';
+        window.location.href = '../main/index.html';
         return;
       }
       currentUser = JSON.parse(storedUser);
@@ -421,9 +421,9 @@
       }
     }
 
-    // BACK BUTTON - goes directly to landing page (which will show dashboard if logged in)
+    // BACK BUTTON - goes directly to main page (which will show dashboard if logged in)
     document.getElementById('backToDashboardBtn')?.addEventListener('click', () => {
-      window.location.href = '../landing/index.html';
+      window.location.href = '../main/index.html';
     });
 
     loadUserData();

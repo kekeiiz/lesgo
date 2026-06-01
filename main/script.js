@@ -147,10 +147,10 @@ if (initialToggle) {
   });
 }
 
-console.log('LesGo landing page ready — find your perfect tutor today!');
+console.log('LesGo main page ready — find your perfect tutor today!');
 // Add this function to handle chat navigation
 function navigateToChatPage() {
-    // Navigate to the chat folder (relative path from landing folder)
+    // Navigate to the chat folder (relative path from main folder)
     window.location.href = '../chat/index.html';
 }
 

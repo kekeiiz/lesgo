@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LesGo · Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e8f0f8;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 25% 40%, rgba(0,0,0,0.03) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header banner */
+    .header-banner {
+      background: linear-gradient(135deg, #2c3e50, #34495e, #2c3e50);
+      padding: 1rem 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .header-banner::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #d4f59e, #a8d85c, #d4f59e);
+    }
+
+    .header-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo-icon {
+      background: #d4f59e;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #1a3a2a;
+      transform: rotate(-5deg);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-icon {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1.1rem;
+      color: #ffffff;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-icon:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .notification-badge {
+      position: relative;
+    }
+
+    .notification-badge::after {
+      content: "2";
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #ff6b6b;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      border: 2px solid #2c3e50;
+    }
+
+    .user-avatar {
+      background: linear-gradient(135deg, #d4f59e, #a8d85c);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1a3a2a;
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: all 0.2s;
+    }
+
+    .user-avatar:hover {
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* welcome & quick actions */
+    .welcome-section {
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(212,245,158,0.2), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .welcome-text h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 0.3rem;
+    }
+
+    .welcome-text .subtitle {
+      color: #666;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: #f8faf8;
+      padding: 0.8rem 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #2c3e50;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .balance-display {
+      background: linear-gradient(135deg, #f0f7e6, #e8f5e0);
+      padding: 1rem 1.8rem;
+      border-radius: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 0.5rem 0 1rem;
+      font-weight: 700;
+      border: 2px solid #d4f59e;
+      font-size: 1.1rem;
+    }
+
+    .balance-display i {
+      font-size: 1.3rem;
+      color: #4f772d;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to bottom, #e5ffb3, #d4f59e);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      color: #1a3a2a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 12px rgba(100, 150, 50, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to bottom, #f0ffc0, #e0ffaa);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(100, 150, 50, 0.3);
+    }
+
+    .btn-outline {
+      background: white;
+      border: 2px solid rgba(0,0,0,0.15);
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-outline:hover {
+      background: #f8faf8;
+      border-color: #a8d85c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Section titles */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title i {
+      color: #4f772d;
+    }
+
+    /* classroom style tutors list */
+    .tutors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .tutor-class-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tutor-class-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #d4f59e, #a8d85c);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .tutor-class-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .tutor-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tutor-avatar {
+      background: linear-gradient(135deg, #c8d8e8, #a0b8d0);
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1a3a2a;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .subject-badge {
+      background: #f0f4f8;
+      padding: 0.3rem 0.9rem;
+      border-radius: 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: inline-block;
+      margin: 0.3rem 0.2rem;
+      color: #2c3e50;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .next-session {
+      font-size: 0.85rem;
+      color: #4a6a5a;
+      margin-top: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f8faf8;
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.8rem;
+    }
+
+    /* right sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .chat-card, .transactions-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .card-header h3 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .online-indicator {
+      width: 8px;
+      height: 8px;
+      background: #4f772d;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .tx-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .tx-row:hover {
+      background: #f8faf8;
+      margin: 0 -0.5rem;
+      padding: 0.8rem 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      color: #888;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #999;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #f8faf8;
+      border-radius: 1rem;
+    }
+
+    .empty-state i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.4;
+    }
+
+    /* Quick tip banner */
+    .quick-tip {
+      background: linear-gradient(135deg, #fff9e6, #fff3cc);
+      border: 1px solid #ffe082;
+      border-radius: 1rem;
+      padding: 0.8rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quick-tip i {
+      color: #f39c12;
+    }
+    
+    .logout-btn {
+      background: #c0392b !important;
+    }
+    .logout-btn:hover {
+      background: #a93226 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-banner">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="logo">
+          <h1>LesGo</h1>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-icon" id="transactionBtn" title="Transactions">
+          <i class="fas fa-receipt"></i>
+        </button>
+        <button class="btn-icon notification-badge" id="chatPageBtn" title="Messages">
+          <i class="fas fa-comment-dots"></i>
+        </button>
+        <button class="btn-icon logout-btn" id="logoutBtn" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+        <div class="user-avatar" id="userAvatarBtn">JD</div>
+      </div>
+    </div>
+  </div>
+
+<div class="container" style="margin-top: 2rem;">
+  <div class="main-grid">
+    <div>
+      <div class="welcome-section">
+        <div class="welcome-text">
+          <h2 id="welcomeUserName">Welcome back 👋</h2>
+          <p class="subtitle">Your learning journey continues</p>
+        </div>
+        
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value" id="totalSessions">0</div>
+            <div class="stat-label">Total Sessions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="activeTutors">0</div>
+            <div class="stat-label">Active Tutors</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="hoursLearned">0</div>
+            <div class="stat-label">Hours Learned</div>
+          </div>
+        </div>
+
+        <div class="balance-display" id="balanceDisplay">
+          <i class="fas fa-coins"></i> 
+          <span>Balance: </span>
+          <span id="balanceAmount" style="font-size: 1.2rem;">$0.00</span>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-primary" id="findTutorBtn"><i class="fas fa-search"></i> Find a tutor</button>
+          <button class="btn-outline" id="topUpBtn"><i class="fas fa-wallet"></i> Top up balance</button>
+        </div>
+
+        <div class="quick-tip">
+          <i class="fas fa-lightbulb"></i>
+          <span><strong>Tip:</strong> Complete your profile to get matched with the best tutors for your learning style.</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="section-title">
+          <i class="fas fa-book-open"></i> Your classes
+        </h3>
+        <div class="tutors-grid" id="tutorsClassesGrid">
+          <div class="empty-state" id="emptyClassesState">
+            <i class="fas fa-book-open"></i>
+            <p>No classes yet</p>
+            <p style="font-size: 0.8rem; margin-top: 0.3rem;">Find a tutor to start learning!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="chat-card">
+        <div class="card-header">
+          <h3><span class="online-indicator"></span> Messages</h3>
+        </div>
+        <div id="chatPreviewArea">
+          <div class="empty-state" style="padding: 1.5rem;">
+            <i class="fas fa-comments"></i>
+            <p style="font-size: 0.85rem;">No messages yet</p>
+          </div>
+        </div>
+        <button class="btn-outline" style="width:100%; margin-top:1rem; justify-content:center;" id="viewAllChatsBtn">
+          <i class="fas fa-comment-dots"></i> Open all chats
+        </button>
+      </div>
+
+      <div class="transactions-card">
+        <div class="card-header">
+          <h3><i class="fas fa-exchange-alt"></i> Recent activity</h3>
+        </div>
+        <div id="transactionsList">
+          <div class="empty-state" style="padding: 1rem;">
+            <p style="font-size: 0.85rem;">No transactions yet</p>
+          </div>
+        </div>
+        <button class="btn-outline" style="width:100%; margin-top:1rem; justify-content:center;" id="fullTransactionBtn">
+          View all transactions
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-note">
+    © 2025 LesGo · Your personal tutoring platform
+  </div>
+</div>
+
+<script>
+  // Check if user is logged in
+  const storedUser = localStorage.getItem('lesgo_user');
+  if (!storedUser) {
+    window.location.href = '../login/index.html';
+  }
+  
+  const currentUser = JSON.parse(storedUser);
+  
+  // Display user name
+  document.getElementById('welcomeUserName').innerHTML = `Welcome back ${currentUser.username} 👋`;
+  document.getElementById('userAvatarBtn').innerText = currentUser.username.slice(0,2).toUpperCase();
+  
+  let currentBalance = 128.50;
+  let totalSessions = 4;
+  let activeTutors = 2;
+  let hoursLearned = 12.5;
+  
+  const balanceSpan = document.getElementById('balanceAmount');
+  const totalSessionsEl = document.getElementById('totalSessions');
+  const activeTutorsEl = document.getElementById('activeTutors');
+  const hoursLearnedEl = document.getElementById('hoursLearned');
+  
+  function updateBalanceDisplay() {
+    if (balanceSpan) {
+      balanceSpan.textContent = `$${currentBalance.toFixed(2)}`;
+    }
+  }
+
+  function updateStats() {
+    if (totalSessionsEl) totalSessionsEl.textContent = totalSessions;
+    if (activeTutorsEl) activeTutorsEl.textContent = activeTutors;
+    if (hoursLearnedEl) hoursLearnedEl.textContent = hoursLearned;
+  }
+
+  function addTransaction(description, amount) {
+    const transactionsList = document.getElementById('transactionsList');
+    if (!transactionsList) return;
+    
+    const emptyState = transactionsList.querySelector('.empty-state');
+    if (emptyState) {
+      emptyState.remove();
+    }
+    
+    const txRow = document.createElement('div');
+    txRow.className = 'tx-row';
+    const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    txRow.innerHTML = `
+      <span>${description} · ${date}</span> 
+      <span style="color:${amount.startsWith('+') ? '#2c6e5c' : '#1a1a1a'}; font-weight:600;">${amount}</span>
+    `;
+    transactionsList.prepend(txRow);
+  }
+
+  function addTutorClass(tutorName, subject, nextSession, avatarInitials) {
+    const grid = document.getElementById('tutorsClassesGrid');
+    const emptyState = document.getElementById('emptyClassesState');
+    if (emptyState) {
+      emptyState.style.display = 'none';
+    }
+    
+    const card = document.createElement('div');
+    card.className = 'tutor-class-card';
+    card.innerHTML = `
+      <div class="tutor-header">
+        <div class="tutor-avatar">${avatarInitials || tutorName.split(' ').map(n => n[0]).join('')}</div>
+        <div>
+          <strong style="font-size: 1.05rem;">${tutorName}</strong>
+          <div style="margin-top: 0.3rem;">
+            <span class="subject-badge">${subject}</span>
+          </div>
+        </div>
+      </div>
+      <div class="next-session">
+        <i class="far fa-calendar-alt"></i> ${nextSession || 'No upcoming session'}
+      </div>
+    `;
+    grid.appendChild(card);
+    
+    activeTutors = grid.querySelectorAll('.tutor-class-card').length;
+    updateStats();
+  }
+
+  // Demo classes
+  addTutorClass('Emma Rodriguez', 'Mathematics (Calculus)', 'Next: Tomorrow, 4:00 PM', 'ER');
+  addTutorClass('Dr. James Chen', 'Physics: Mechanics', 'Next: Wed, 6:30 PM', 'JC');
+  
+  updateBalanceDisplay();
+  updateStats();
+  addTransaction('Session with Emma Rodriguez', '-$35.00');
+  addTransaction('Balance top-up', '+$50.00');
+  addTransaction('Physics group session', '-$28.50');
+
+  // Event Listeners
+  document.getElementById('transactionBtn')?.addEventListener('click', () => {
+    alert('📊 Transaction history\n\nView all your payments, top-ups, and session charges.');
+  });
+
+  document.getElementById('chatPageBtn')?.addEventListener('click', () => {
+    window.location.href = '../chat/index.html';
+  });
+
+  document.getElementById('viewAllChatsBtn')?.addEventListener('click', () => {
+    window.location.href = '../chat/index.html';
+  });
+
+  document.getElementById('userAvatarBtn')?.addEventListener('click', () => {
+    alert(`👤 Profile & Settings\n\nUsername: ${currentUser.username}\nEmail: ${currentUser.email || 'student@lesgo.com'}\nRole: Student`);
+  });
+
+  document.getElementById('findTutorBtn')?.addEventListener('click', () => {
+    window.location.href = '../search/index.html';
+  });
+
+  document.getElementById('topUpBtn')?.addEventListener('click', () => {
+    let amount = prompt('Enter amount to add to your balance:', '50');
+    if (amount && !isNaN(amount) && Number(amount) > 0) {
+      currentBalance += Number(amount);
+      updateBalanceDisplay();
+      addTransaction('Balance top-up', `+$${Number(amount).toFixed(2)}`);
+      alert(`✅ $${amount} added successfully!\n\nYour new balance is $${currentBalance.toFixed(2)}`);
+    } else if (amount !== null) {
+      alert('Please enter a valid amount greater than 0.');
+    }
+  });
+
+  document.getElementById('fullTransactionBtn')?.addEventListener('click', () => {
+    alert('💵 Complete Transaction History\n\n• +$50.00 Top-up\n• -$35.00 Session (Calculus)\n• -$28.50 Physics session');
+  });
+  
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('lesgo_user');
+    window.location.href = '../login/index.html';
+  });
+</script>
+</body>
+</html>

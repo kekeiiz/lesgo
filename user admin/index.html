@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LesGo · Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(180deg, #b8cfe0 0%, #d2e4f0 40%, #e8f0f8 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 25% 40%, rgba(0, 0, 0, 0.04) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+    
+    .admin-header {
+      background: #3a4a5a;
+      padding: 1rem 0;
+      border-bottom: 3px solid #d4f59e;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      position: relative;
+      z-index: 2;
+    }
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+    .logo-icon {
+      background: #d4f59e;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #1a3a2a;
+    }
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .tutor-badge {
+      background: #d4f59e;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #1a3a2a;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .nav-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+    .user-avatar {
+      background: #d4f59e;
+      width: 44px;
+      height: 44px;
+      border-radius: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      cursor: pointer;
+      color: #1a3a2a;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); }
+    .stat-card i { font-size: 2rem; color: #4f772d; margin-bottom: 0.5rem; }
+    .stat-number { font-size: 2rem; font-weight: 800; color: #1a3a2a; }
+    .stat-label { color: #718096; font-size: 0.8rem; }
+    
+    .students-section {
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 2px solid #e8ecef;
+      padding-bottom: 0.75rem;
+    }
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .student-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      transition: all 0.2s;
+    }
+    .student-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .student-avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #c8d8e8, #a0b8d0);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .message-student-btn {
+      background: #d4f59e;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+    .message-student-btn:hover { background: #c0e87a; }
+    .empty-state { text-align: center; padding: 3rem; color: #999; }
+    .footer { text-align: center; padding: 2rem 0; color: #4a5568; font-size: 0.75rem; }
+    .logout-btn { background: #c0392b !important; }
+    .logout-btn:hover { background: #a93226 !important; }
+  </style>
+</head>
+<body>
+  <div class="admin-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon"><i class="fas fa-chalkboard-user"></i></div>
+        <span class="logo-text">LesGo Tutor</span>
+        <span class="tutor-badge"><i class="fas fa-check-circle"></i> Admin</span>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn" id="chatNavBtn"><i class="fas fa-comment-dots"></i> Messages</button>
+        <button class="nav-btn logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        <div class="user-avatar" id="userAvatarBtn">AD</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card"><i class="fas fa-users"></i><div class="stat-number" id="totalStudents">3</div><div class="stat-label">My Students</div></div>
+      <div class="stat-card"><i class="fas fa-calendar-check"></i><div class="stat-number" id="totalSessions">8</div><div class="stat-label">Completed Sessions</div></div>
+      <div class="stat-card"><i class="fas fa-dollar-sign"></i><div class="stat-number" id="totalEarnings">$360</div><div class="stat-label">Total Earnings</div></div>
+      <div class="stat-card"><i class="fas fa-star"></i><div class="stat-number" id="rating">4.9</div><div class="stat-label">Tutor Rating</div></div>
+    </div>
+
+    <div class="students-section">
+      <div class="section-title"><i class="fas fa-user-graduate"></i> My Students</div>
+      <div id="studentsList" class="students-grid">
+        <div class="student-card">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="student-avatar">EJ</div>
+            <div><h4>Emma Johnson</h4><p>📧 emma@example.com</p><p>📚 Physics • 3 sessions</p></div>
+          </div>
+          <button class="message-student-btn" data-student="Emma Johnson"><i class="fas fa-comment"></i> Message Student</button>
+        </div>
+        <div class="student-card">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="student-avatar">ML</div>
+            <div><h4>Michael Lee</h4><p>📧 michael@example.com</p><p>📚 Physics • 2 sessions</p></div>
+          </div>
+          <button class="message-student-btn" data-student="Michael Lee"><i class="fas fa-comment"></i> Message Student</button>
+        </div>
+        <div class="student-card">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="student-avatar">SC</div>
+            <div><h4>Sarah Chen</h4><p>📧 sarah@example.com</p><p>📚 Physics • 3 sessions</p></div>
+          </div>
+          <button class="message-student-btn" data-student="Sarah Chen"><i class="fas fa-comment"></i> Message Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">© 2025 LesGo — Tutor Admin Portal</div>
+
+  <script>
+    // Check if admin is logged in
+    const storedUser = localStorage.getItem('lesgo_user');
+    if (!storedUser) {
+      window.location.href = '../login/index.html';
+    }
+    
+    const currentUser = JSON.parse(storedUser);
+    if (!currentUser.isAdmin) {
+      window.location.href = '../main/index.html';
+    }
+    
+    document.getElementById('userAvatarBtn').innerText = currentUser.username.slice(0,2).toUpperCase();
+    
+    // Logout button
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      localStorage.removeItem('lesgo_user');
+      window.location.href = '../login/index.html';
+    });
+    
+    // Messages button - go to admin chat
+    document.getElementById('chatNavBtn')?.addEventListener('click', () => {
+      window.location.href = '../admin chat/index.html';
+    });
+    
+    // Message student buttons - go to admin chat with specific student
+    document.querySelectorAll('.message-student-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const studentName = btn.dataset.student;
+        // Store which student to chat with
+        sessionStorage.setItem('adminChatWithStudent', studentName);
+        window.location.href = '../admin chat/index.html';
+      });
+    });
+  </script>
+</body>
+</html>
